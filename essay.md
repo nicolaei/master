@@ -55,3 +55,46 @@ Residential WiFi Networks [@resfi].
 Quantitative measurements will be utilized to answer the questions in 
 [the outlining of the problem](#The problem). This will be done by creating a
 physical network with live WiFi routers.
+
+
+Existing Works
+==============
+
+There are some existing work covering ResFi and distributed orchestration 
+that I intend to utilize in this thesis.
+
+* Understanding the Role of Active Scans For Their Better Utilization In 
+  Large-Scale WiFi Networks [@active-resfi-scans]
+
+
+How do I intend to solve the task?
+===================================
+
+I intend to solve the task at hand with a few tools:
+
+*   [Bloom filters] - A compact and efficient way of knowing what data is *not* 
+                      present.
+                  
+*   [ResFi] - A python framework for communicating with other nodes trough
+              back haul.
+
+Bloom filters
+-------------
+
+I will experiment with bloom filters [@bloom-filters] to exchange data about 
+the local wireless network between nodes.
+
+Bloom filters are useful as they're able to reduce network look-ups for 
+non-existent keys in the set of nodes. If a key isn't in the bloom filter, 
+it's definitily not on the network. But there is still a chance of false 
+positives (as a bloom filter is a type of hash map) [@bloom-filter-explenation].
+
+This might sound like a standard hash map, but it is not. The difference is that 
+Bloom filters have a smaller footprint as they don't store the elements 
+themselves. Instead, they check if a value is *certainly not* present.
+
+ResFi
+-----
+
+As ResFi is a Python framework [@resfi], any code in this project will be 
+developed with Python 3.
