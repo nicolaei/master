@@ -9,9 +9,10 @@ Introduction
 ============
 
 With this essay, I intend to take a look at a subsection of a larger project
-addressing interference in 802.11 wireless networks. This project tries to 
-solve the problem with a decentralized algorithm where every access point in 
-a given neighborhood discovers each other and communicates over backhaul.
+addressing interference in 802.11 wireless networks [@IEEE802.11]. This project 
+tries to solve the problem with a decentralized algorithm where every 
+access point in a given neighborhood discovers each other and communicates 
+over back haul.
 
 The algorithm will assign a channel and antenna power output to each access 
 point, to minimize interference.
