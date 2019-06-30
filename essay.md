@@ -42,3 +42,15 @@ There is also another question that has to be solved, related to the minimal
 disruption question:
 
 **How do we pass information about the network between routers?**
+
+
+Methods and Technologies
+========================
+
+ResFi will be the main technology I'll be looking at to solve the task at 
+hand. It is a Python framework for Distributed Radio Resource Management of
+Residential WiFi Networks [@resfi].
+
+Quantitative measurements will be utilized to answer the questions in 
+[the outlining of the problem](#The problem). This will be done by creating a
+physical network with live WiFi routers.
