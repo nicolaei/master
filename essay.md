@@ -1,6 +1,7 @@
 ---
-title: Master Essay
-date: 2019-07-30
+title: "Master Essay"
+subtitle: "A part of a larger project for better channel assignment in WiFi"
+date: 2019-07-01
 author: Nicolas Harlem Eide
 ---
 
@@ -110,5 +111,11 @@ themselves. Instead, they check if a value is *certainly not* present.
 ResFi
 -----
 
-As ResFi is a Python framework [@resfi], any code in this project will be 
-developed with Python 3.
+ResFi is a Python framework for enabling creation of distributed Radio 
+Resource Management (RRM) functionality in Residential or residental 802.11 
+WLAN deployments. It uses the radio interface of all APs to efficiently 
+discover adjacent ones. After this initial discovery, the APs public IPs are 
+exchanged and a connection is made via the southbound interface [@resfi].
+
+As ResFi is a Python framework, any code in this project will be 
+developed with Python. 
