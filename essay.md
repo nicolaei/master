@@ -46,6 +46,14 @@ disruption question:
 
 **How do we pass information about the network between routers?**
 
+This question also have a few sub-questions "built in".
+
+*   How can we pass possibly large-ish amounts of information with as little 
+    data as possible?
+
+*   Can we ensure that the data we're receiving is correct?
+    Someone might have ill intent when answering our probe requests
+
 
 Methods and Technologies
 ========================
