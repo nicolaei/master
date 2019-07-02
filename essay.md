@@ -49,43 +49,11 @@ disruption question:
 Methods and Technologies
 ========================
 
-ResFi will be the main technology I'll be looking at to solve the task at 
-hand. It is a Python framework for Distributed Radio Resource Management of
-Residential WiFi Networks [@resfi].
-
 Quantitative measurements will be utilized to answer the questions in 
 [the outlining of the problem](#The problem). This will be done by creating a
 physical network with live WiFi routers.
 
-
-Existing Works
-==============
-
-There are some existing work covering ResFi and distributed orchestration 
-that I intend to utilize in this thesis.
-
-Understanding the Role of Active Scans For Their Better Utilization In Large-Scale WiFi Networks [@active-resfi-scans]
-----------------------------------------------------------------------------------------------------------------------
-This article focuses on how active scanning, which is one of the main 
-components of ResFi's discovery phase, might affect the local WLAN's 
-performance.
-
-It highlights:
-
-*   that  active scans increase latency quite a lot for _all_ clients on a 
-    network, and that this latency will even stay for a few seconds after the
-    actual probe request [@active-resfi-scans p. 32]. Which will not play out
-    nicely on high impact WiFi deployments [@active-resfi-scans p. 121].
-    
-*   that all current solutions to decrease scanning delays require some 
-    change to hardware or driver [@active-resfi-scans p. 123].
-  
-
-
-How do I intend to solve the task?
-===================================
-
-I intend to solve the task at hand with a few tools:
+To actually solve the problem, I will be using the following technologies:
 
 *   [Bloom filters] - A compact and efficient way of knowing what data is *not* 
                       present.
@@ -119,3 +87,36 @@ exchanged and a connection is made via the southbound interface [@resfi].
 
 As ResFi is a Python framework, any code in this project will be 
 developed with Python. 
+
+
+Existing Works
+==============
+
+There are some existing work covering ResFi and distributed orchestration 
+that I intend to utilize in this thesis.
+
+Understanding the Role of Active Scans For Their Better Utilization In Large-Scale WiFi Networks [@active-resfi-scans]
+----------------------------------------------------------------------------------------------------------------------
+
+This article focuses on how active scanning, which is one of the main 
+components of ResFi's discovery phase, might affect the local WLAN's 
+performance.
+
+It highlights:
+
+*   that  active scans increase latency quite a lot for _all_ clients on a 
+    network, and that this latency will even stay for a few seconds after the
+    actual probe request [@active-resfi-scans p. 32]. Which will not play out
+    nicely on high impact WiFi deployments [@active-resfi-scans p. 121].
+    
+*   that all current solutions to decrease scanning delays require some 
+    change to hardware or driver [@active-resfi-scans p. 123].
+  
+
+
+How do I intend to solve the task?
+===================================
+
+With the help of [ResFi] and [Bloom filters] I will hopefully be able to find
+a viable solution to establish and sustain communication between access points 
+in proximity of each other.
