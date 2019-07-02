@@ -1,8 +1,9 @@
 ---
-title: "Master Essay"
+title: "Using ResFi for distributed discovery of a local network"
 subtitle: "A part of a larger project for better channel assignment in WiFi"
 date: 2019-07-01
 author: Nicolas Harlem Eide
+documentclass: ifimaster 
 ---
 
 
@@ -120,3 +121,29 @@ How do I intend to solve the task?
 With the help of [ResFi] and [Bloom filters] I will hopefully be able to find
 a viable solution to establish and sustain communication between access points 
 in proximity of each other.
+
+Local Network Discovery Methods
+-------------------------------
+
+Evolutionary algorithms might be utilized to find a good model for maximizing
+the speed and accuracy of the discovery, while still keeping the possible 
+impact from probe requests [@active-resfi-scans] low.
+
+Different enviornments call for differing strategies when it comes to minimizing
+the amount of latency introduced from our active scanning, and actually 
+discovering what access points live on a given channel. If we're really 
+unlucky we might even not discover any accesspoints, because they're all 
+scanning for other access points!
+
+Though this could also be over engineering, and any simple algorithm with 
+exponential backoff might suffice. Only the measurements will tell!
+
+Needless to say, there is a large chance that we'll have to do multiple scans
+on the network to get a true idea about what the local area might look like.
+
+Measuring
+---------
+
+With the help of a physical network and emulated networks for testing I will
+be measuring what kind of effect my changes are doing, and what the best 
+strategy might be.
