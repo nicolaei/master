@@ -19,14 +19,14 @@ over back haul.
 The algorithm will assign a channel and antenna power output to each access 
 point, to minimize interference.
 
-What this masters thesis aims to solve is scanning the local area for active
+What this thesis aims to solve is scanning the local area for active
 wireless nodes, so that the algorithm can do it's work.
 
 The problem
 -----------
 
-There is one main issue I'll have to look at while trying to find a 
-solution to the problem.
+There are two main issues I'll have to look at while trying to find a 
+solution to the task at hand.
 
 **How can we scan the network with minimal disruption to the connected 
   clients?**
@@ -79,7 +79,7 @@ the local wireless network between nodes.
 Bloom filters are useful as they're able to reduce network look-ups for 
 non-existent keys in the set of nodes. If a key isn't in the bloom filter, 
 it's definitily not on the network. But there is still a chance of false 
-positives (as a bloom filter is a type of hash map) [@bloom-filter-explenation].
+positives [@bloom-filter-explenation].
 
 This might sound like a standard hash map, but it is not. The difference is that 
 Bloom filters have a smaller footprint as they don't store the elements 
