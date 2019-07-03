@@ -155,3 +155,6 @@ Measuring
 With the help of a physical network and emulated networks for testing I will
 be measuring what kind of effect my changes are doing, and what the best 
 strategy might be.
+
+For emulated networks I'll be working with Mininet, as that is already 
+supported by ResFi.
