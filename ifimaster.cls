@@ -7,7 +7,7 @@
 %% Initial code part:
 
 %% Option declaration part:
-\DeclareOption*{\PassOptionsToClass{\CurrentOption}{report}}
+\DeclareOption*{\PassOptionsToClass{\CurrentOption}{scrreprt}}
 
 \ExecuteOptions{}
 \ProcessOptions \relax

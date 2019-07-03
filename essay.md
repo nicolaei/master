@@ -3,7 +3,8 @@ title: "Using ResFi for distributed discovery of a local wireless network"
 subtitle: "A part of a larger project for better channel assignment in WiFi"
 date: 2019-07-01
 author: Nicolas Harlem Eide
-documentclass: ifimaster 
+documentclass: scrreprt 
+toc: yes
 ---
 
 
@@ -158,3 +159,7 @@ strategy might be.
 
 For emulated networks I'll be working with Mininet, as that is already 
 supported by ResFi.
+
+
+Bibliography
+============
