@@ -15,10 +15,8 @@ With this essay, I intend to take a look at a subsection of a larger project
 addressing interference in 802.11 wireless networks [@IEEE802.11]. This project 
 tries to solve the problem with a decentralized algorithm where every 
 access point in a given neighborhood discovers each other and communicates 
-over back haul.
-
-The algorithm will assign a channel and antenna power output to each access 
-point, to minimize interference.
+over back haul. The algorithm will assign a channel, and antenna power output,
+to each access point, to minimize interference.
 
 What this thesis aims to solve is scanning the local area for active
 wireless nodes, so that the algorithm can do it's work.
@@ -67,7 +65,7 @@ To actually solve the problem, I will be using the following technologies:
 
 *   [Bloom filters] - A compact and efficient way of knowing what data is *not* 
                       present.
-                  
+
 *   [ResFi] - A python framework for communicating with other nodes trough
               back haul.
 
@@ -121,7 +119,6 @@ It highlights:
     
 *   that all current solutions to decrease scanning delays require some 
     change to hardware or driver [@active-resfi-scans p. 123].
-  
 
 
 How do I intend to solve the task?
@@ -150,6 +147,18 @@ exponential backoff might suffice. Only the measurements will tell!
 Needless to say, there is a large chance that we'll have to do multiple scans
 on the network to get a true idea about what the local area might look like.
 
+Passing data
+------------
+
+Another problem I'll have to look at is regarding the passing of data.
+
+I'll try to utilize bloom filters to keep a track off what data is available 
+on the network. As mentioned in [Bloom filters], they're quite lightweight 
+and help us pass less data between the access points, which in turn results 
+in less traffic on the network. It cannot be stressed enough how important 
+this is. If we don't try to manage the administrative traffic over the 
+network, it can result in congestion.
+
 Measuring
 ---------
 
@@ -159,6 +168,11 @@ strategy might be.
 
 For emulated networks I'll be working with Mininet, as that is already 
 supported by ResFi.
+
+In addition to this, I will be using "normal" simulated traffic as my 
+baseline for measuring how efficient my implementations are. This "normal" 
+traffic is traffic where none of the access points are utilizing active 
+scanning.
 
 
 Bibliography
