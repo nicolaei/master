@@ -4,7 +4,7 @@
 
 \ProvidesClass{ifimaster}[2017/03/17 v1.02 Ifi/UiO document class]
 
-%% Initial code part:
+%% Initial source part:
 
 %% Option declaration part:
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{scrreprt}}
