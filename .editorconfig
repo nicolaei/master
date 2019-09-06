@@ -1,0 +1,15 @@
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+indent_size = 4
+indent_style = space
+max_line_length = 80
+ij_visual_guides = 80
+
+[{*.pyw,*.py}]
+ij_wrap_on_typing = true
+
+[{*.yml,*.yaml}]
+indent_size = 2
