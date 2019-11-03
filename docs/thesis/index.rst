@@ -14,7 +14,13 @@ wireless nodes, so that the algorithm can do it's work.
 
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
+   :caption: Contents
+
+   scope
+   related_work
+   scanning
+   discussion
+   conclusion
 
 
 
@@ -24,3 +30,4 @@ Indices and tables
 * :ref:`genindex`
 * :ref:`modindex`
 * :ref:`search`
+

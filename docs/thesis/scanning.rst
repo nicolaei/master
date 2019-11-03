@@ -79,8 +79,6 @@ Because of this, I'll have to figure out:
 Getting the scanning up and running
 -----------------------------------
 
-.. todo:
+.. todo::
 
     Do the actual scanning
-
-
