@@ -29,7 +29,6 @@ author = 'Nicolas Harlem Eide'
 # ones.
 extensions = [
     'sphinxcontrib.bibtex',
-    # 'rst2pdf.pdfbuilder'
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -57,5 +56,6 @@ html_static_path = ['_static']
 # -- Options for LaTeX output ------------------------------------------------
 latex_elements = {
     # Start new chapters on any page!
-    'extraclassoptions': 'openany'
+    'extraclassoptions': 'openany',
+    'papersize': 'a4paper',
 }
