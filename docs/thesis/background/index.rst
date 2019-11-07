@@ -10,4 +10,4 @@ used in this thesis. In addition I'll outline the theory used in the thesis.
 .. toctree::
 
     scanning
-    related_work
+    problem_areas

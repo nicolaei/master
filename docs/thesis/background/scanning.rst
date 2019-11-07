@@ -1,84 +1,48 @@
 Scanning
 ========
 
-.. todo::
-
-    Remember to add how I'll be scanning. Could be ResFi.
-
-To accomplish the scanning I will be using Python 2.7 together with *some
-library or something else*.
-
-The aim of doing the scanning is to be able to share information about our
+The aim of scanning in this thesis is to be able to share information about our
 local network with the clustering algorithm. Without this information, the
 algorithm won't be able to accurately create clusters.
 
-Possible problem areas
-----------------------
+Active- vs passive scanning
+---------------------------
 
-While just doing a scan might sound like a simple project, but there are a
-few parameters that needs to be considered to make sure that the program does
-not interrupt the clients.
+Scanning in :cite:`IEEE802.11` is handled via management frames, and can be
+done in one of two ways: Active- or passive scanning.
 
-Client's have to rediscover the access point
-#############################################
+Passive scanning, from a STA's perspective, is simply to listen for
+*beacon frames* that are sent out periodically by all APs. These frames contain
 
-.. todo::
+ *  *A timestamp*; indicating when the frame was sent (according to the APs
+    synchronization timer.
 
-    Find a citation for the fact that clients will lose their connection when
-    the access point switches channel.
+ *  *A beacon interval*; telling the STAs the period between each beacon
+    transmission in TUs (a time period of 1024µ).
 
-    Also, a bit clunky language here :(
+ *  *The capability information*; Various information about the AP, such as
+    it's SSID and more. Extensions to 802.11 has also typically added some
+    information to this field.
 
-    Maybe the title of this section should be a question to be consistent
-    with the other subsections?
+Active scanning on the other hand is initiated by the STAs themselves. This
+process contains two management frames *probe requests* and *probe responses*.
 
-When the access point switches channels, all it's clients will lose connection
-and have to re-discover and re-connect to the access point
-:cite:`Citation Needed`. If the access point switches channels to quickly,
-the clients may end up losing connection for such a long time that it might
-become an annoyance to the users. To leviate this, I will have to figure out
-what the best possible time period is.
+The *probe request* is sent by an STA and either targets a single access point,
+or broadcast to all APs. This is done by specifying the target APs SSID in
+the frame. Leaving the SSID field empty means that the frame is considered as
+a broadcast frame.
 
-Can the access point send data while scanning?
-##############################################
-
-If it is not possible for the access point to send data while scanning, then
-another problem will arise: *How can we make sure that the client's are able
-to continue using the network when the clustering algorithm asks for the
-current status of the network?*.
-
-If we can't transmit og receive data during the whole duration of the scan,
-we might even need to schedule the discovery period to periods where the
-network is less utilized.
-
-What if some other access points are also scanning?
-###################################################
+*Probe responses* on the other hand are sent by access points that receive the
+*probe request*. These frames' content is almost identical to beacon frames,
+though they do contain some more information than beacon frames. This
+information isn't really relevant for what I wish to accomplish with this
+thesis, so I won't outline it.
 
 .. todo::
 
-    I'm not quite sure about this section. I need to find some literature or
-    do some measurements that support that access points that are scanning
-    might not be able to do RX or TX.
+    Hmmm, not quite sure if I should actually outline what that information
+    is, and then say that it's not relevant instead.
 
-    The program is also going to be using active beacons, so maybe this needs
-    to be rephrased?
+.. [*]  Information about active and passive scanning is gathered from
+        :cite:`IEEE802.11Handbook`.
 
-In the case that multiple access points are trying to do a scan of the network
-at the same time, our program might need to do multiple passes to be certain
-that it collects information about all the other access points around it.
-
-Because of this, I'll have to figure out:
-
-*   How many passes are enough to be certain that we've collected information
-    about all other access points in our neighbourhood?
-
-*   Is it possible to be more smart about the scanning? Can - for example -
-    some randomization of when the scan happens or be used?
-
-
-Getting the scanning up and running
------------------------------------
-
-.. todo::
-
-    Do the actual scanning
