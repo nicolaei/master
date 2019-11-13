@@ -17,7 +17,7 @@
 
 # -- Project information -----------------------------------------------------
 
-project = 'Using ResFi for distributed discovery of a local wireless network'
+project = 'Master Thesis'
 copyright = '2020, Nicolas Harlem Eide'
 author = 'Nicolas Harlem Eide'
 
