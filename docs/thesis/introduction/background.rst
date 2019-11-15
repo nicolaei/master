@@ -11,3 +11,10 @@ to each access point, to minimize interference.
 
 What this thesis aims to solve is scanning the local area for active
 wireless nodes, so that the algorithm can do it's work.
+
+
+.. todo::
+
+    What is the motivation behind this thesis?
+
+     * Helping the main project!
