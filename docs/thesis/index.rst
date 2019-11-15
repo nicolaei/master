@@ -10,9 +10,9 @@ Master Thesis
 
     abstract
     preface
-    introduction
-    background/*
-    implementation
+    introduction/*
+    method
+    results
     discussion
     conclusion
 
