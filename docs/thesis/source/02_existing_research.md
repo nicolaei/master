@@ -1,15 +1,14 @@
----------------------------------------
 Existing research and current practices
----------------------------------------
+=======================================
 
 Scanning
-========
+--------
 
 The aim of scanning in this thesis is to be able to share information about our
 local network with the clustering algorithm. Without this information, the
 algorithm won't be able to accurately create clusters.
 
-Scanning in :cite:`IEEE802.11` is handled via management frames, and can be
+Scanning in @IEEE802.11 is handled via management frames, and can be
 done in one of two ways: Active- or passive scanning.
 
 Passive scanning, from a STA's perspective, is simply to listen for
@@ -39,17 +38,39 @@ though they do contain some more information than beacon frames. This
 information isn't really relevant for what I wish to accomplish with this
 thesis, so I won't outline it.
 
-.. todo::
+\todo{
 
     Hmmm, not quite sure if I should actually outline what that information
     is, and then say that it's not relevant instead.
+}
 
-.. [*]  Information about active and passive scanning is gathered from
-        :cite:`IEEE802.11Handbook`.
+[notused]: Information about active and passive scanning is gathered from
+           [-@IEEE802.11Handbook]
 
 
-Differences between active and passive scanning
------------------------------------------------
+### Current use of scanning in IEEE802.11 networks
+
+While the aim of this thesis is to use scanning to discover other APs from
+our own AP, the main use of scanning in IEEE802.11 networks is for
+clients (STAs) to find access points to connect to. Typical use-cases are:
+
+ * When disconnected; finding available APs to connect to or ask for
+   specific APs that the STA has connected to before.
+
+ * When connected; finding APs with the same SSID as the one that the STA
+   is currently connected to, but with a better signal. This is typically
+   used for mobile STAs to improve service while roaming.
+
+In addition to this, i
+
+
+
+\todo{
+    Is this the kind of information i need to cite?
+}
+
+
+### Differences between active and passive scanning
 
 While both active and passive scanning are means to achieve the same result,
 they have different impacts on the network and use differing amount of time
@@ -58,8 +79,7 @@ discovery latency and network impact is widely studied.
 
 
 
-Discovery time
-##############
+### Discovery time
 
 Even though both active and passive scanning will converge towards
 discovering all nodes in the network, there is a significant time-difference
@@ -71,14 +91,14 @@ discovery time due to the fact that there are always going to be large
 variations in the wireless medium. Since multiple STAs share the same medium,
 they'll have to share access to the medium.
 
-In :cite:`APDiscovery` the authors analyzed the scanning process in IEEE802.11
+In [@APDiscovery] the authors analyzed the scanning process in IEEE802.11
 networks in an urban setting, which typically means high density of APs in
 the given area. The main takeaway from this study is that you'll need
 multiple scans to discover as many APs as possible, and even then you're not
 guaranteed to find all of the access points in your vicinity.
 
 In their tests, they found that the scanning timer for a probe request
-[#timer]_ had a lot to say about your ability to discover other APs. In general,
+[^timer] had a lot to say about your ability to discover other APs. In general,
 the longer the timer, the better the chance of discovering other access points.
 Though over 100ms the benifit quickly diminish, as very few or no probe
 responses were recieved after this time and the discovered APs mainly came
@@ -89,17 +109,16 @@ scans mattered a lot to the discovery (see the figure that I haven't added
 yet). Even after 100 scans, the study found that up to 15% of all APs were
 not discovered.
 
-.. [#timer] Write about scanning timers
+[^timer]: Write about scanning timers
 
-.. todo::
+\todo{
+    Remember to add figures from [@APDiscovery]!
+}
 
-    Remember to add figures from :cite:`APDiscovery`!
 
+### Network Impact
 
-Network Impact
-##############
-
-According to :cite:`ActiveScanPerformance` up to 90% of all probe responses
+According to [@ActiveScanPerformance] up to 90% of all probe responses
 carry redundant information, and up to 60 percent of all management traffic
 in a WLAN can be probe traffic. This is especially true for heavily utilized
 channels (over 50% utilization), which typically exist in urban
@@ -110,7 +129,7 @@ VoIP and games. Why? Well, there are two aspects to this: The client-side
 impact and the network-wide impact.
 
 The client-side issues with active scans are quite apparent. In
-:cite:`ActiveScanPermformance`, they set up a client to run an active scan
+[@ActiveScanPermformance], they set up a client to run an active scan
 every minute. While running these active scans they were continuously pinging
 another host over the WLAN to measure the impact these active scans have on
 the latency. The result was that every minute, when the active scans where
@@ -118,12 +137,12 @@ initialized, a large spike in latency occurred. This spike had a tail of
 latency that lasted a few seconds. This kind of latency spike is problematic,
  as it has a impact of real time applications like games and VoIP.
 
-.. todo::
-
-    Add figure from :cite:`ActiveScanPerformance` that shows the spike in
+\todo{
+    Add figure from [@ActiveScanPerformance] that shows the spike in
     latency during active scans.
+}
 
-In addition to each individual client, :cite:`ActiveScanPerformance` also takes
+In addition to each individual client, [@ActiveScanPerformance] also takes
 a look at how active scanning impacts the network as a whole. The main takeaway
 here is that due to the low data rate of probe traffic, it consumes airtime
 that could have been better utilized by normal application data.
@@ -134,22 +153,21 @@ negativly on goodput in the network and will negatively affect other clients
 that are not currently scanning.
 
 
-Channel overlapping
------------------------------------
+### Channel overlapping
 
-In addition to their findings about :ref:`Discovery Time` in
-:cite:`APDiscovery`, the authors also highlighted that due to channel
+In addition to their findings about [@sec:Discovery Time] in
+[@APDiscovery], the authors also highlighted that due to channel
 overlapping scanning, say channel 1, will also discover APs on channel 2.
 
 This will help with discovery of access points, since a scan can potentially
 discover as many as 40% of APs in adjacent channels. See the figure from the
 study for percentages of adjecent channels.
 
-.. todo::
-
+\todo{
     Figure out if this will be a problem for the clustering algorithm. Will
     it be supplied with false data? Where one AP is reported as being on
     channel 1, while in reality being on channel 2?
+}
 
 Possible problem areas
 ----------------------
@@ -158,11 +176,9 @@ While just doing a scan might sound like a simple project, but there are a
 few parameters that needs to be considered to make sure that the program does
 not interrupt the clients.
 
-Client's have to rediscover the access point
-#############################################
+### Client's have to rediscover the access point
 
-.. todo::
-
+\todo{
     Find a citation for the fact that clients will lose their connection when
     the access point switches channel.
 
@@ -170,16 +186,16 @@ Client's have to rediscover the access point
 
     Maybe the title of this section should be a question to be consistent
     with the other subsections?
+}
 
 When the access point switches channels, all it's clients will lose connection
-and have to re-discover and re-connect to the access point
-:cite:`Citation Needed`. If the access point switches channels to quickly,
-the clients may end up losing connection for such a long time that it might
-become an annoyance to the users. To leviate this, I will have to figure out
-what the best possible time period is.
+and have to re-discover and re-connect to the access point [Citation Needed].
+If the access point switches channels to quickly, the clients may end up
+losing connection for such a long time that it might become an annoyance to
+the users. To leviate this, I will have to figure out what the best possible
+time period is.
 
-Can the access point send data while scanning?
-##############################################
+### Can the access point send data while scanning?
 
 If it is not possible for the access point to send data while scanning, then
 another problem will arise: *How can we make sure that the client's are able
@@ -190,17 +206,16 @@ If we can't transmit og receive data during the whole duration of the scan,
 we might even need to schedule the discovery period to periods where the
 network is less utilized.
 
-What if some other access points are also scanning?
-###################################################
+### What if some other access points are also scanning?
 
-.. todo::
-
+\todo{
     I'm not quite sure about this section. I need to find some literature or
     do some measurements that support that access points that are scanning
     might not be able to do RX or TX.
 
     The program is also going to be using active beacons, so maybe this needs
     to be rephrased?
+}
 
 In the case that multiple access points are trying to do a scan of the network
 at the same time, our program might need to do multiple passes to be certain

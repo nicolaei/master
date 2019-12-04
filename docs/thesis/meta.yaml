@@ -1,0 +1,19 @@
+---
+title: Master Thesis
+author: Nicolas Harlem Eide
+
+abstract: Write the abstract!
+
+preface: Thanks here
+
+toc: yes
+lof: yes
+lot: yes
+
+# Latex options
+documentclass: ifimaster
+classoption: UKenglish
+
+bibliography: source/references.bib
+csl: static/ieee.csl
+---
