@@ -139,6 +139,70 @@ goodput. But this approach was ultimately decided against due to the extra
 equipment needed for adoption.
 
 
+Parameters
+----------
+
+In addition to changing up the strategies, there are also a few parameters
+that can be changed within every strategy for more optimal results.
+
+These parameters might be set adaptively or statically, depending on the
+operator's wish.
+
+These parameters may be:
+
+ *  *Max and min channel time*: How long to stay on each channel
+ 
+ *  *Minimum number of scans*: How many scans (of the whole channel sequence)
+    should be performed before the scan is finished.
+ 
+ *  *Smooth scan interval*: How long to wait between each scan 
+
+ *  *Smooth scan group size*: The number of channels to scan per period
+
+
+### Min and max channel time 
+
+Minimum and maximum channel time is mentioned in a lot of literature
+regarding Wi-Fi. This parameter can change weather or not we spend too much time
+on a channel or if we don't spend enough time.
+
+[@SelectingScanningParameters] suggests to have a set of minimum and maximum
+channel times for each available channel. This way we can optimize the time
+spent on each channel depending on weather or not there have previously been
+seen access points, or if the access points on a channel typically spend longer
+time to reply.
+
+
+### Minimum number of scans
+
+This parameter is important to make sure that we have a reply from all access
+points in our vicinity before sending of our results. As [@AccessPointDiscovery]
+notes, all access points will most likely not be discovered with just one scan.
+
+
+### Smooth scanning interval
+
+As mentioned in [Smooth Scanning], there is a possibility to adjust the time
+spent serving clients in between each scanning group. This parameter is a
+trade off between the latency and package loss of clients, and the speed of the
+total scan.
+
+[@ProactiveScan] has done research regarding which interval to choose. The
+longer the interval is, the more time clients will have to send packets that
+were cued up during the last scan. Though these longer intervals will
+increase the total time of our scan.
+
+
+### Smooth scanning group size 
+
+The size of the groups in smooth scanning is another trade off between client
+packet loss and total scan duration.
+
+[@ProactiveScan] has also done research regarding this parameter. The larger the
+group size, the faster the total scan will be, though the trade-off comes at
+the expense of clients in form of possible packet loss.
+
+
 Setup
 -----
 
