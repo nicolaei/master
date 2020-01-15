@@ -95,19 +95,25 @@ In [@APDiscovery] the authors analyzed the scanning process in IEEE802.11
 networks in an urban setting, which typically means high density of APs in
 the given area. The main takeaway from this study is that you'll need
 multiple scans to discover as many APs as possible, and even then you're not
-guaranteed to find all of the access points in your vicinity.
+guaranteed to find all the access points in your vicinity.
 
 In their tests, they found that the scanning timer for a probe request
 had a lot to say about your ability to discover other APs. In general,
 the longer the timer, the better the chance of discovering other access points.
-Though over 100ms the benifit quickly diminish, as very few or no probe
-responses were recieved after this time and the discovered APs mainly came
+Though over 100ms the benefit quickly diminish, as very few or no probe
+responses were received after this time, and the discovered APs mainly came
 from normal beacon frames.
 
 In addition to the length of the timer, they also found that the amount of
 scans mattered a lot to the discovery (see the figure that I haven't added
 yet). Even after 100 scans, the study found that up to 15% of all APs were
 not discovered.
+
+\todo{
+    Why are some access points discovered, while others are not?
+    Which APs are these (like, is it the distance that matters)?
+    Maybe it's their distance (ie. quality of the connection).
+}
 
 \todo{
     Remember to add figures from [@APDiscovery]!
@@ -122,38 +128,42 @@ in a WLAN can be probe traffic. This is especially true for heavily utilized
 channels (over 50% utilization), which typically exist in urban
 environments.
 
-This heavy utilization takes a special toll on real time applications such as
-VoIP and games. Why? Well, there are two aspects to this: The client-side
-impact and the network-wide impact.
+This heavy utilization takes a special toll on real-time applications such as
+VoIP and games. Why? Well, there are two aspects to this: The client-side 
+impact, and the network-wide impact.
 
 The client-side issues with active scans are quite apparent. In
-[@ActiveScanPermformance], they set up a client to run an active scan
+[@ActiveScanPerformance], they set up a client to run an active scan
 every minute. While running these active scans they were continuously pinging
 another host over the WLAN to measure the impact these active scans have on
-the latency. The result was that every minute, when the active scans where
+the latency. The result was that every minute, when the active scans was 
 initialized, a large spike in latency occurred. This spike had a tail of
 latency that lasted a few seconds. This kind of latency spike is problematic,
- as it has a impact of real time applications like games and VoIP.
+as it has an impact on real-time applications like games and VoIP.
 
 \todo{
     Add figure from [@ActiveScanPerformance] that shows the spike in
     latency during active scans.
 }
 
+I hypothesize that this effect will be even stronger ones access points start
+scanning as well, seeing that this won't just effect the access point, but
+all of it's connected clients as well.
+
 In addition to each individual client, [@ActiveScanPerformance] also takes
 a look at how active scanning impacts the network as a whole. The main takeaway
 here is that due to the low data rate of probe traffic, it consumes airtime
 that could have been better utilized by normal application data.
 
-In networks with low utilization, this might not have shouch a large impact.
-But in networks with high utilization, this low data rate traffic will factor
-negativly on goodput in the network and will negatively affect other clients
-that are not currently scanning.
+In networks with low utilization, this might not have such a large impact.
+However, in networks with high utilization, this low data rate traffic will
+factor negatively on goodput in the network and will negatively affect other
+clients that are not currently scanning.
 
 
 ### Channel overlapping
 
-In addition to their findings about [@sec:Discovery Time] in
+In addition to their findings about [Discovery Time](@sec:Discovery Time)) in
 [@APDiscovery], the authors also highlighted that due to channel
 overlapping scanning, say channel 1, will also discover APs on channel 2.
 
@@ -161,11 +171,6 @@ This will help with discovery of access points, since a scan can potentially
 discover as many as 40% of APs in adjacent channels. See the figure from the
 study for percentages of adjecent channels.
 
-\todo{
-    Figure out if this will be a problem for the clustering algorithm. Will
-    it be supplied with false data? Where one AP is reported as being on
-    channel 1, while in reality being on channel 2?
-}
 
 Possible problem areas
 ----------------------
@@ -179,9 +184,10 @@ not interrupt the clients.
 \todo{
     Find a citation for the fact that clients will lose their connection when
     the access point switches channel.
-
-    Also, a bit clunky language here :(
-
+    
+    This might also be a non-problem if we utilize smooth scanning.
+}
+\todo{
     Maybe the title of this section should be a question to be consistent
     with the other subsections?
 }
@@ -216,8 +222,8 @@ network is less utilized.
 }
 
 In the case that multiple access points are trying to do a scan of the network
-at the same time, our program might need to do multiple passes to be certain
-that it collects information about all the other access points around it.
+at the same time, our program might need to do multiple scanning passes to be
+certain that it collects information about all the other access points.
 
 Because of this, I'll have to figure out:
 
