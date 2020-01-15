@@ -4,12 +4,13 @@ Existing research and current practices
 Scanning
 --------
 
-The aim of scanning in this thesis is to be able to share information about our
-local network with the clustering algorithm. Without this information, the
-algorithm won't be able to accurately create clusters.
+The aim of scanning the local IEE802.11 network in this thesis is to be able
+to provide information about adjacent nodes to channel allocation algorithms.
+With this information any given channel allocation algorithm should be able to
+give the access point an optimal channel.
 
-Scanning in @IEEE802.11 is handled via management frames, and can be
-done in one of two ways: Active- or passive scanning.
+Scanning in IEEE802.11 [@IEEE802.11] is handled via management frames, and can
+be done in one of two ways: Active- or passive scanning.
 
 Passive scanning, from a STA's perspective, is simply to listen for
 *beacon frames* that are sent out periodically by all APs. These frames contain
