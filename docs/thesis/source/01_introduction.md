@@ -15,15 +15,10 @@ What this thesis aims to solve is scanning the local area for active
 wireless nodes, so that the algorithm can do it's work.
 
 
-\todo{
-    What is the motivation behind this thesis?
-    * Helping the main project!
-}
+Scope (Problem Statement?)
+--------------------------
 
-Scope
------
-
-In this section I'll be discussing whats is and what is not in the scope of
+In this section I'll be discussing what is and what is not in the scope of
 this thesis. The goal, as discussed in the introduction, is to find a way to
 give the channel allocation all the information it needs to select the best
 channel for a given access point.
@@ -37,20 +32,26 @@ will have to keep network performance and discovery accuracy in mind.
 
 The definition of this thesis is thus:
 
-**How do you scan a network from an AP without affecting the performance of
-the connected STAs while still ensuring accurate results?**
+**How do you scan a IEE802.11 network from an access point without affecting the
+performance of the connected STAs while still ensuring accurate results?**
 
 
-### How does this aid the main project?
+### What problems does this solve?
 
-\todo{
-    Write this section!
-}
+By being able to scan a network continuously for other access points, it is
+possible for any given access point to change channels when needed. This can
+help to minimize the package loss and latency introduced by interference,
+which is common to see in urban 2.4 GHz deployments where channel availability
+is generally low.
+
+This information can also be further shared with other nodes on the network or
+a centralized channel allocation system.
+
 
 ### Outside of the scope
 
 \todo{
-    Not quite sure if this is a section I actually should have?
+    Could possibly be in the conclusion or discussion section.
 }
 
 
