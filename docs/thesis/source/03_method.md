@@ -85,7 +85,7 @@ order and without pause.
 
 ### Selective Scanning
 
-According to [@ApDiscovery], some percentage of access points in adjacent
+According to [@APDiscovery], some percentage of access points in adjacent
 channels will be discovered while in a given channel due to channel overlapping.
 
 Seeing that our main goal is to find access points that are neighbouring the
@@ -100,7 +100,7 @@ being scanned. Reducing the number of channels scanned, will thus reduce the
 total time of the scan.
 
 ![Percent of access points discovered in adjacent channels 
-  (From [@ApDiscovery])](../static/channel_overlap.png)
+  (From [@APDiscovery])](static/channel_overlap.png){ width=75% }
 
 
 ### Smooth Scanning
@@ -241,7 +241,9 @@ WiFi chipset that will be used.
 
 The Raspberry Pi's have the following specifications:
 
- - [ ] TODO: Get the Raspberry Pi's and their specifications.
+\todo{
+    Get the Raspberry Pi's and their specifications.
+}
 
 This setup was tested and used in an isolated room at the norwegian defence
 institute of technology.

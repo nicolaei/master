@@ -97,6 +97,10 @@ the given area. The main takeaway from this study is that you'll need
 multiple scans to discover as many APs as possible, and even then you're not
 guaranteed to find all the access points in your vicinity.
 
+![Probe responses vs beacon frames. Here you can clearly see the how
+ probe responses almost disappear after 100ms. Taken from [@APDiscovery]
+](static/probe_vs_beacon.png){ width=40% }
+
 In their tests, they found that the scanning timer for a probe request
 had a lot to say about your ability to discover other APs. In general,
 the longer the timer, the better the chance of discovering other access points.
@@ -113,10 +117,6 @@ not discovered.
     Why are some access points discovered, while others are not?
     Which APs are these (like, is it the distance that matters)?
     Maybe it's their distance (ie. quality of the connection).
-}
-
-\todo{
-    Remember to add figures from [@APDiscovery]!
 }
 
 
@@ -141,10 +141,9 @@ initialized, a large spike in latency occurred. This spike had a tail of
 latency that lasted a few seconds. This kind of latency spike is problematic,
 as it has an impact on real-time applications like games and VoIP.
 
-\todo{
-    Add figure from [@ActiveScanPerformance] that shows the spike in
-    latency during active scans.
-}
+![Scanning can have quite an effect on a client's latency. Every time a
+ client scans, it's latency can increase as much as 10 fold.
+ From [@ActiveScanPerformance]](static/probe_latency.png){ width=60% }
 
 I hypothesize that this effect will be even stronger ones access points start
 scanning as well, seeing that this won't just effect the access point, but
