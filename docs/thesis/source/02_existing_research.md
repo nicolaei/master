@@ -35,18 +35,26 @@ a broadcast frame.
 
 *Probe responses* on the other hand are sent by access points that receive the
 *probe request*. These frames' content is almost identical to beacon frames,
-though they do contain some more information than beacon frames. This
-information isn't really relevant for what I wish to accomplish with this
-thesis, so I won't outline it.
+though they do contain some more information than the probe request's frames. 
+This information isn't really relevant for what I wish to accomplish with this
+thesis, so I won't outline it [^beacon-information].
 
-\todo{
+The window in which the station that sent out the *probe request* is
+listening for *probe responses* is called the *scanning timer*. This timer
+has two components:
 
-    Hmmm, not quite sure if I should actually outline what that information
-    is, and then say that it's not relevant instead.
-}
+ * *Minimum Channel Time*: The minimum time a station will listen to the
+   channel for a response from access points.
 
-[notused]: Information about active and passive scanning is gathered from
-           [-@IEEE802.11Handbook]
+ * *Max Channel Time*: The maximum time a station will listen to a channel
+   for a response from an access point. This timer only activates if a probe
+   response is received.
+
+This timer decides how long the station will listen in on the channel it is
+currently scanning.
+
+[^beacon-information]: If you're interested in the rest of the information that
+    can be found in a beacon frame, please consult [@802.11Handbook, p. 52-53].
 
 
 ### Current use of scanning in IEEE802.11 networks
@@ -62,14 +70,6 @@ clients (STAs) to find access points to connect to. Typical use-cases are:
    is currently connected to, but with a better signal. This is typically
    used for mobile STAs to improve service while roaming.
 
-In addition to this, i
-
-
-
-\todo{
-    Is this the kind of information i need to cite?
-}
-
 
 ### Differences between active and passive scanning
 
@@ -77,7 +77,6 @@ While both active and passive scanning are means to achieve the same result,
 they have different impacts on the network and use differing amount of time
 to discover all nodes on the network. The impact of them in regards to
 discovery latency and network impact is widely studied.
-
 
 
 ### Discovery time
@@ -99,7 +98,7 @@ multiple scans to discover as many APs as possible, and even then you're not
 guaranteed to find all of the access points in your vicinity.
 
 In their tests, they found that the scanning timer for a probe request
-[^timer] had a lot to say about your ability to discover other APs. In general,
+had a lot to say about your ability to discover other APs. In general,
 the longer the timer, the better the chance of discovering other access points.
 Though over 100ms the benifit quickly diminish, as very few or no probe
 responses were recieved after this time and the discovered APs mainly came
@@ -109,8 +108,6 @@ In addition to the length of the timer, they also found that the amount of
 scans mattered a lot to the discovery (see the figure that I haven't added
 yet). Even after 100 scans, the study found that up to 15% of all APs were
 not discovered.
-
-[^timer]: Write about scanning timers
 
 \todo{
     Remember to add figures from [@APDiscovery]!
