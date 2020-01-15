@@ -4,6 +4,103 @@ Method
 In this chapter I'll be talking about my methods for experiments and how I
 implemented the experiments.
 
+
+Discovery strategies
+--------------------
+
+Discovery strategies are a well discussed topic within IEEE802.11, but these
+are mainly aimed at client's trying to discover access points.
+
+Any given scanning algorithm must find the best trade-off between:
+
+ *  The time spent to probe for APs
+ 
+ *  The number of discovered APs
+ 
+ *  The discovery of at least one candidate AP after a full scan
+
+An ideal scanning algorithm seeks to discover the maximum number of APs in
+the shortest period [@SelectingScanningParameters].
+ 
+I'll be testing multiple discovery strategies that has been outlined in
+various research articles in this thesis.
+
+ *  Full scan
+ 
+ *  Selective scanning
+ 
+ *  Smooth scanning
+ 
+\todo{
+    Write a section about each of the strategies and outline their apparent
+    weaknesses that has been discussed in the given research articles.
+}
+
+### Full scan
+
+This approach will be used as the baseline, seeing as it is the simplest and
+most common way for most clients to scan the network.
+
+With a full scan, the access point will be going trough all channels, in
+order and without pause.
+
+
+### Selective Scanning
+
+According to [@ApDiscovery], some percentage of access points in adjacent
+channels will be discovered while in a given channel due to channel overlapping.
+
+Seeing that our main goal is to find access points that are neighbouring the
+current access point, it's possible that we can find many of these while
+scanning fewer channels. This could give a huge boost in speed if successful.
+
+This approach should substantially decrease the time spent on doing a full scan,
+as (according to [@SeamlessHandoff]) the fact that when scanning the station
+that is scanning has to wait for a response for up to 100ms. This implies
+that scanning time increases proportional to the number of channels that are
+being scanned. Reducing the number of channels scanned, will thus reduce the
+total time of the scan.
+
+![Percent of access points discovered in adjacent channels 
+  (From [@ApDiscovery])](../static/channel_overlap.png)
+
+
+### Smooth Scanning
+
+Smooth scanning utilizes a staggered approach where channels are scanned in
+multiple batches. Each channel is assigned to a group, and in between the
+groups the access point will return to "normal" operations where it will
+serve clients. 
+
+Both the group size and time between each scan is configurable, and has their
+trade-offs. For more on this, see [Parameters].
+
+This approach has previously been explored in
+[@SelectingScanningParameters], [@ProactiveScan], and [@PracticalSchemes].
+Though in these cases, it was specifically tested on the client.
+
+The use of intervals of normal operations in these articles prove quite
+beneficial for the client's latency, goodput and packet loss, though at the
+expense of scanning speed. This longer scanning period should hopefully not have
+any impact when scanning as the access-point.
+
+
+### Other approaches
+
+Some other approaches were also concidered, but ultimately not tested for
+various reasons. 
+
+#### Extra radio operating on a separate channel
+
+In [@SeamlessHandoff] the authors suggest having an extra radio on the
+access point to improve handoff between access points. This extra radio would
+operate on an exclusive channel.
+
+This method could help with both discovery time, accuracy, client latency and
+goodput. But this approach was ultimately decided against due to the extra
+equipment needed for adoption.
+
+
 Setup
 -----
 
