@@ -5,6 +5,44 @@ In this chapter I'll be talking about my methods for experiments and how I
 implemented the experiments.
 
 
+Measuring points
+----------------
+
+During my tests, I've tried to gather the following data to verify the
+effectiveness of my results:
+
+- Client latency
+- Client goodput [^goodput]
+- Percent of access points discovered
+- Speed of discovery
+
+[^goodput]: Goodput is the application-level throughput.
+
+These data points will help me figure out which methods are best fit for
+discovering a high percentage of access points at a high speed, while still
+letting clients utilize the network like normal.
+
+
+### Client latency & client goodput
+
+These datapoints will be used to measure how a given algorithm affects the
+clients on the network. As [@ActiveScanPerformance] mentions, a large amount
+of probe traffic can negatively impact the network's clients.
+
+To summarize: These measurement points main objective is to make sure that our
+chosen algorithm does not harm our networks performance too negatively.
+
+
+### Percent of access points discovered & speed of discovery
+
+While client latency and goodput from the chosen algorithms are important, it
+is also very important to make sure that we're discovering as many access
+points as possible and doing it as fast as possible.
+
+Worth noting is that the faster we're doing the discovery, the less probe
+requests will be occupying the network, and thus improving the client's latency.
+
+
 Discovery strategies
 --------------------
 
@@ -147,44 +185,3 @@ institute of technology.
 \todo{
     Once tests are completed, make sure that this is correct.
 }
-
-Data points
------------
-
-During my tests, I've tried to gather the following data to verify the
-effectiveness of my results:
-
-- Client latency
-- Client goodput
-- Percent of access points discovered
-- Speed of discovery
-
-[^goodput]: Goodput is the application-level throughput.
-
-These data points will help me figure out which methods are best fit for
-discovering a high percentage of access points at a high speed, while still
-letting clients utilize the network like normal.
-
-\todo{
-    Remember to add citations to articles for the resoning behind these
-    datapoints.
-}
-
-### Client latency & client goodput
-
-These datapoints will be used to measure how a given algorithm affects the
-clients on the network. As [@ActiveScanPerformance] mentions, a large amount
-of probe traffic can negatively impact the network's clients.
-
-To summarize: These measurement points main objective is to make sure that our
-chosen algorithm does not harm our networks performance too negatively.
-
-
-### Percent of access points discovered & speed of discovery
-
-While client latency and goodput from the chosen algorithms are important, it
-is also very important to make sure that we're discovering as many access
-points as possible and doing it as fast as possible.
-
-Worth noting is that the faster we're doing the discovery, the less probe
-requests will be occupying the network, and thus improving the client's latency.
