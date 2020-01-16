@@ -141,6 +141,8 @@ These parameters may be:
  *  *Smooth scan interval*: How long to wait between each scan 
 
  *  *Smooth scan group size*: The number of channels to scan per period
+ 
+ *  *Scanning Trigger*: When should the scans start?
 
 
 ### Min and max channel time 
@@ -184,6 +186,63 @@ packet loss and total scan duration.
 [@ProactiveScan] has also done research regarding this parameter. The larger the
 group size, the faster the total scan will be, though the trade-off comes at
 the expense of clients in form of possible packet loss.
+
+
+### Scanning Trigger
+
+When to start scanning is important. In an extreme case, all access points can
+start scanning at the same time, which would both congest the medium and since
+they're all listening and probably not replying, we could end up not discovering
+any other access point.
+
+\todo{
+    I'm not quite sure if access points don't reply while listening for
+    responses. I'll have to verify this.
+}
+
+In typical client handoff schemes, the scan is triggered when the RSSI to the
+connected access point is low or when trying to find a network to connect to.
+Both of these triggers don't exist when searching from an access point, because
+the client isn't connected to another access point, nor does it need to find
+another one.
+
+There is also a question of how often the access points should scan to keep a
+accurate view of its neighbourhood. I hypothesize that new access points won't
+be introduced and removed within a day. Though with the advent of sharing mobile
+data over Wi-Fi, this assumption might be wrong. Mobile phones that share their
+data are mobile, as opposed to traditional access points.
+
+Some possible methods are:
+
+ *  **Random timers**: Having the timing for a scan totally random opens for
+    less possibility for collision. Pairing this with the number of scans, it
+    seems very likely that it would help give an accurate overview of the
+    access point's current neighbourhood.
+ 
+ *  **Clock based timer**: Basing the scan times of the clock could be a good
+    solution for avoiding times with high traffic, but it introduces the risk
+    of always scanning at the same time as another access point or scanning
+    while another access point is turned off [^turned-off].
+ 
+ *  **Traffic based trigger**: Having times of low traffic be the trigger could
+    also be a possible solution. Though here we also introduce the risk of
+    scanning at the wrong time. Seeing that workplaces and homes usually empty
+    and fill up at the same time, we could risk having access points scanning at
+    the same time.
+    
+    In addition to this, only scanning when there is low traffic could risk
+    getting inaccurate results because other access points might be turned off
+    or getting a different signal strength due to lower traffic.
+    
+\todo{
+    I'm not quite sure about what I'm saying about different signal strength
+    here. Does it actually work like that?
+}
+
+
+[^turned-off]: Some consumer access points have the ability to be turned off
+               during a specified period. For example in households where
+               parents wish to limit access to the internet during the night.
 
 
 Setup
