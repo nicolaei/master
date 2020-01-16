@@ -22,6 +22,11 @@ These data points will help me figure out which methods are best fit for
 discovering a high percentage of access points at a high speed, while still
 letting clients utilize the network like normal.
 
+\todo{
+    These measuring points could be grouped into two parts: Scan results and
+    client impact.
+}
+
 
 ### Client latency & client goodput
 
