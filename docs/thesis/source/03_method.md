@@ -122,23 +122,6 @@ beneficial for the client's latency, goodput and packet loss, though at the
 expense of scanning speed. This longer scanning period should hopefully not have
 any impact when scanning as the access-point.
 
-
-### Other approaches
-
-Some other approaches were also concidered, but ultimately not tested for
-various reasons. 
-
-#### Extra radio operating on a separate channel
-
-In [@SeamlessHandoff] the authors suggest having an extra radio on the
-access point to improve handoff between access points. This extra radio would
-operate on an exclusive channel.
-
-This method could help with both discovery time, accuracy, client latency and
-goodput. But this approach was ultimately decided against due to the extra
-equipment needed for adoption.
-
-
 Parameters
 ----------
 

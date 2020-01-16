@@ -32,3 +32,23 @@ system is in charge of channel allocation, rather than the single access point.
     more prevent in the future, and they might not have a strong enough signal
     to actively cause a problem for other clients on the network. Though this is
     just a hypothesis, so more research has to be done to confirm this.
+    
+    
+Extra radio operating on a separate channel
+-------------------------------------------
+
+In [@SeamlessHandoff] the authors suggest having an extra radio on the
+access point to improve handoff between access points. Using this extra
+radio, access points discover each other using an exclusive discovery channel.
+
+The approach outlined in [@SeamlessHandoff] showed that the time spent on
+scanning would remain approximately the same, but the packet loss was greatly
+reduced. I also hypothesize that this approach would allow for less impact on
+the clients, seeing that the discovery of other access points would not
+happen on the same channel that clients are operating on.
+
+This approach was considered for testing in the thesis, but ultimately decided
+against due to the extra equipment needed for adoption. For this method to be
+effective, most access points need to have this extra radio.
+
+
