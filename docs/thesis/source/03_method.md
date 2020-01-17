@@ -250,13 +250,16 @@ Some possible methods are:
                parents wish to limit access to the internet during the night.
 
 
-Setup
------
+Implementation
+--------------
+
+### Hardware & Software
 
 To get my results I need to gather data. This data will be gathered via two
 methods: A simulation setup and a real-world setup.
 
-### Simulation
+
+#### Simulation
 
 To test various use-cases I'll be using emulation to do rapid testing of
 mechanism to check if they are viable. Ones a setup is deemed viable in my
@@ -279,8 +282,12 @@ results might be dramatically different from it's real world counterpart.
     dramatically different from the real world counterpart.
 }
 
+\todo{
+    This section might be dropped entirely if I only do real-world experiments.
+}
 
-### Real-world
+
+#### Real-world
 
 In the real-world setup I will be using Raspberry Pi's as both make-shift
 clients and access points. These relatively inexpensive units have an onboard
@@ -298,3 +305,84 @@ institute of technology.
 \todo{
     Once tests are completed, make sure that this is correct.
 }
+
+### Scanning Strategies
+
+#### Full Scan
+
+The full scan is used as a base-line test for comparisons. As mentioned earlier,
+this approach will simply go through all channels in one go.
+
+#### Selective Scanning
+
+With the selective channel approach I will be testing two approaches.
+As mentioned earlier in this chapter, according to [@APDiscovery], some
+percentage of adjacent channels will be discovered while in any given channels
+due to channel overlapping.
+
+ *  **Scanning channels 1, 6 and 11**: These are the only channels that don't
+    overlap with each other in the normal 2.4 GHz space.
+ 
+ *  **Scanning every alternating channel**: If scanning every alternating
+    channel is feasible, it might halve our total scanning time seeing that
+    the time to scan is proportional to the amount of channels scanned
+    [@SeamlessHandoff].
+
+
+#### Smooth Scanning
+
+The smooth scanning implementation has been tested with static smooth scanning
+parameters based on [@ProactiveScan] and [@PracticalSchemes]'s results. These 
+articles showed that lower group size and higher intervals are beneficial for
+latency and packet loss. Seeing that we're not dependent on a low time-to-scan,
+I want to prioritize the clients goodput. Thus, I will be keeping the group size
+to 1 channel per group and interval between scans to 300 ms. 
+
+
+### Scanning Parameters
+
+To make sure that results are comparable I will try to keep the parameters as
+static as possible between each test. This section will not cover the Smooth
+scan interval and Smooth scan group size. See the [implementation section about
+smooth scanning](Smooth Scanning) for that information.
+
+#### Min and Max Channel Time
+
+I will be testing three alternatives for min and max channel time to see how it
+affects scan time and clients.
+
+ *  **Scanning with a constant Min-/MaxCT for all channels**: This means that
+    the channel time won't change for each individual channel. [@APDiscovery]
+    showed that higher timers yield higher discovery rates, but since I'm also
+    interested in the impact towards clients, I will be using the same set of
+    timers that they used.
+ 
+ *  **Scanning with a variable Min-/MaxCT for each channel**: As suggested in
+    [@SelectingScanningParameters], a variable Min-/MaxCT for each channel
+    is an approach that might yield high results, while still keeping time on
+    less populated channels low.
+
+#### Minimum number of scans
+
+[@APDiscovery] discovered that to get the most accurate view of the local
+topology, multiple scans are neccesary. They measured up to 100 times, I will be
+testing 1, 10, 25, 50, and 100 scans in my experiments.
+
+#### Scanning triggers
+
+Seeing that there isn't a lot of literature around scanning from an access
+point, these scanning triggers will mostly be based around _something_ (I'm
+ not sure of the wording here, hmm).
+
+I will be testing these three strategies:
+
+*   **Random Timers**
+
+*   **Clock based timers**
+
+*   **Traffic based triggers**[^traffic-triggers]
+
+
+[^traffic-triggers]: It can be argued that my experiments around traffic based
+    triggers arn't really accurate enough due to the low amount of clients.
+    Further research should be done to verfiy my findings here.
