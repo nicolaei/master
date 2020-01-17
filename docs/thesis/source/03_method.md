@@ -1,8 +1,12 @@
 Method
 ======
 
-In this chapter I'll be talking about my methods for experiments and how I
-implemented the experiments.
+In this chapter I'll be talking about which methods that I will be using in my
+experiments and how I implemented these methods.
+
+These methods aim to measure and discover the optimal way to get a good overview
+of the local topology, while not impacting the clients connected to the
+access point.
 
 
 Measuring points
@@ -16,7 +20,7 @@ effectiveness of my results:
 - Percent of access points discovered
 - Speed of discovery
 
-[^goodput]: Goodput is the application-level throughput.
+[^goodput]: _Goodput_ is the application-level throughput.
 
 These data points will help me figure out which methods are best fit for
 discovering a high percentage of access points at a high speed, while still
@@ -42,7 +46,7 @@ chosen algorithm does not harm our networks performance too negatively.
 
 While client latency and goodput from the chosen algorithms are important, it
 is also very important to make sure that we're discovering as many access
-points as possible and doing it as fast as possible.
+points as possible, and doing it as fast as possible.
 
 Worth noting is that the faster we're doing the discovery, the less probe
 requests will be occupying the network, and thus improving the client's latency.
@@ -52,7 +56,7 @@ Discovery strategies
 --------------------
 
 Discovery strategies are a well discussed topic within IEEE802.11, but these
-are mainly aimed at client's trying to discover access points.
+are mainly aimed at clients trying to discover access points.
 
 Any given scanning algorithm must find the best trade-off between:
 
@@ -67,12 +71,6 @@ the shortest period [@SelectingScanningParameters].
  
 I'll be testing multiple discovery strategies that has been outlined in
 various research articles in this thesis.
-
- *  Full scan
- 
- *  Selective scanning
- 
- *  Smooth scanning
  
 \todo{
     Write a section about each of the strategies and outline their apparent
@@ -136,7 +134,9 @@ that can be changed within every strategy for more optimal results.
 These parameters might be set adaptively or statically, depending on the
 operator's wish.
 
-These parameters may be:
+Based on previous research, the following parameters are the most impactfull
+when it comes to time and accuracy. In addition to this, I assume that these
+will have some sort of impact on a client's goodput.
 
  *  *Max and min channel time*: How long to stay on each channel
  
@@ -166,7 +166,7 @@ time to reply.
 ### Minimum number of scans
 
 This parameter is important to make sure that we have a reply from all access
-points in our vicinity before sending of our results. As [@AccessPointDiscovery]
+points in our vicinity before sending of our results. As [@APDiscovery]
 notes, all access points will most likely not be discovered with just one scan.
 
 

@@ -23,7 +23,7 @@ a scan of the network.
 
 Assuming that access points rarely or never move, and new ones are rather
 rarely introduced this persistent connection can be used to check if any
-access points has been removed from the area [^mobile-aps].
+access points has been removed from the area.
 
 This approach might be useful in cases where a centralized or decentralized
 system is in charge of channel allocation, rather than the single access point.

@@ -4,7 +4,7 @@ Existing research and current practices
 Scanning
 --------
 
-The aim of scanning the local IEE802.11 network in this thesis is to be able
+The aim of scanning the local IEE802.11 topology in this thesis is to be able
 to provide information about adjacent nodes to channel allocation algorithms.
 With this information any given channel allocation algorithm should be able to
 give the access point an optimal channel.
@@ -19,11 +19,13 @@ Passive scanning, from a STA's perspective, is simply to listen for
     synchronization timer.
 
  *  *A beacon interval*; telling the STAs the period between each beacon
-    transmission in TUs (a time period of 1024µ).
+    transmission in TUs[^tu-definition].
 
  *  *The capability information*; Various information about the AP, such as
     it's SSID and more. Extensions to 802.11 has also typically added some
     information to this field.
+
+[^tu-definition]: TU (time unit) is a period of 1024p.
 
 Active scanning on the other hand is initiated by the STAs themselves. This
 process contains two management frames *probe requests* and *probe responses*.
@@ -36,7 +38,7 @@ a broadcast frame.
 *Probe responses* on the other hand are sent by access points that receive the
 *probe request*. These frames' content is almost identical to beacon frames,
 though they do contain some more information than the probe request's frames. 
-This information isn't really relevant for what I wish to accomplish with this
+This information isn't really relevant for what I wish to accomplish in this
 thesis, so I won't outline it [^beacon-information].
 
 The window in which the station that sent out the *probe request* is
@@ -156,27 +158,33 @@ that could have been better utilized by normal application data.
 
 In networks with low utilization, this might not have such a large impact.
 However, in networks with high utilization, this low data rate traffic will
-factor negatively on goodput in the network and will negatively affect other
-clients that are not currently scanning.
+factor negatively on goodput[^goodput] in the network and will negatively affect
+other clients that are not currently scanning.
+
+[^goodput]: _Goodput_ is the application-level throughput.
 
 
 ### Channel overlapping
 
 In addition to their findings about [Discovery Time](@sec:Discovery Time)) in
-[@APDiscovery], the authors also highlighted that due to channel
-overlapping scanning, say channel 1, will also discover APs on channel 2.
+[@APDiscovery] the authors also highlighted that due to channel overlapping,
+an STA that is scanning a channel $i$ has a propability of also discovering
+access points on channels up to two channels away.
 
 This will help with discovery of access points, since a scan can potentially
 discover as many as 40% of APs in adjacent channels. See the figure from the
 study for percentages of adjecent channels.
 
+![Percent of access points discovered in adjacent channels 
+  (From [@APDiscovery])](static/channel_overlap.png){ width=75% }
+
 
 Possible problem areas
 ----------------------
 
-While just doing a scan might sound like a simple project, but there are a
-few parameters that needs to be considered to make sure that the program does
-not interrupt the clients.
+Simply scanning the local topology may sound like a simple endevour, but there
+are some caviats that need to be considered to get accurate results while still
+letting clients use the network freely.
 
 ### Client's have to rediscover the access point
 
@@ -191,7 +199,7 @@ not interrupt the clients.
     with the other subsections?
 }
 
-When the access point switches channels, all it's clients will lose connection
+When an access point switches channels, all its clients will lose connection
 and have to re-discover and re-connect to the access point [Citation Needed].
 If the access point switches channels to quickly, the clients may end up
 losing connection for such a long time that it might become an annoyance to

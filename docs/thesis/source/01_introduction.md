@@ -11,17 +11,18 @@ access point in a given neighborhood discovers each other and communicates
 over back haul. The algorithm will assign a channel, and antenna power output,
 to each access point, to minimize interference.
 
-What this thesis aims to solve is scanning the local area for active
-wireless nodes, so that the algorithm can do it's work.
+This thesis aims to figure out how to scan the local wireless topology for
+active wireless access points, so that an channel allocation algorithm can
+allocate the best channel without interruption to normal traffic.
 
 
 Scope (Problem Statement?)
 --------------------------
 
-In this section I'll be discussing what is and what is not in the scope of
+In this section I'll be discussing what _is_ and what _is not_ in the scope of
 this thesis. The goal, as discussed in the introduction, is to find a way to
-give the channel allocation all the information it needs to select the best
-channel for a given access point.
+give the channel allocation algorithm all the information it needs to select the
+best channel for a given access point.
 
 
 ### What am I trying to figure out?
@@ -51,11 +52,11 @@ a centralized channel allocation system.
 ### Outside of the scope
 
 \todo{
-    Could possibly be in the conclusion or discussion section.
+    Could be in the conclusion, discussion or future work section?
 }
 
 
-The following is not in the scope of this thesis.
+The following approaches have not been concidered in this study. 
 
 #### Hardware-spesific solutions
 
