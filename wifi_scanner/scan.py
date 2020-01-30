@@ -12,14 +12,15 @@ Every channel, except 14, is spaced 5 MHz appart. Starting from 2412 MHz.
 """
 
 
-def first_occurance(prefix: str, lines: list):
+
+def _first_occurance(prefix: str, lines: list):
     """Gets the first occurance of prefix in lines"""
     return next(line[len(prefix):]
                 for line in lines
                 if line.startswith(prefix))
 
 
-@dataclass
+@dataclass(frozen=True)
 class AccessPoint:
     bss: str
     ssid: str
@@ -39,44 +40,49 @@ class AccessPoint:
         split_result = scan_result.splitlines()
 
         bss = split_result[0][:17]
-        ssid = first_occurance("\tSSID: ", split_result)
-        freq = int(first_occurance("\tfreq: ", split_result))
-        signal = float(first_occurance("\tsignal: ", split_result).split()[0])
+        ssid = _first_occurance("\tSSID: ", split_result)
+        freq = int(_first_occurance("\tfreq: ", split_result))
+        signal = float(_first_occurance("\tsignal: ", split_result).split()[0])
 
         return cls(bss, ssid, freq, signal)
+
+    def __eq__(self, other):
+        if other is self:
+            return True
+        elif type(other) != type(self):
+            return False
+
+        return other.bss == self.bss
+
+    def __hash__(self):
+        return hash(self.bss)
 
     def __str__(self):
         return f"{self.ssid} (on channel {self.channel} " \
                f"at {self.signal_strength} dBm)"
 
 
-def scan_with_iw(frequency: int = None):
+def _parse_iw_scan_result(scan: str):
+    """Naive parsing of the output from iw scan"""
+    if scan == "":
+        return set()
+
+    results = scan.split("\nBSS ")
+    results[0] = results[0][4:]  # The first occurance doesn't remove "BSS".
+
+    return {AccessPoint.from_iw_scan(bss) for bss in results}
+
+
+def scan(frequency: int = None) -> set:
     """Grab the results of a scan from the iw tool.
 
     :param frequency: Frequency to scan, if left empty all channels
                       will be scanned.
     """
-    command = ["iw", "wlan0", "scan"] if not frequency \
-        else ["iw", "wlan0", "scan", "frequency", f"{frequency}"]
+    command = ["iw", "wlan0", "scan"]
+    if frequency:
+        command.extend(["freq", f"{frequency}"])
 
-    output = subprocess.run(command, capture_output=True)
-    return output.stdout.decode()
+    result = subprocess.run(command, capture_output=True)
 
-
-def parse_scan_result(scan: str):
-    """Naive parsing of the output from iw scan"""
-    results = scan.split("\nBSS ")
-    results[0] = results[0][4:]  # The first occurance doesn't remove "BSS".
-
-    return [AccessPoint.from_iw_scan(bss) for bss in results]
-
-
-def main():
-    scan_result = scan_with_iw()
-    access_points = parse_scan_result(scan_result)
-    for ap in access_points:
-        print(ap)
-
-
-if __name__ == "__main__":
-    main()
+    return _parse_iw_scan_result(result.stdout.decode())
