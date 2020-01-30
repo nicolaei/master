@@ -81,7 +81,7 @@ def scan(frequency: int = None) -> set:
     :param frequency: Frequency to scan, if left empty all channels
                       will be scanned.
     """
-    command = ["iw", "wlan0", "scan"]
+    command = ["iw", "wlan0", "scan", "flush"]
     if frequency:
         command.extend(["freq", f"{frequency}"])
 
