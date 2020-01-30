@@ -27,5 +27,4 @@ def smooth_scan(interval: timedelta, group_size: int = 1):
                       f"Sleeping for {interval}")
             sleep(interval.total_seconds())
 
-    log.debug(f"Found a total of {len(access_points)} APs")
     return access_points
