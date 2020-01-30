@@ -1,0 +1,31 @@
+import logging
+from datetime import timedelta
+from time import sleep
+
+from wifi_scanner.scan import CHANNEL_FREQUENCY, scan
+
+
+log = logging.getLogger(__name__)
+
+
+def smooth_scan(interval: timedelta, group_size: int = 1):
+    """Scanning method that switches between scanning and normal operation"""
+    # Stolen from "grouper" example in itertools documentation.
+
+    access_points = set()
+    for i, (channel, frequency) in enumerate(CHANNEL_FREQUENCY.items()):
+        found = scan(frequency)
+
+        log.debug(f"Found {len(found)} APs on channel {channel}. "
+                  f"{len(found & access_points)} of these were already "
+                  f"discovered.")
+
+        access_points |= found
+
+        if i % group_size is 0:
+            log.debug(f"Reached group size ({group_size})! "
+                      f"Sleeping for {interval}")
+            sleep(interval.total_seconds())
+
+    log.debug(f"Found a total of {len(access_points)} APs")
+    return access_points

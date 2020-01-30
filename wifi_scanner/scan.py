@@ -11,6 +11,8 @@ FREQUENCY_CHANNEL = {
 Every channel, except 14, is spaced 5 MHz appart. Starting from 2412 MHz.
 """
 
+CHANNEL_FREQUENCY = {v: k for k, v in FREQUENCY_CHANNEL.items()}
+"""The corresponding frequencies for all 2.4GHz channels"""
 
 
 def _first_occurance(prefix: str, lines: list):
