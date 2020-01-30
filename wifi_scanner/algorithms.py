@@ -8,6 +8,11 @@ from wifi_scanner.scan import CHANNEL_FREQUENCY, scan
 log = logging.getLogger(__name__)
 
 
+def full_scan():
+    """A simple scan of all channels, concecutivelly"""
+    return scan()
+
+
 def smooth_scan(interval: timedelta, group_size: int = 1):
     """Scanning method that switches between scanning and normal operation"""
     # Stolen from "grouper" example in itertools documentation.
