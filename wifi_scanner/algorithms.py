@@ -13,6 +13,27 @@ def full_scan():
     return scan()
 
 
+def selective_scan(channels: list):
+    """Only scan some channels on the network
+
+    This approach aims to decrease the total time the scan takes.
+    """
+    selected = {ch: freq for ch, freq in CHANNEL_FREQUENCY.items()
+                if ch in channels}
+
+    access_points = set()
+    for channel, frequency in selected:
+        found = scan(frequency)
+
+        log.debug(f"Found {len(found)} APs on channel {channel}. "
+                  f"{len(found & access_points)} of these were already "
+                  f"discovered.")
+
+        access_points |= found
+
+    return access_points
+
+
 def smooth_scan(interval: timedelta, group_size: int = 1):
     """Scanning method that switches between scanning and normal operation"""
     # Stolen from "grouper" example in itertools documentation.
