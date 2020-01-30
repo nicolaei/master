@@ -42,7 +42,7 @@ class AccessPoint:
         split_result = scan_result.splitlines()
 
         bss = split_result[0][:17]
-        ssid = _first_occurance("\tSSID: ", split_result)
+        ssid = _first_occurance("\tSSID: ", split_result) or None
         freq = int(_first_occurance("\tfreq: ", split_result))
         signal = float(_first_occurance("\tsignal: ", split_result).split()[0])
 
