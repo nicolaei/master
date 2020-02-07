@@ -41,23 +41,47 @@ though they do contain some more information than the probe request's frames.
 This information isn't really relevant for what I wish to accomplish in this
 thesis, so I won't outline it [^beacon-information].
 
+[^beacon-information]: If you're interested in the rest of the information that
+    can be found in a beacon frame, please consult [@802.11Handbook, p. 52-53].
+
 The window in which the station that sent out the *probe request* is
 listening for *probe responses* is called the *scanning timer*. This timer
 has two components:
 
- * *Minimum Channel Time*: The minimum time a station will listen to the
-   channel for a response from access points.
+ * *Minimum Channel Time*: The minimum amount of time a station will listen to
+   the channel for a response from access points.
 
- * *Max Channel Time*: The maximum time a station will listen to a channel
-   for a response from an access point. This timer only activates if a probe
-   response is received.
+ * *Max Channel Time*: The maximum amount of time a station will listen to a
+   channel for a response from an access point. This timer only activates if a
+   probe response is received before MinCT.
 
-This timer decides how long the station will listen in on the channel it is
-currently scanning.
+The min- and maxCT timer pair decides for how long the station will listen in on
+a channel after sending a probe request. 
 
-[^beacon-information]: If you're interested in the rest of the information that
-    can be found in a beacon frame, please consult [@802.11Handbook, p. 52-53].
-
+\begin{figure}
+    \begin{tikzpicture}[scale=1]
+        \node at (0,0) (start) {};
+        \node at (3,0) (min) {};
+        \node at (10,0) (max) {};
+        
+        \draw [|->] (start) -- (max);
+        \draw [->] (start) -- (1, 2) node [midway, above, sloped] 
+            {\footnotesize Probe Request};
+        \draw [->] (2, 2) -- (4, 0) node [midway, above, sloped] 
+            {\footnotesize Probe Response (AP 1)};
+        \draw [->] (3, 2) -- (6, 0) node [midway, above, sloped] 
+            {\footnotesize Probe Response (AP 2)};
+        
+        \draw [decorate, decoration={brace, amplitude=10pt, mirror}] 
+            (start) -- (min) node [midway, yshift=-1.5em] {$MinCT$};
+        
+        \draw [decorate, decoration={brace, amplitude=10pt, mirror}] 
+            (min) -- (max) node [midway, yshift=-1.5em] {$MinCT$};
+    \end{tikzpicture}
+\caption{A scenario where no probe response was resieved before $MinCT$. In
+         this case, no access points would be discovered because all responses
+         came after $MinCT$, and thus the $MaxCT$ period will never occur.}
+\end{figure}
 
 ### Current use of scanning in IEEE802.11 networks
 
