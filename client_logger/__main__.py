@@ -6,8 +6,16 @@ import subprocess
 from datetime import datetime
 from time import sleep
 
-
 log = logging.getLogger(__name__)
+
+
+def write_output(file_name: str, data: list):
+    with open(file_name, "a") as csvfile:
+        writer = csv.writer(csvfile)
+        writer.writerow([
+            datetime.now().timestamp(),
+            *data
+        ])
 
 
 def db_reading():
@@ -33,16 +41,16 @@ def measure():
     log.info("===== Starting data collection =====")
     while True:
         sleep(1)
-        signal_strenght = db_reading()
-        latency_ap = latency("192.168.4.1")
 
-        with open("/tmp/client_measurement.csv", "a") as csvfile:
-            writer = csv.writer(csvfile)
-            writer.writerow([
-                datetime.now().timestamp(),
-                signal_strenght,
-                latency_ap
-            ])
+        write_output(
+            "/tmp/client_measurement.csv",
+            [db_reading(), latency("192.168.4.1")]
+        )
 
 
-measure()
+if __name__ == "__main__":
+    logging.basicConfig(
+        level=logging.DEBUG,
+        format="[%(asctime)s][%(name)s][%(levelname)s]: %(message)s"
+    )
+    measure()
