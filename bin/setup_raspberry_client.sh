@@ -11,8 +11,8 @@ if [ -z "${3}" ]; then
     exit 1
 fi
 
-echo "Changing hostname to ${1}! After this process is done connect to the
-client with the hostname ${1}.local"
+echo "Changing hostname to ${1}! After this process is done connect to the"\
+     "client with the hostname ${1}.local"
 
 echo "${1}" > /etc/hostname
 
@@ -29,3 +29,5 @@ network={
 
 service dhcpcd restart
 wpa_cli -i wlan0 reconfigure
+
+reboot

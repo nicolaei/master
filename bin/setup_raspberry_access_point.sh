@@ -56,3 +56,5 @@ systemctl unmask hostapd
 systemctl enable hostapd
 systemctl start hostapd
 systemctl status hostapd
+
+reboot
