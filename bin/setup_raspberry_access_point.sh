@@ -57,4 +57,7 @@ systemctl enable hostapd
 systemctl start hostapd
 systemctl status hostapd
 
+# wlan0 seems to be initially softblocked for some reason :/
+rfkill unblock 0
+
 reboot

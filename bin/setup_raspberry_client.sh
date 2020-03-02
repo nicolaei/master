@@ -30,4 +30,7 @@ network={
 service dhcpcd restart
 wpa_cli -i wlan0 reconfigure
 
+# wlan0 seems to be initially softblocked for some reason :/
+rfkill unblock 0
+
 reboot
