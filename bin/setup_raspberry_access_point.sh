@@ -3,6 +3,7 @@
 # Run this file as root on the RPi itself.
 
 # Once ran, it will:
+#  * Install ntp to make sure our time is synced
 #  * Change the hostname to the specified one.
 #  * Set the IP to 192.168.4.1/24
 #  * Setup hostapd with password Testing Stuff
@@ -18,7 +19,10 @@ echo "Changing hostname to ${1}! After this process is done connect to the"\
 echo "${1}" > /etc/hostname
 
 apt update --yes
-apt install dnsmasq hostapd --yes
+apt install ntp ntpdate dnsmasq hostapd --yes
+
+# Sometimes the time is wrong, which will affect our graphs
+ntpdate -s time.google.com
 
 # Make the scanner run at startup
 echo "@reboot root cd ~pi/ && python3 -m wifi_scanner full 5min 1>> /home/pi/ap.log 2>&1" >> /etc/crontab

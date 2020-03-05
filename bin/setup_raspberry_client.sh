@@ -11,6 +11,11 @@ if [ -z "${3}" ]; then
     exit 1
 fi
 
+apt install ntp ntpdate --yes
+
+# Sometimes the time is wrong, which will affect our graphs
+ntpdate -s time.google.com
+
 echo "Changing hostname to ${1}! After this process is done connect to the"\
      "client with the hostname ${1}.local"
 
