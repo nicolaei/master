@@ -4,6 +4,7 @@ import csv
 import logging
 import subprocess
 from datetime import datetime
+from os import path
 from time import sleep
 
 log = logging.getLogger(__name__)
@@ -43,7 +44,7 @@ def measure():
         sleep(1)
 
         write_output(
-            "/tmp/client_measurement.csv",
+            path.expanduser("~pi/client_measurement.csv"),
             [db_reading(), latency("192.168.4.1")]
         )
 

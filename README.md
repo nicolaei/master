@@ -16,10 +16,14 @@ There are two files for setting up your Raspberry Pi:
 These have to be run as root. For headless clients, make sure to enable SSH
 access by adding a file called `ssh` to the boot partition of the Pi.
 
-To run the files, you simply ssh to the default address:
+Now we can initialize the pi. Start of by moving the files over:
 ```bash
-ssh pi@raspberrypi.local "sudo bash -s --" < \
-    ./bin/setup_raspberry_client.sh <hostname> <AP password>
+scp -r bin client_logger wifi_scanner pi@raspberrypi.local:~/
+```
+
+Then run the client or access point setup script:
+```bash
+ssh pi@raspberrypi.local "sudo bash ~/bin/setup_raspberry_[client|access_point].sh"
 ```
 The default password is `raspberry`.
 

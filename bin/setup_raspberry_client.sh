@@ -16,6 +16,9 @@ echo "Changing hostname to ${1}! After this process is done connect to the"\
 
 echo "${1}" > /etc/hostname
 
+# Make the logger run at startup
+echo "@reboot python -m ~pi/client_logger" >> /etc/crontab
+
 echo "
 interface wlan0
   static ip_address=${3}/24

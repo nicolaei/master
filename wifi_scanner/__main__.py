@@ -79,6 +79,6 @@ if __name__ == "__main__":
     log.info(f"Starting {argv[2]} with {argv[1]} scan")
     for scan in scheduler(algorithm):
         write_output(
-            path.expanduser("/tmp/scanner_measurements.json"),
+            path.expanduser("~pi/scanner_measurements.json"),
             list(scan)
         )

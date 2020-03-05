@@ -20,6 +20,9 @@ echo "${1}" > /etc/hostname
 apt update --yes
 apt install dnsmasq hostapd --yes
 
+# Make the scanner run at startup
+echo "@reboot python -m ~pi/wifi_scanner full 5min" >> /etc/crontab
+
 # Setup the APs IP
 echo "
 interface wlan0
