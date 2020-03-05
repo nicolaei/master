@@ -42,11 +42,17 @@ def measure():
     log.info("===== Starting data collection =====")
     while True:
         sleep(1)
-
-        write_output(
-            path.expanduser("~pi/client_measurement.csv"),
-            [db_reading(), latency("192.168.4.1")]
-        )
+        try:
+            write_output(
+                path.expanduser("~pi/client_measurement.csv"),
+                [db_reading(), latency("192.168.4.1")]
+            )
+        except IndexError as e:
+            log.warning(
+                "Measurement Error: Couldn't read dB or latency.\n"
+                "You're probably not connected to a network. This mostly "
+                "happens if you just booted your device."
+            )
 
 
 if __name__ == "__main__":
@@ -54,4 +60,7 @@ if __name__ == "__main__":
         level=logging.DEBUG,
         format="[%(asctime)s][%(name)s][%(levelname)s]: %(message)s"
     )
-    measure()
+    try:
+        measure()
+    except Exception as e:
+        log.exception(e)
