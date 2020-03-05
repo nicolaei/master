@@ -23,7 +23,7 @@ scp -r bin client_logger wifi_scanner pi@raspberrypi.local:~/
 
 Then run the client or access point setup script:
 ```bash
-ssh pi@raspberrypi.local "sudo bash ~/bin/setup_raspberry_[client|access_point].sh"
+ssh pi@raspberrypi.local "sudo bash ~pi/bin/setup_raspberry_[client|access_point].sh"
 ```
 The default password is `raspberry`.
 
