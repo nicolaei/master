@@ -21,7 +21,7 @@ apt update --yes
 apt install dnsmasq hostapd --yes
 
 # Make the scanner run at startup
-echo "@reboot python -m ~pi/wifi_scanner full 5min" >> /etc/crontab
+echo "@reboot root cd ~pi/ && python3 -m wifi_scanner full 5min 1>> /home/pi/ap.log 2>&1" >> /etc/crontab
 
 # Setup the APs IP
 echo "
