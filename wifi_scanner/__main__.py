@@ -14,14 +14,13 @@ log = logging.getLogger(__name__)
 
 
 def write_output(file_name: str, access_points: list):
-    with open(file_name, "r+") as json_file:
-        try:
+    try:
+        with open(file_name, "r") as json_file:
             data = json.load(json_file)
-        except JSONDecodeError as e:
-            # In this case the file is empty!
-            log.exception(e)
-            log.warning("The file was empty; initializing with empty list!")
-            data = []
+    except (JSONDecodeError, FileNotFoundError) as e:
+        log.exception(e)
+        log.warning("The file was empty; initializing with empty list!")
+        data = []
 
     data.append(
         {
