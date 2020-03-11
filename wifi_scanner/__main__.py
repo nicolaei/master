@@ -43,8 +43,8 @@ def write_output(file_name: str, access_points: list):
 
 algorithms = {
     "full": full_scan,
-    "selective": selective_scan,
-    "smooth": smooth_scan,
+    "selective": partial(selective_scan, channels=[1, 6, 11]),
+    "smooth": partial(smooth_scan, interval=timedelta(milliseconds=300)),
 }
 
 schedulers = {
