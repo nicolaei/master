@@ -29,6 +29,16 @@ def _client_data(folder: str, file: str):
     return time, db, latency
 
 
+def _multi_client_data(folder: str, files: List[str]):
+    data = [_client_data(folder, file) for file in files]
+
+    time = [items[0] for items in data]
+    db = [items[1] for items in data]
+    latency = [items[2] for items in data]
+
+    return time, db, latency
+
+
 def _modify_axis(
     ax: Subplot,
     time: list,
@@ -38,7 +48,11 @@ def _modify_axis(
     label: str,
 ):
     ax.set_ylabel(label, color=color)
-    ax.plot(time, data, color=color)
+    if isinstance(time[0], list):
+        for plot in zip(time, data):
+            ax.plot(*plot)
+    else:
+        ax.plot(time, data, color=color)
     ax.tick_params(axis='y', labelcolor=color)
 
     ax.xaxis.set_major_locator(mdates.MinuteLocator(interval=5))
@@ -104,5 +118,17 @@ draw(
     limit=(
         datetime(year=2020, month=3, day=12, hour=0, minute=0, second=0),
         datetime(year=2020, month=3, day=12, hour=1, minute=0, second=0)
+    )
+)
+
+draw(
+    "./measurements/full_5min_3clients",
+    limit=(
+        datetime(year=2020, month=3, day=15, hour=0, minute=0, second=0),
+        datetime(year=2020, month=3, day=15, hour=1, minute=0, second=0)
+    ),
+    client_data=_multi_client_data(
+        "./measurements/full_5min_3clients",
+        ["client_close.csv", "client_mid.csv", "client_far.csv"]
     )
 )
