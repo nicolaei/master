@@ -11,6 +11,7 @@ log = logging.getLogger(__name__)
 
 
 def write_output(file_name: str, data: list):
+    log.debug(f"{data[0]} dB - {data[1]} ms")
     with open(file_name, "a") as csvfile:
         writer = csv.writer(csvfile)
         writer.writerow([
@@ -50,7 +51,7 @@ async def latency(
     while True:
         stdout = (await process.stdout.readline()).decode("utf-8")
         if stdout.startswith("no answer yet for"):
-            yield None
+            yield -1
         else:
             yield float(re.search(r"(?<=time=)\S+(?= ms)", stdout).group())
 
