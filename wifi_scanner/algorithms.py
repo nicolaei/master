@@ -22,7 +22,7 @@ def selective_scan(channels: list):
                 if ch in channels}
 
     access_points = set()
-    for channel, frequency in selected:
+    for channel, frequency in selected.items():
         found = scan(frequency)
 
         log.debug(f"Found {len(found)} APs on channel {channel}. "
