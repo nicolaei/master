@@ -24,7 +24,10 @@ def _client_data(folder: str, file: str):
         for row in reader:
             time.append(datetime.fromtimestamp(float(row[0])))
             db.append(float(row[1]))
-            latency.append(float(row[2]))
+            try:
+                latency.append(float(row[2]))
+            except:
+                latency.append(-100)
 
     return time, db, latency
 
@@ -76,7 +79,7 @@ def draw(
     _modify_axis(ax1, time, db, color="tab:red", label="dB")
     _modify_axis(ax2, time, latency, color="tab:green", label="Latency")
 
-    ax2.set_ylim(0, 5)
+    ax2.set_ylim(0, 250)
     if limit:
         ax1.set_xlim(*limit)
 
@@ -90,45 +93,41 @@ def draw(
 
 
 draw(
-    "./measurements/full_5min_far",
+    "./measurements/full_5min",
     limit=(
-        datetime(year=2020, month=3, day=7, hour=0, minute=0, second=0),
-        datetime(year=2020, month=3, day=7, hour=1, minute=0, second=0),
-    ),
-)
-
-draw(
-    "./measurements/full_5min_close",
-    limit=(
-        datetime(year=2020, month=3, day=8, hour=0, minute=0, second=0),
-        datetime(year=2020, month=3, day=8, hour=1, minute=0, second=0),
+        datetime(year=2020, month=3, day=26, hour=10, minute=30, second=0),
+        datetime(year=2020, month=3, day=26, hour=11, minute=0, second=0)
     )
 )
 
 draw(
-    "./measurements/smooth_5min_far",
+    "./measurements/smooth_300_5min",
     limit=(
-        datetime(year=2020, month=3, day=9, hour=0, minute=0, second=0),
-        datetime(year=2020, month=3, day=9, hour=1, minute=0, second=0)
+        datetime(year=2020, month=4, day=1, hour=7, minute=0, second=0),
+        datetime(year=2020, month=4, day=1, hour=7, minute=30, second=0)
     )
 )
 
 draw(
-    "./measurements/smooth_5min_close",
+    "./measurements/smooth_600_5min",
     limit=(
-        datetime(year=2020, month=3, day=12, hour=0, minute=0, second=0),
-        datetime(year=2020, month=3, day=12, hour=1, minute=0, second=0)
+        datetime(year=2020, month=4, day=1, hour=13, minute=0, second=0),
+        datetime(year=2020, month=4, day=1, hour=13, minute=30, second=0)
     )
 )
 
 draw(
-    "./measurements/full_5min_3clients",
+    "./measurements/smooth_1200_5min",
     limit=(
-        datetime(year=2020, month=3, day=15, hour=0, minute=0, second=0),
-        datetime(year=2020, month=3, day=15, hour=1, minute=0, second=0)
-    ),
-    client_data=_multi_client_data(
-        "./measurements/full_5min_3clients",
-        ["client_close.csv", "client_mid.csv", "client_far.csv"]
+        datetime(year=2020, month=4, day=1, hour=7, minute=0, second=0),
+        datetime(year=2020, month=4, day=1, hour=7, minute=30, second=0)
+    )
+)
+
+draw(
+    "./measurements/selective_5min",
+    limit=(
+        datetime(year=2020, month=4, day=2, hour=11, minute=0, second=0),
+        datetime(year=2020, month=4, day=2, hour=11, minute=30, second=0)
     )
 )
