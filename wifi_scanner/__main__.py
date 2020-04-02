@@ -44,12 +44,16 @@ def write_output(file_name: str, access_points: list):
 algorithms = {
     "full": full_scan,
     "selective": partial(selective_scan, channels=[1, 6, 11]),
-    "smooth": partial(smooth_scan, interval=timedelta(milliseconds=300)),
+    "selective_1ch": partial(selective_scan, channels=[1]),
+    "smooth_300": partial(smooth_scan, interval=timedelta(milliseconds=300)),
+    "smooth_600": partial(smooth_scan, interval=timedelta(milliseconds=600)),
+    "smooth_1200": partial(smooth_scan, interval=timedelta(milliseconds=1200)),
 }
 
 schedulers = {
     "single": partial(repeat_scan, repetitions=1),
     "5min": partial(interval_trigger, interval=timedelta(minutes=5)),
+    "2min": partial(interval_trigger, interval=timedelta(minutes=2)),
     "traffic": traffic_trigger
 }
 
