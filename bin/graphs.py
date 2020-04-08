@@ -65,6 +65,7 @@ def _modify_axis(
 def draw(
     folder: str,
     limit: Tuple[datetime, datetime] = None,
+    title: str = None,
     client_data: Tuple = None,
     ap_data: Tuple = None
 ):
@@ -87,6 +88,7 @@ def draw(
     [plt.axvline(x=datetime.fromtimestamp(float(data_point["time"])))
      for data_point in ap_data]
 
+    fig.suptitle(title or folder)
     fig.set_size_inches(30, 10)
     fig.tight_layout()  # otherwise the right y-label is slightly clipped
     plt.show()
@@ -94,6 +96,7 @@ def draw(
 
 draw(
     "./measurements/full_5min",
+    title="Full Scan",
     limit=(
         datetime(year=2020, month=3, day=26, hour=10, minute=30, second=0),
         datetime(year=2020, month=3, day=26, hour=11, minute=0, second=0)
@@ -102,6 +105,7 @@ draw(
 
 draw(
     "./measurements/smooth_300_5min",
+    title="Smooth Scan (300ms)",
     limit=(
         datetime(year=2020, month=4, day=1, hour=7, minute=0, second=0),
         datetime(year=2020, month=4, day=1, hour=7, minute=30, second=0)
@@ -110,24 +114,36 @@ draw(
 
 draw(
     "./measurements/smooth_600_5min",
+    title="Smooth Scan (600ms)",
     limit=(
-        datetime(year=2020, month=4, day=1, hour=13, minute=0, second=0),
-        datetime(year=2020, month=4, day=1, hour=13, minute=30, second=0)
+        datetime(year=2020, month=4, day=2, hour=10, minute=45, second=0),
+        datetime(year=2020, month=4, day=2, hour=11, minute=15, second=0)
     )
 )
 
 draw(
     "./measurements/smooth_1200_5min",
+    title="Smooth Scan (1200ms)",
     limit=(
-        datetime(year=2020, month=4, day=1, hour=7, minute=0, second=0),
-        datetime(year=2020, month=4, day=1, hour=7, minute=30, second=0)
+        datetime(year=2020, month=4, day=3, hour=0, minute=30, second=0),
+        datetime(year=2020, month=4, day=3, hour=1, minute=0, second=0)
     )
 )
 
 draw(
     "./measurements/selective_5min",
+    title="Selective Scan (1, 6, 11)",
     limit=(
         datetime(year=2020, month=4, day=2, hour=11, minute=0, second=0),
         datetime(year=2020, month=4, day=2, hour=11, minute=30, second=0)
+    )
+)
+
+draw(
+    "./measurements/selective_1ch_5min",
+    title="Selective Scan (1) [For comparison]",
+    limit=(
+        datetime(year=2020, month=4, day=3, hour=0, minute=0, second=0),
+        datetime(year=2020, month=4, day=3, hour=0, minute=30, second=0)
     )
 )
