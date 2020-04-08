@@ -55,6 +55,7 @@ def get_x_y_stdev(data):
     times_discoveries = []
     db = []
     db_variance = []
+    labels = []
 
     for bss, discoveries in data.items():
         if len(discoveries) < 2:
@@ -62,12 +63,13 @@ def get_x_y_stdev(data):
             continue
 
         times_discoveries.append(len(discoveries))
+        labels.append(discoveries[0].ssid)
 
         signal_strengths = [d.signal_strength for d in discoveries]
         db.append(mean(signal_strengths))
         db_variance.append(stdev(signal_strengths))
 
-    return times_discoveries, db, db_variance
+    return times_discoveries, db, db_variance, labels
 
 
 def draw(
@@ -75,9 +77,9 @@ def draw(
     title: str = None,
 ):
     scans = _ap_data(folder, "scanner_measurements.json")
-    scans = scans[:100]
+    scans = scans[:1000]
     discovered_aps = orginize_data(scans)
-    times_discovered, db, db_variance = get_x_y_stdev(discovered_aps)
+    times_discovered, db, db_variance, labels = get_x_y_stdev(discovered_aps)
 
     fig, ax1 = plt.subplots()
 
@@ -88,6 +90,9 @@ def draw(
     ax1.set_xlabel("Signal Strength (dB)")
     ax1.set_yscale("log")
     ax1.yaxis.set_major_formatter(ScalarFormatter())
+
+    for x, y, name in zip(db, times_discovered, labels):
+        ax1.annotate(name, (x, y))
 
     fig.suptitle(
         f"Access Points Discovered (Over {len(scans)} scans) ({title or folder})"
