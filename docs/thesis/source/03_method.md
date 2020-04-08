@@ -253,59 +253,6 @@ Some possible methods are:
 Implementation
 --------------
 
-### Hardware & Software
-
-To get my results I need to gather data. This data will be gathered via two
-methods: A simulation setup and a real-world setup.
-
-
-#### Simulation
-
-To test various use-cases I'll be using emulation to do rapid testing of
-mechanism to check if they are viable. Ones a setup is deemed viable in my
-simulation environment I will be moving on to the real-world setup with my
-tasks.
-
-The simulation's are done in a fork of the network-emulator Mininet called
-Mininet-Wifi. This enables me to do tests in an environment that doesn't
-require real world parts.
-
-There are limitations to this approach that are important to be wary off
-though, such as Mininet-Wifi's limited interference model[^interference], which 
-is rather basic at the time of writing. This limitation means that some
-results might be dramatically different from it's real world counterpart.
-
-[^interference]: https://github.com/intrig-unicamp/mininet-wifi/issues/134
-
-\todo{
-    When actual tests are done, confirm the quote about results being
-    dramatically different from the real world counterpart.
-}
-
-\todo{
-    This section might be dropped entirely if I only do real-world experiments.
-}
-
-
-#### Real-world
-
-In the real-world setup I will be using Raspberry Pi's as both make-shift
-clients and access points. These relatively inexpensive units have an onboard
-WiFi chipset that will be used.
-
-The Raspberry Pi's have the following specifications:
-
-\todo{
-    Get the Raspberry Pi's and their specifications.
-}
-
-This setup was tested and used in an isolated room at the norwegian defence
-institute of technology.
-
-\todo{
-    Once tests are completed, make sure that this is correct.
-}
-
 ### Scanning Strategies
 
 #### Full Scan
@@ -386,3 +333,63 @@ I will be testing these three strategies:
 [^traffic-triggers]: It can be argued that my experiments around traffic based
     triggers arn't really accurate enough due to the low amount of clients.
     Further research should be done to verfiy my findings here.
+
+### Setup
+
+\todo{Add photos of the Raspery Pi's for dramatic effect}
+
+To do the actuall measurements, I'll be using Raspberry Pi 4 Model B (4 GB) as
+make-shift access points and clients. RPi 4 has a built in Wi-Fi antenna which 
+supports both 2.4 and 5 GHz.
+
+Both clients and the access points are using Raspian 10 (Buster), which are based
+on the popular Linux distribution Debian (Buster).
+
+#### Access Point Setup
+
+The nodes that function as access points are using `hostapd`. This allows for
+easy-setup of everything from SSID to Wi-Fi channel.
+
+For the sake of consistensy all access points are set to the same channel accross
+all experiments.
+
+
+#### Client Setup
+
+In similar vains ast the access points, the clients are using `wpa_supplicant` 
+to connect to the access points. A single client never changes which access point 
+it is connected to during a scan-run.
+
+
+#### Measurements and collecting data
+
+To do the actual measurements, I will be using:
+
+ * `ping` to collect data about how the client's connection is affected by the scans
+   that the access points are doing.
+  
+ * `iw` to conduct scans from the access points
+ 
+ * `python` to collect data from `ping` and `iw`, as well as writing this data to disk.
+   All data is also timestamped to make it easier to spot the corralations between
+   ping-spikes and the actuall scan (ping-spikes can happen unrelated to scans due
+   to interference).
+
+##### Ping setup
+
+On the client-side, a ping is sent to the access point every 250 ms. This ensures
+that we get multiple measurements as a scan happens.
+
+All pinging is sent to the access point instead of a remote host to make sure that
+only the link between the client and access point is being measured, and not the
+uplink between the access point and the internet.
+
+
+##### Scanning setup
+
+The access points were running scans depending on the triggers that were used.
+
+To see how performat the scanning algorithms were, multiple scans were conducted
+over the course of a few hours. Discovered access points with less than 2 results
+have been discarded as these were typically mobile access-points that passed by
+the measuring environment.
