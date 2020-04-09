@@ -138,8 +138,6 @@ Based on previous research, the following parameters are the most impactfull
 when it comes to time and accuracy. In addition to this, I assume that these
 will have some sort of impact on a client's goodput.
 
- *  *Max and min channel time*: How long to stay on each channel
- 
  *  *Minimum number of scans*: How many scans (of the whole channel sequence)
     should be performed before the scan is finished.
  
@@ -148,19 +146,6 @@ will have some sort of impact on a client's goodput.
  *  *Smooth scan group size*: The number of channels to scan per period
  
  *  *Scanning Trigger*: When should the scans start?
-
-
-### Min and max channel time 
-
-Minimum and maximum channel time is mentioned in a lot of literature
-regarding Wi-Fi. This parameter can change weather or not we spend too much time
-on a channel or if we don't spend enough time.
-
-[@SelectingScanningParameters] suggests to have a set of minimum and maximum
-channel times for each available channel. This way we can optimize the time
-spent on each channel depending on weather or not there have previously been
-seen access points, or if the access points on a channel typically spend longer
-time to reply.
 
 
 ### Minimum number of scans
@@ -292,22 +277,6 @@ To make sure that results are comparable I will try to keep the parameters as
 static as possible between each test. This section will not cover the Smooth
 scan interval and Smooth scan group size. See the [implementation section about
 smooth scanning](Smooth Scanning) for that information.
-
-#### Min and Max Channel Time
-
-I will be testing three alternatives for min and max channel time to see how it
-affects scan time and clients.
-
- *  **Scanning with a constant Min-/MaxCT for all channels**: This means that
-    the channel time won't change for each individual channel. [@APDiscovery]
-    showed that higher timers yield higher discovery rates, but since I'm also
-    interested in the impact towards clients, I will be using the same set of
-    timers that they used.
- 
- *  **Scanning with a variable Min-/MaxCT for each channel**: As suggested in
-    [@SelectingScanningParameters], a variable Min-/MaxCT for each channel
-    is an approach that might yield high results, while still keeping time on
-    less populated channels low.
 
 #### Minimum number of scans
 
