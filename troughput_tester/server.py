@@ -1,5 +1,6 @@
 import logging
 import socketserver
+import time
 
 logger = logging.getLogger(__name__)
 
@@ -11,12 +12,23 @@ BUFFER = 4096
 class TrughputServer(socketserver.BaseRequestHandler):
     """We simply send the data back to the sender!"""
     def handle(self):
-        data = self.request.recv(BUFFER)
-        self.request.sendall(data)
+        data = self.request[0]
+        time.sleep(0.1)
+        self.request[1].sendto(data, self.client_address)
 
-        logger.info(f"Recieved and returned data from {self.client_address[0]}")
+        logger.debug(
+            f"Recieved and returned {len(data)} bytes "
+            f"from {self.client_address[0]}:{self.client_address[1]}"
+        )
 
 
 if __name__ == "__main__":
+    logging.basicConfig(
+        level=logging.DEBUG,
+        format="[%(asctime)s][%(name)s][%(levelname)s]: %(message)s"
+    )
+
+    logger.info("Starting troughput server")
     with socketserver.UDPServer((HOST, PORT), TrughputServer) as server:
+        logger.info("Waiting for requests...")
         server.serve_forever()

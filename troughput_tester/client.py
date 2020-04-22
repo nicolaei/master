@@ -46,8 +46,17 @@ def client():
     with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as sock:
         sock.settimeout(TIMEOUT)
         while True:
-            measure(sock, (HOST, PORT))
+            try:
+                data = measure(sock, (HOST, PORT))
+                logger.debug(f"recieved")
+            except socket.timeout as e:
+                logger.warning(f"The request to {HOST}:{PORT} timed out")
+                data = None
 
 
 if __name__ == "__main__":
+    logging.basicConfig(
+        level=logging.DEBUG,
+        format="[%(asctime)s][%(name)s][%(levelname)s]: %(message)s"
+    )
     client()
