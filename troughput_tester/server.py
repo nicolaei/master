@@ -1,6 +1,4 @@
-import datetime
 import logging
-import socket
 import socketserver
 
 logger = logging.getLogger(__name__)
