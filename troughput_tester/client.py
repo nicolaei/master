@@ -3,19 +3,29 @@
 In this client we're trying to measure as often as possible to keep the link saturated.
 This should hopfully give accurate results.
 """
+import csv
 import logging
 import sys
 import socket
+import time
 from datetime import datetime
 
 logger = logging.getLogger(__name__)
 
 HOST = sys.argv[1]
 PORT = 50000
-BUFFER_SIZE = 4096
+BUFFER_SIZE = 2**13
 TIMEOUT = 0.25  # 250 ms
 
 DATA = b"X" * BUFFER_SIZE
+
+
+def write(file_name: str, data: tuple):
+    with open(file_name, "a") as csvfile:
+        writer = csv.writer(csvfile)
+        writer.writerow([
+            *data
+        ])
 
 
 def measure(sock: socket.socket, recipient: tuple):
@@ -25,7 +35,6 @@ def measure(sock: socket.socket, recipient: tuple):
     :param recipient: A pair of host and port
     :returns: Various info about the given mesurement:
                 * The amount of bytes sent
-                * The amount of seconds the round trip took (latency)
                 * The time when the request was sent
                 * The time when the request was responded to
     """
@@ -36,10 +45,7 @@ def measure(sock: socket.socket, recipient: tuple):
 
     after = datetime.now()
 
-    round_trip_time = (after - before).total_seconds()
-    troughput = BUFFER_SIZE / round_trip_time
-
-    return troughput, round_trip_time, before, after
+    return len(DATA), before.timestamp(), after.timestamp()
 
 
 def client():
@@ -48,10 +54,12 @@ def client():
         while True:
             try:
                 data = measure(sock, (HOST, PORT))
-                logger.debug(f"recieved")
             except socket.timeout as e:
                 logger.warning(f"The request to {HOST}:{PORT} timed out")
-                data = None
+                data = (len(DATA), -1.0, -1.0)
+
+            write("client_measurements.csv", data)
+            time.sleep(0.05)  # Seems to help the troughput?
 
 
 if __name__ == "__main__":

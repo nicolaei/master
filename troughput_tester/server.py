@@ -13,13 +13,7 @@ class TrughputServer(socketserver.BaseRequestHandler):
     """We simply send the data back to the sender!"""
     def handle(self):
         data = self.request[0]
-        time.sleep(0.1)
         self.request[1].sendto(data, self.client_address)
-
-        logger.debug(
-            f"Recieved and returned {len(data)} bytes "
-            f"from {self.client_address[0]}:{self.client_address[1]}"
-        )
 
 
 if __name__ == "__main__":
