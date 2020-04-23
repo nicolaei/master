@@ -23,9 +23,13 @@ DATA = b"X" * BUFFER_SIZE
 def write(file_name: str, data: tuple):
     with open(file_name, "a") as csvfile:
         writer = csv.writer(csvfile)
-        writer.writerow([
-            *data
-        ])
+        writer.writerow([*data])
+
+
+def db_reading():
+    """Reads how strong the connection is in dB"""
+    with open("/proc/net/wireless") as f:
+        return float(f.readlines()[2].split()[3])
 
 
 def measure(sock: socket.socket, recipient: tuple):
@@ -58,7 +62,17 @@ def client():
                 logger.warning(f"The request to {HOST}:{PORT} timed out")
                 data = (len(DATA), -1.0, -1.0)
 
-            write("client_measurements.csv", data)
+            try:
+                signal_strength = db_reading()
+            except IndexError:
+                logger.warning(
+                    "Measurement Error: Couldn't read dB or latency.\n"
+                    "You're probably not connected to a network. This mostly "
+                    "happens if you just booted your device."
+                )
+                signal_strength = None
+
+            write("client_measurements.csv", (*data, signal_strength))
             time.sleep(0.05)  # Seems to help the troughput?
 
 
