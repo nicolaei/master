@@ -22,7 +22,7 @@ echo "Changing hostname to ${1}! After this process is done connect to the"\
 echo "${1}" > /etc/hostname
 
 # Make the logger run at startup
-echo "@reboot root cd ~pi/ && python3 -m client_logger 1>> /home/pi/cli.log 2>&1" >> /etc/crontab
+echo "@reboot root cd ~pi/ && python3 -m troughput_tester.client 1>> /home/pi/cli.log 2>&1" > /etc/crontab
 
 echo "
 interface wlan0

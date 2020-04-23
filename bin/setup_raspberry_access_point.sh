@@ -25,6 +25,7 @@ apt install ntp ntpdate dnsmasq hostapd --yes
 ntpdate -s time.google.com
 
 # Make the scanner run at startup
+echo "@reboot root cd ~pi/ && python3 -m troughput_tester.server 1>> /home/pi/server.log 2>&1" > /etc/crontab
 echo "@reboot root cd ~pi/ && python3 -m wifi_scanner full 5min 1>> /home/pi/ap.log 2>&1" >> /etc/crontab
 
 # Setup the APs IP
