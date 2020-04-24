@@ -60,7 +60,16 @@ def client():
                 data = measure(sock, (HOST, PORT))
             except socket.timeout as e:
                 logger.warning(f"The request to {HOST}:{PORT} timed out")
-                data = (len(DATA), -1.0, -1.0)
+                time.sleep(5)
+                continue
+            except OSError as e:
+                logger.warning(
+                    f"Network could not be reached! This typically happens at boot. "
+                    f"This warning should stop appearing in a few seconds. "
+                    f"Waiting 5 seconds."
+                )
+                time.sleep(5)
+                continue
 
             try:
                 signal_strength = db_reading()
