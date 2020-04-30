@@ -45,6 +45,7 @@ algorithms = {
     "full": full_scan,
     "selective": partial(selective_scan, channels=[1, 6, 11]),
     "selective_1ch": partial(selective_scan, channels=[1]),
+    "selective_odd": partial(selective_scan, channels=[1, 3, 5, 7, 9, 11]),
     "smooth_300": partial(smooth_scan, interval=timedelta(milliseconds=300)),
     "smooth_600": partial(smooth_scan, interval=timedelta(milliseconds=600)),
     "smooth_1200": partial(smooth_scan, interval=timedelta(milliseconds=1200)),
