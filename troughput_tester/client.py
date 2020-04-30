@@ -12,7 +12,11 @@ from datetime import datetime
 
 logger = logging.getLogger(__name__)
 
-HOST = sys.argv[1]
+try:
+    HOST = sys.argv[1]
+except IndexError:
+    HOST = "192.168.4.1"  # This is the IP access points are configured with by default.
+
 PORT = 50000
 BUFFER_SIZE = 2**13
 TIMEOUT = 0.25  # 250 ms
@@ -81,7 +85,7 @@ def client():
                 )
                 signal_strength = None
 
-            write("client_measurements.csv", (*data, signal_strength))
+            write("client_2_measurements.csv", (*data, signal_strength))
             time.sleep(0.05)  # Seems to help the troughput?
 
 
