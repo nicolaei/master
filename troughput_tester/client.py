@@ -68,7 +68,7 @@ def recv_packet(sock: socket.socket):
     order_number = parse_data(data)
     before = BUFFER.pop(order_number)
 
-    return len(data), before, after
+    return len(data), before.timestamp(), after.timestamp()
 
 
 def client():
@@ -83,18 +83,25 @@ def client():
     last_sent = datetime.now()
     while True:
         for key, mask in poller.select(timeout=0.1):
-            if mask & selectors.EVENT_READ:
-                data = recv_packet(key.fileobj)
-                signal_strength = 0  # db_reading()
-                write("client_measurements.csv", (*data, signal_strength))
+            try:
+                if mask & selectors.EVENT_READ:
+                    data = recv_packet(key.fileobj)
+                    signal_strength = db_reading()
+                    write("client_measurements.csv", (*data, signal_strength))
 
-            # When the socket is ready to send
-            elif mask & selectors.EVENT_WRITE:
-                if last_sent > datetime.now() - timedelta(milliseconds=100):
-                    continue
-                send_packet(sock, order_number, (HOST, PORT))
-                order_number += 1
-                last_sent = datetime.now()
+                # When the socket is ready to send
+                elif mask & selectors.EVENT_WRITE:
+                    if last_sent > datetime.now() - timedelta(milliseconds=100):
+                        continue
+                    send_packet(sock, order_number, (HOST, PORT))
+                    order_number += 1
+                    last_sent = datetime.now()
+            except OSError as e:
+                logger.warning(
+                    f"{e.strerror}\nThis ususally happens while initially starting up."
+                    f"Sleeping for 5 seconds before trying again."
+                )
+                time.sleep(5)
 
 
 if __name__ == "__main__":
