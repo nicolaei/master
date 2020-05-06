@@ -4,16 +4,18 @@ from typing import List, Tuple
 
 from graphing.latency import latency_graph
 from graphing.scan_accuracy import accuracy_graph
+from graphing.troughput import troughput_graph
 from graphing.utils import client_data, access_point_data
 
 
 logger = logging.getLogger(__name__)
 
 
-def render_graphs(folders: List[Tuple[Path, str]]):
+def render_graphs(folders: List[Tuple[Path, str]], time_range: List = None):
     """Renders all relevant graphs for the given folder
 
     :param folders: A list of folders and the name of which scan they contain
+    :param time_range: Limit the output to this spesific range of time
     """
     for folder, scan_name in folders:
         logger.info(f"Loading data for {scan_name}")
@@ -28,13 +30,15 @@ def render_graphs(folders: List[Tuple[Path, str]]):
             logger.warning(f"Couldn't find {e.filename}. Continuing to next scan type")
             continue
 
-        time_range = [client_0[1][10000], client_0[1][50000]]
+        time_range = time_range or [client_0[1][0], client_0[1][-1]]
 
         logger.info(f"Creating graphs for {scan_name}")
 
         latency_graph(client_0, ap_0, title=scan_name, limit=time_range)
         latency_graph(client_2, ap_2, title=scan_name, limit=time_range)
-        # TODO: These should probably be named after which AP they are
+
+        troughput_graph(client_0, ap_0, title=scan_name, limit=time_range)
+
         accuracy_graph(ap_0, title=f"{scan_name} (AP0)")
         accuracy_graph(ap_1, title=f"{scan_name} (AP1)")
         accuracy_graph(ap_2, title=f"{scan_name} (AP2)")

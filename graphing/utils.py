@@ -3,7 +3,7 @@ import json
 from datetime import datetime
 from itertools import islice
 from pathlib import Path
-from typing import List, Dict, Tuple
+from typing import List, Dict, Tuple, Iterable
 
 from wifi_scanner.scan import AccessPoint
 
@@ -68,7 +68,7 @@ def calculate_troughput(bytes_: int, before: datetime, after: datetime) -> float
 
 
 def avg_troughput_chuncked(
-    data: List[Tuple[int, datetime, datetime]], chunck_size: int
+    data: Iterable[Tuple[int, datetime, datetime]], chunck_size: int
 ):
     """Get's the average troughput within chunck_size of items"""
     trougphuts = (calculate_troughput(*item) for item in data)
