@@ -60,7 +60,7 @@ def latency_graph(
         ax2, start_time, round_trip_time, color="tab:green", label="Latency (ms)"
     )
 
-    ax2.set_ylim(0, 250)
+    ax2.set_ylim(0, 500)
     if limit:
         ax1.set_xlim(*limit)
 
