@@ -37,8 +37,17 @@ def render_graphs(
 
         logger.info(f"Creating graphs for {scan_name}")
 
-        latency_graph(client_0, ap_0, title=scan_name, limit=time_range)
-        latency_graph(client_2, ap_2, title=scan_name, limit=time_range)
+        latency_graph(client_0, ap_0, title=scan_name, limit=render_range)
+        latency_graph(client_2, ap_2, title=scan_name, limit=render_range)
+
+        # Zoomed portion of single graph
+        single_time_range = [client_0[1][20000], client_0[1][22000]]
+        latency_graph(
+            client_0, ap_0, title=f"{scan_name} [Single]", limit=single_time_range
+        )
+        latency_graph(
+            client_2, ap_2, title=f"{scan_name} [Single]", limit=single_time_range
+        )
 
         troughput_graph(client_0, ap_0, title=scan_name, limit=time_range)
 
