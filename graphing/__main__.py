@@ -11,7 +11,10 @@ from graphing.utils import client_data, access_point_data
 logger = logging.getLogger(__name__)
 
 
-def render_graphs(folders: List[Tuple[Path, str]], time_range: List = None):
+def render_graphs(
+    folders: List[Tuple[Path, str]],
+    time_range: List = None
+):
     """Renders all relevant graphs for the given folder
 
     :param folders: A list of folders and the name of which scan they contain
@@ -30,7 +33,7 @@ def render_graphs(folders: List[Tuple[Path, str]], time_range: List = None):
             logger.warning(f"Couldn't find {e.filename}. Continuing to next scan type")
             continue
 
-        time_range = time_range or [client_0[1][0], client_0[1][-1]]
+        render_range = time_range or [client_0[1][15000], client_0[1][25000]]
 
         logger.info(f"Creating graphs for {scan_name}")
 
