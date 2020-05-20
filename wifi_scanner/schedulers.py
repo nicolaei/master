@@ -3,7 +3,7 @@
 These are all generators to enable easy extraction of the scanning data.
 """
 import logging
-from datetime import timedelta
+from datetime import timedelta, datetime
 from time import sleep
 
 log = logging.getLogger(__name__)
@@ -43,7 +43,11 @@ def interval_trigger(scanner: callable, interval: timedelta):
     """Triggers the scanner every interval."""
     while True:
         log.info("Triggering Scan")
-        yield scanner()
+
+        start_time = datetime.now()
+        results = scanner()
+        end_time = datetime.now()
+        yield start_time, end_time, results
 
         log.info(f"Sleeping for {interval}")
         sleep(interval.total_seconds())

@@ -2,11 +2,12 @@ import logging
 from pathlib import Path
 from typing import List, Tuple
 
+from graphing.detection_probability import detection_probability
 from graphing.latency import latency_graph
 from graphing.scan_accuracy import accuracy_graph
+from graphing.scan_time import scan_time
 from graphing.troughput import troughput_graph
-from graphing.utils import client_data, access_point_data
-
+from graphing.utils import client_data, access_point_data, timing_data
 
 logger = logging.getLogger(__name__)
 
@@ -20,6 +21,13 @@ def render_graphs(
     :param folders: A list of folders and the name of which scan they contain
     :param time_range: Limit the output to this spesific range of time
     """
+    # Graphs using all measurements
+    timings = {}
+    for folder, scan_name in folders:
+        timings[scan_name] = timing_data(folder / "timing_measurements.json")
+    scan_time(timings)
+
+    # Graphs using individual measurements
     for folder, scan_name in folders:
         logger.info(f"Loading data for {scan_name}")
 

@@ -13,7 +13,9 @@ from wifi_scanner.schedulers import random_trigger, interval_trigger, \
 log = logging.getLogger(__name__)
 
 
-def write_output(file_name: str, access_points: list):
+def write_output(
+    file_name: str, start_time: datetime, end_time: datetime, access_points: list
+):
     try:
         with open(file_name, "r") as json_file:
             data = json.load(json_file)
@@ -24,7 +26,8 @@ def write_output(file_name: str, access_points: list):
 
     data.append(
         {
-            "time": datetime.now().timestamp(),
+            "start_time": start_time.timestamp(),
+            "end_time": end_time.timestamp(),
             "aps": [
                 {
                     "bss": ap.bss,
@@ -83,8 +86,10 @@ if __name__ == "__main__":
     scheduler = schedulers[argv[2]]
 
     log.info(f"===== Starting {argv[2]} with {argv[1]} scan =====")
-    for scan in scheduler(algorithm):
+    for start_time, end_time, scan in scheduler(algorithm):
         write_output(
             path.expanduser("~pi/scanner_measurements.json"),
+            start_time,
+            end_time,
             list(scan)
         )

@@ -49,6 +49,26 @@ def access_point_data(file: Path) -> List[Dict]:
     ]
 
 
+def timing_data(file: Path) -> List[Dict]:
+    """Gets timing data from an access point JSON file
+
+    NOTE: This is for the later access point measurements where I remembered
+          to record _both_ start and end time.
+
+    :param file: The file to read
+    """
+    with open(file) as f:
+        data = json.load(f)
+
+    return [
+        {
+            "start_time": datetime.fromtimestamp(item["start_time"]),
+            "end_time": datetime.fromtimestamp(item["end_time"]),
+        }
+        for item in data
+    ]
+
+
 def _chunk(iterable: iter, chunck_size: int):
     """Returns the iterable split into chunck_size partitions.
 
