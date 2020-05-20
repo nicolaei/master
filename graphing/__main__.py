@@ -63,6 +63,8 @@ def render_graphs(
         accuracy_graph(ap_1, title=f"{scan_name} (AP1)")
         accuracy_graph(ap_2, title=f"{scan_name} (AP2)")
 
+        detection_probability((ap_0, ap_1, ap_2), title=f"{scan_name}")
+
 
 if __name__ == "__main__":
     logging.basicConfig(
