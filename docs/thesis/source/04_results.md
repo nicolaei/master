@@ -21,38 +21,26 @@ Access Point Scan results
 -------------------------
 
 As mentioned in [Discovery strategies], the access points measure the amount of
-times an access point was discovered against the decibels range of the given access
-point.
+times an access point was discovered against it's percived strenght.
 
-While wildly different results were not expected, the final results were suprisingly
-similar. In this sub-section you'll see the results of the three main different
+In this sub-section you'll see the results of the three main different
 discovery strategies and how well they picked up the access points that are in 
 its proximity.
-
-
- *   Quickly recap what was measured
-
- *   Hint at the overall results
-
-
-### The results
 
 The five result-sets for the access points shows how the scans picked up different
 access points. As you might notice, the strength of the signal isn't everything that
 matters for being able to discover an access point. Two access points that have the same
 average signal strength might be discovered less. This is most likely because some of
-the access points that are further away might be obstructed [@citation needed].
-
-\todo{
-    Find a citation for the claim above. Does this effect have a name? Torleiv
-    probably knows!
-}
+the access points that are further away might be obstructed while others are not.
+This can be explained via _Raileigh fading_ [@CitationNeeded], as all measurements have
+taken place in an urban environment. This will be more clearly vissible in the
+probability graphs for each scan type.
 
 As expected, the different discovery methods take different amounts of time to execute.
 These findings reflect findings of previous studies, for example where smooth
 scanning is slower than alternative discovery methods. Though in the end, this doesn't 
 have an impact on our results, but it is worth to highlight in cases where this
-thesis is used for other solutions.
+thesis is used in solutions where measurement time is critical.
 
 \todo{
     While I believe that this statement is true, this has to be confirmed when I have
@@ -62,16 +50,14 @@ thesis is used for other solutions.
 
 ![The average time of each discovery method](static/ap_time_taken.png)
 
-\todo{
-    Create graph that shows how long each scan takes!
-}
-
 The actual results are where we find the relevant results start showing up. In the next
-few paragraph we'll take a look at the following measurement runs over 1000 scans:
+few paragraph we'll take a look at the following measurement runs:
 
  * Full Scan
  
- * Selective Scan
+ * Selective Scan (channels 1, 3, 5, 7, 9 and 11)
+ 
+ * Selective Scan (channels 1, 6, and 11)
  
  * Smooth Scan (300ms intervals)
  
