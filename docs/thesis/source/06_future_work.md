@@ -1,4 +1,4 @@
-Further Work
+Future Work
 ============
 
 In this section I'll outline similar approaches and other work that can build
