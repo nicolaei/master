@@ -234,3 +234,30 @@ Some possible methods are:
                during a specified period. For example in households where
                parents wish to limit access to the internet during the night.
 
+
+### Min and Max Channel Time
+
+Minimum and maximum channel time is mentioned in a lot of literature
+regarding Wi-Fi. This parameter can change weather or not the scanning node
+spend too much time on a channel or if it doesn't spend enough time.
+
+For example [@SelectingScanningParameters] suggests having a set of minimum and maximum
+channel times for each available channel. This way we can optimize the time
+spent on each channel depending on weather or not there have previously been
+seen access points, or if the access points on a channel typically spend longer
+time to reply.
+
+By using minimum and maximum channel time, client latency can be reduced for each
+channel scanned. Reducing the total time of a scan and possibly improving goodput
+and latency. Two prevelant strategies from literature are:
+
+ *  **Scanning with a constant Min-/MaxCT for all channels**: This means that
+    the channel time won't change for each individual channel. [@APDiscovery]
+    showed that higher timers yield higher discovery rates, but since I'm also
+    interested in the impact towards clients, I will be using the same set of
+    timers that they used.
+ 
+ *  **Scanning with a variable Min-/MaxCT for each channel**: As suggested in
+    [@SelectingScanningParameters], a variable Min-/MaxCT for each channel
+    is an approach that might yield high results, while still keeping time on
+    less populated channels low.
