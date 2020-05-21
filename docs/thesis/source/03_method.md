@@ -362,3 +362,18 @@ To see how performat the scanning algorithms were, multiple scans were conducted
 over the course of a few hours. Discovered access points with less than 2 results
 have been discarded as these were typically mobile access-points that passed by
 the measuring environment.
+
+
+### Methodic problems
+
+During the implementation, it turned out that the Raspberry Pi does not have a
+hardware clock. This paired with the fact that the Raspberry Pis did not have
+an uplink towards the internet ment that the clocks on the devices were really
+inaccurate (typically shifting up to a minute or two during a few hours of
+scanning).
+
+Due to this, programatic corelation between when a scan occured and the resulting
+latency proved problematic. To leviate this, in the results I will be manually
+corelating the results. Furture works might be able to leviate this problems by
+keeping all access points and clients connected with an uplink to sync to an NTP
+server or use hardware that has an hardware clock.
