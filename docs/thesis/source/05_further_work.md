@@ -82,3 +82,14 @@ was not able to test them.
     less populated channels low.
 
 
+Scanning Triggers
+-----------------
+
+As noted in the Method chapter, scanning triggers might be worthwile to 
+investigate further. Scanning isn't neccesarry to do that often, as the
+local access points might not move often enough to warrant a scan.
+
+Instead, something like a trigger to scan only when traffic is low might be a
+good idea to investigate for future research.
+
+
