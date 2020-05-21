@@ -383,6 +383,12 @@ the measuring environment.
 
 ### Methodic problems
 
+During the implementation process a few issues were discovered. In the following
+sections I will be outlining some of these problems and how they could have been
+mitigated.
+
+#### The Raspberry Pi's lack of a hardware clock
+
 During the implementation, it turned out that the Raspberry Pi does not have a
 hardware clock. This paired with the fact that the Raspberry Pis did not have
 an uplink towards the internet ment that the clocks on the devices were really
@@ -394,3 +400,18 @@ latency proved problematic. To leviate this, in the results I will be manually
 corelating the results. Furture works might be able to leviate this problems by
 keeping all access points and clients connected with an uplink to sync to an NTP
 server or use hardware that has an hardware clock.
+
+#### Problems with doing measurements in an appartment
+
+Originally these measurements were planned to be ran in an dedicated environment
+at _Kjeller ITS_, but due to COVID-19 that was not avaliable. Thus, the 
+experiments had to be conducted in my appartment which is in the middle of Oslo.
+This introduced some issues, outlined below:
+
+ * There is more chance of interference due to the appartment being in the middle
+   of a high density residential area.
+ 
+ * There was constant movement in the appartment and thus LoS between some of the
+   access points would at times be broken. In addition a clothing rack would be
+   in the general area which chould have affected the results.
+
