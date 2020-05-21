@@ -19,8 +19,9 @@ pdf:
 	pandoc $(BASEDIR)/meta.yaml $(SOURCEDIR)/*.md \
 	-o $(OUTPUTDIR)/thesis.pdf \
 	--template=$(SOURCEDIR)/template.tex \
-	--chapters \
+	--top-level-division=chapter \
 	-N \
+	--filter pandoc-fignos \
 	--filter pandoc-citeproc \
 	--verbose
 

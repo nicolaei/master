@@ -238,12 +238,18 @@ Some possible methods are:
 Implementation
 --------------
 
+In the following section we will be taking a look at how the tests were 
+implemented and executed. 
+
 ### Scanning Strategies
 
 #### Full Scan
 
-The full scan is used as a base-line test for comparisons. As mentioned earlier,
-this approach will simply go through all channels in one go.
+The full scan is used as a base-line test for comparisons. 
+
+As mentioned earlier, this approach will simply go through all channels in one 
+go. Meaning that we go from channel 1 to 12 without any breaks. This is how a 
+typical scan works with most modern implementations.
 
 #### Selective Scanning
 
@@ -267,96 +273,107 @@ The smooth scanning implementation has been tested with static smooth scanning
 parameters based on [@ProactiveScan] and [@PracticalSchemes]'s results. These 
 articles showed that lower group size and higher intervals are beneficial for
 latency and packet loss. Seeing that we're not dependent on a low time-to-scan,
-I want to prioritize the clients goodput. Thus, I will be keeping the group size
-to 1 channel per group and interval between scans to 300 ms. 
+I want to prioritize the clients goodput. 
 
+The following parameter configurations will be tested:
+
+ * **1 channel per group, 300 miliseconds intervals**
+ 
+ * **1 channel per group, 600 miliseconds intervals**
+ 
+ * **1 channel per group, 1200 miliseconds intervals**
+ 
 
 ### Scanning Parameters
 
 To make sure that results are comparable I will try to keep the parameters as
-static as possible between each test. This section will not cover the Smooth
-scan interval and Smooth scan group size. See the [implementation section about
+static as possible between each test. This section will not cover the smooth
+scan interval and smooth scan group size. See the [implementation section about
 smooth scanning](Smooth Scanning) for that information.
 
 #### Minimum number of scans
 
 [@APDiscovery] discovered that to get the most accurate view of the local
-topology, multiple scans are neccesary. They measured up to 100 times, I will be
-testing 1, 10, 25, 50, and 100 scans in my experiments.
+topology, multiple scans are neccesary. To get a good view of the probability
+of dicsovery for each scanning setup, the implementation will be scanning every
+2 minutes for a minimum of three hours. 
 
 #### Scanning triggers
 
-Seeing that there isn't a lot of literature around scanning from an access
-point, these scanning triggers will mostly be based around _something_ (I'm
- not sure of the wording here, hmm).
+As hinted at above I will only be testing one trigger type, *clock based triggers*.
+It might be a worthwile endevor for future work to investigate traffic based
+triggers and other triggers to find more optimal times to scan at.
 
-I will be testing these three strategies:
-
-*   **Random Timers**
-
-*   **Clock based timers**
-
-*   **Traffic based triggers**[^traffic-triggers]
-
-
-[^traffic-triggers]: It can be argued that my experiments around traffic based
-    triggers arn't really accurate enough due to the low amount of clients.
-    Further research should be done to verfiy my findings here.
+It can also be argued that due to the low amount of traffic that my access points
+will be experiencing (max two clients), the traffic based trigger might not make
+a huge difference due to the low amount of clients.
 
 ### Setup
 
-\todo{Add photos of the Raspery Pi's for dramatic effect}
-
-To do the actuall measurements, I'll be using Raspberry Pi 4 Model B (4 GB) as
-make-shift access points and clients. RPi 4 has a built in Wi-Fi antenna which 
-supports both 2.4 and 5 GHz.
+To do the actual measurements, I will be using Raspberry Pi 4 Model B (4 GB) as
+make-shift access points and clients. The RPi 4 has a built in Wi-Fi antenna 
+which supports both 2.4 and 5 GHz.
 
 Both clients and the access points are using Raspian 10 (Buster), which are based
 on the popular Linux distribution Debian (Buster).
 
+All Raspberries were deployed at consistent locations in a area of approximately
+50sqm. See figure {@fig:aplayout} for an aproximation on placement. In this 
+figure the clients number corresponds to the access point it is connected to. 
+`AP 1` does not have any connected clients.
+
+![Layout of access points and clients during scans](static/ap_layout.png){ height=45% #fig:aplayout }
+
 #### Access Point Setup
 
-The nodes that function as access points are using `hostapd`. This allows for
-easy-setup of everything from SSID to Wi-Fi channel.
+The nodes that function as access points are using `hostapd` as the access point
+software. This allows for easy-setup of everything from SSID to the selected channel.
 
-For the sake of consistensy all access points are set to the same channel accross
-all experiments.
+For the sake of consistensy all access points have the same settings accross
+all experiments. The selected channel was the one with the least assigned APs
+in my area.
 
 
 #### Client Setup
 
 In similar vains ast the access points, the clients are using `wpa_supplicant` 
 to connect to the access points. A single client never changes which access point 
-it is connected to during a scan-run.
+it is connected to during any of the experiments.
 
 
-#### Measurements and collecting data
+### Measurements and collecting data
 
 To do the actual measurements, I will be using:
 
- * `ping` to collect data about how the client's connection is affected by the scans
-   that the access points are doing.
+ * `sockets` to collect data about how the client's connection is affected by 
+   the scans that the access points are doing.
   
- * `iw` to conduct scans from the access points
+ * `iw` to conduct scans from the access points.
  
- * `python` to collect data from `ping` and `iw`, as well as writing this data to disk.
-   All data is also timestamped to make it easier to spot the corralations between
-   ping-spikes and the actuall scan (ping-spikes can happen unrelated to scans due
-   to interference).
+ * `python` to collect data from `socekt`s and `iw`, as well as writing this 
+   data to disk. All data is also timestamped to make it easier to spot the
+   corralations between ping-spikes and the actuall scan (ping-spikes can happen
+   unrelated to scans due to interference).
 
-##### Ping setup
+#### Latency and goodput measurement
 
-On the client-side, a ping is sent to the access point every 250 ms. This ensures
-that we get multiple measurements as a scan happens.
+To measure latency and goodput a `socket` server is set up on the access points,
+which the client connects to over UDP. UPD was selected to avoid potential backoff
+from an TCP implementation. Packets are sent as soon as the channel is avaliable
+for aditional sends. Each packet is numbered to make sure that timing is matched
+to the correct packet.
 
-All pinging is sent to the access point instead of a remote host to make sure that
-only the link between the client and access point is being measured, and not the
-uplink between the access point and the internet.
+By only checking latency and goodput between the client and access point, instead
+of a remote host, we make sure that only the connection between the two nodes
+are measured. In contrast, if we tried to measure between a remote server and
+the client we might end up measuring the uplink to the internet instead.
 
 
-##### Scanning setup
+#### Scanning setup
 
-The access points were running scans depending on the triggers that were used.
+Scans are triggered at 2 minute intervals and use `iw`, a linux tool to show
+and manipulate wireless devices and their configuration [@iw], to initiate and
+gather information about the scans.
 
 To see how performat the scanning algorithms were, multiple scans were conducted
 over the course of a few hours. Discovered access points with less than 2 results
