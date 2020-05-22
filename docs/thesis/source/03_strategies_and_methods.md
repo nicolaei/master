@@ -105,9 +105,6 @@ that scanning time increases proportional to the number of channels that are
 being scanned. Reducing the number of channels scanned, will thus reduce the
 total time of the scan.
 
-![Percent of access points discovered in adjacent channels 
-  (From [@APDiscovery])](static/channel_overlap.png){ width=75% }
-
 
 ### Smooth Scanning
 
