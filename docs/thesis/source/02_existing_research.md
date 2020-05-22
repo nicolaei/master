@@ -1,13 +1,16 @@
-Existing research and current practices
-=======================================
-
-Scanning
---------
+Scanning IEEE802.11 networks
+============================
 
 The aim of scanning the local IEE802.11 topology in this thesis is to be able
 to provide information about adjacent nodes to channel allocation algorithms.
 With this information any given channel allocation algorithm should be able to
 give the access point an optimal channel.
+
+In this chapter we will be exploring how a IEEE802.11 scan works and existing
+research on scanning strategies for IEE802.11 networks.
+
+The attonomy of a IEEE802.11 scan
+---------------------------------
 
 Scanning in IEEE802.11 [@IEEE802.11] is handled via management frames, and can
 be done in one of two ways: Active- or passive scanning.
@@ -83,7 +86,9 @@ a channel after sending a probe request.
          came after $MinCT$, and thus the $MaxCT$ period will never occur.}
 \end{figure}
 
-### Current use of scanning in IEEE802.11 networks
+
+Scanning in modern day IEE802.11 networks
+-----------------------------------------
 
 While the aim of this thesis is to use scanning to discover other APs from
 our own AP, the main use of scanning in IEEE802.11 networks is for
@@ -97,7 +102,9 @@ clients (STAs) to find access points to connect to. Typical use-cases are:
    used for mobile STAs to improve service while roaming.
 
 
-### Differences between active and passive scanning
+
+Differences between active and passive scanning
+-----------------------------------------------
 
 While both active and passive scanning are means to achieve the same result,
 they have different impacts on the network and use differing amount of time
@@ -146,7 +153,7 @@ not discovered.
 }
 
 
-### Network Impact
+### Network impact
 
 According to [@ActiveScanPerformance] up to 90% of all probe responses
 carry redundant information, and up to 60 percent of all management traffic
@@ -188,19 +195,20 @@ other clients that are not currently scanning.
 [^goodput]: _Goodput_ is the application-level throughput.
 
 
-### Channel overlapping
+Channel overlapping
+-------------------
 
 In addition to their findings about [Discovery Time](@sec:Discovery Time)) in
 [@APDiscovery] the authors also highlighted that due to channel overlapping,
 an STA that is scanning a channel $i$ has a propability of also discovering
 access points on channels up to two channels away.
 
-This will help with discovery of access points, since a scan can potentially
-discover as many as 40% of APs in adjacent channels. See the figure from the
-study for percentages of adjecent channels.
+This can help with discovery of access points, since a scan can potentially
+discover as many as 40% of APs in adjacent channels. See {@fig:channeloverlap}
+for percentages of adjecent channels.
 
 ![Percent of access points discovered in adjacent channels 
-  (From [@APDiscovery])](static/channel_overlap.png){ width=75% }
+  (From [@APDiscovery])](static/channel_overlap.png){ #fig:channeloverlap }
 
 
 Possible problem areas
