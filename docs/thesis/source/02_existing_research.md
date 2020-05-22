@@ -91,16 +91,26 @@ Scanning in modern day IEE802.11 networks
 -----------------------------------------
 
 While the aim of this thesis is to use scanning to discover other APs from
-our own AP, the main use of scanning in IEEE802.11 networks is for
-clients (STAs) to find access points to connect to. Typical use-cases are:
+our own AP, the main use of scanning in IEEE802.11 networks is for clients 
+(STAs) to find access points to connect to and keep their connection alive. 
+These are the two typical use-cases found in the wild today [@WifiScanFaq]:
 
  * When disconnected; finding available APs to connect to or ask for
    specific APs that the STA has connected to before.
 
- * When connected; finding APs with the same SSID as the one that the STA
+ * While connected; finding APs with the same SSID as the one that the STA
    is currently connected to, but with a better signal. This is typically
    used for mobile STAs to improve service while roaming.
 
+In addition to this, some access points have the ability to trigger a scan in
+order to figure out which channel might be the least congested in the area. With
+this information, the access point might choose to switch channel.
+
+Lastly, mobile devices may also use IEEE802.11 beacons to enhance their
+positioning service by using a database of known access point poisitions such as
+Mozilla Location Services [@MozillaLocationServices]. It's also worth noting
+that these services typically use other sources such as bluetooth or GPS to
+further increase accuracy.
 
 
 Differences between active and passive scanning
