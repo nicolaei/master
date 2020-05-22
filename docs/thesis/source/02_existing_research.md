@@ -142,7 +142,7 @@ guaranteed to find all the access points in your vicinity.
 
 ![Probe responses vs beacon frames. Here you can clearly see the how
  probe responses almost disappear after 100ms. Taken from [@APDiscovery]
-](static/probe_vs_beacon.png){ width=40% }
+](static/probe_vs_beacon.png){ width=40%; #fig:probevsbeacons }
 
 In their tests, they found that the scanning timer for a probe request
 had a lot to say about your ability to discover other APs. In general,
@@ -186,7 +186,7 @@ as it has an impact on real-time applications like games and VoIP.
 
 ![Scanning can have quite an effect on a client's latency. Every time a
  client scans, it's latency can increase as much as 10 fold.
- From [@ActiveScanPerformance]](static/probe_latency.png){ width=60% }
+ From [@ActiveScanPerformance]](static/probe_latency.png){ width=60%; #fig:probelatency }
 
 I hypothesize that this effect will be even stronger ones access points start
 scanning as well, seeing that this won't just effect the access point, but
