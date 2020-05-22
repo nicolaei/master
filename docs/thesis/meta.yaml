@@ -14,6 +14,8 @@ lot: yes
 documentclass: ifimaster
 classoption: UKenglish
 
+fontfamily: charter
+
 bibliography: source/references.bib
 csl: static/ieee.csl
 ---
