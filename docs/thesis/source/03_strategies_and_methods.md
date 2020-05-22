@@ -9,47 +9,50 @@ of the local topology, while not impacting the clients connected to the
 access point.
 
 
-Measuring points
-----------------
+Measurement strategies 
+----------------------
 
 During my tests, I've tried to gather the following data to verify the
 effectiveness of my results:
 
 - Client latency
 - Client goodput [^goodput]
-- Percent of access points discovered
-- Speed of discovery
+- Probability of access point discovery 
+- Speed of access point discovery
 
 [^goodput]: _Goodput_ is the application-level throughput.
 
 These data points will help me figure out which methods are best fit for
-discovering a high percentage of access points at a high speed, while still
-letting clients utilize the network like normal.
-
-\todo{
-    These measuring points could be grouped into two parts: Scan results and
-    client impact.
-}
+discovering a high percentage of access points, while still letting clients 
+utilize the network like normal.
 
 
-### Client latency & client goodput
+### Client measurements
 
-These datapoints will be used to measure how a given algorithm affects the
-clients on the network. As [@ActiveScanPerformance] mentions, a large amount
-of probe traffic can negatively impact the network's clients.
+Client latency and goodput will be used to measure how a given algorithm affects
+the clients on the network. With these two measurements combined we can see how
+much impact each scanning method has on both real-time and non-real-time .
 
-To summarize: These measurement points main objective is to make sure that our
-chosen algorithm does not harm our networks performance too negatively.
+As [@ActiveScanPerformance] mentions, a large amount of probe traffic can
+negatively impact the network's clients, and when access points are scanning they
+won't be able to recive traffic from the clients.
+
+To summarize: The main objective of these measurement points is to make sure
+that we can choose an algorithm that has the least negative impact on our
+client's performance.
 
 
-### Percent of access points discovered & speed of discovery
+### Access point measurements 
 
 While client latency and goodput from the chosen algorithms are important, it
-is also very important to make sure that we're discovering as many access
-points as possible, and doing it as fast as possible.
+is also important to make sure that we're discovering as many access points as
+possible, as accurately as possible. To acomplish this we will have to measure 
+the probability of discovery against the percived strength of the signal.
 
-Worth noting is that the faster we're doing the discovery, the less probe
-requests will be occupying the network, and thus improving the client's latency.
+It's worth noting that the less time we're spending on _active_ scanning, the
+smaller the chance is that we will be missing packets due to buffer overflows
+on the client [@ActiveScanPerformance]. To measure this, we will be looking
+at the total time spend scanning for access points.
 
 
 Discovery strategies
