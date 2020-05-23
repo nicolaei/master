@@ -67,3 +67,30 @@ multiple access points to collaborate using this information.
     This last paragraph with talk about usecase should be moved to the
     discussion or conclusion.
 }
+
+
+Outline
+-----------
+
+Continuing into the next chapters we will be gaining more insight into the world
+of scanning in IEEE802.11 and how we can use scans from an access point.
+
+ - **Scanning in IEEE802.11 networks** - How scanning works and current 
+   practices within the field
+
+ - **Requirements and Problem Areas** - Further discussing the requirmenents
+   that needs to be met when scanning from an access point and possible problems
+   that we might face.
+ 
+ - **Possible Measurement Strategies and Discovery Methods** - A look into
+   different scanning strategies from existing litterature and how to measure
+   if we're meeting the defined requirements.
+ 
+ - **Implementation** - A look into how the experiments were implemented.
+ 
+ - **Results** - The results from the implemented experiments
+ 
+ - **Future Work** - A walktrough of issues and ideas that future works can look at.
+ 
+ - **Conclsion** - Conclusion based on the results and subsiquent discussion.
+
