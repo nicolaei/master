@@ -53,6 +53,17 @@ pandoc-xnos = ">=2.2.0,<3.0"
 
 [[package]]
 category = "main"
+description = "Table number filter for pandoc"
+name = "pandoc-tablenos"
+optional = false
+python-versions = "*"
+version = "2.1.1"
+
+[package.dependencies]
+pandoc-xnos = ">=2.1.2,<3.0"
+
+[[package]]
+category = "main"
 description = "Library code for the pandoc-xnos filter suite."
 name = "pandoc-xnos"
 optional = false
@@ -121,7 +132,7 @@ python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*"
 version = "1.15.0"
 
 [metadata]
-content-hash = "bac7cd20822e92c7092e5465dad565b1c2a972e60d9dff136490a04ae80a8469"
+content-hash = "afd5a5d73e028a660375cefd0d364cca9c4d272f278ca2fc459046a16f9f391e"
 python-versions = "^3.7"
 
 [metadata.files]
@@ -189,6 +200,10 @@ numpy = [
 pandoc-fignos = [
     {file = "pandoc-fignos-2.2.0.tar.gz", hash = "sha256:ee1da4745ed725bccb7c4fd246e1bf8dc49a08467ea9af91a8755c29207c8890"},
     {file = "pandoc_fignos-2.2.0-py3-none-any.whl", hash = "sha256:767baa44412c969e6853011bc8034018e1bbd529d470149754595cbbf602cd60"},
+]
+pandoc-tablenos = [
+    {file = "pandoc-tablenos-2.1.1.tar.gz", hash = "sha256:a9958666bbde789002df91520ce9e4e4f93e2ad860e71435e0184d51648d61dc"},
+    {file = "pandoc_tablenos-2.1.1-py3-none-any.whl", hash = "sha256:8f31aa0376fef6a593248982e22c6073498d8e14579360a4e3ed0c64a062275a"},
 ]
 pandoc-xnos = [
     {file = "pandoc-xnos-2.3.0.tar.gz", hash = "sha256:6f007a83bce28a137ee9a82b01a03ce649f225ea792dec935f5d5c402362845d"},

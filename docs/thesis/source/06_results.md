@@ -5,7 +5,8 @@ In this chapter I will present my findings, discuss them and elaborate on how
 this impacts my problem statement.
 
 
-In this chapter I will:
+<!--
+Guiding points while writing:
 
  * Present my findings
  
@@ -15,43 +16,20 @@ In this chapter I will:
  
  * Check if these findings are in line with what I expected from the work I 
    talked about in the introduction?
-
-
+-->
+   
 Access Point Scan results
 -------------------------
 
-As mentioned in [Discovery strategies], the access points measure the amount of
-times an access point was discovered against it's percived strenght.
+As mentioned in [Discovery strategies] in an earlier chapter, the access points 
+measure the amount of times an access point was discovered against it's percived
+strenght.
 
-In this sub-section you'll see the results of the three main different
+In this section you'll see the results of the three main different
 discovery strategies and how well they picked up the access points that are in 
 its proximity.
 
-The five result-sets for the access points shows how the scans picked up different
-access points. As you might notice, the strength of the signal isn't everything that
-matters for being able to discover an access point. Two access points that have the same
-average signal strength might be discovered less. This is most likely because some of
-the access points that are further away might be obstructed while others are not.
-This can be explained via _Raileigh fading_ [@CitationNeeded], as all measurements have
-taken place in an urban environment. This will be more clearly vissible in the
-probability graphs for each scan type.
-
-As expected, the different discovery methods take different amounts of time to execute.
-These findings reflect findings of previous studies, for example where smooth
-scanning is slower than alternative discovery methods. Though in the end, this doesn't 
-have an impact on our results, but it is worth to highlight in cases where this
-thesis is used in solutions where measurement time is critical.
-
-\todo{
-    While I believe that this statement is true, this has to be confirmed when I have
-    the graph. Confirm that the timing has no effect on the actual results by looking
-    at the final graph.
-}
-
-![The average time of each discovery method](static/ap_time_taken.png)
-
-The actual results are where we find the relevant results start showing up. In the next
-few paragraph we'll take a look at the following measurement runs:
+In the next few sections we'll take a look at the following measurement runs:
 
  * Full Scan
  
@@ -64,10 +42,21 @@ few paragraph we'll take a look at the following measurement runs:
  * Smooth Scan (600ms intervals)
  
  * Smooth Scan (1200ms intervals)
+ 
+ 
+<!-- TODO: Write about removing results below 2 discoveries. -->
+
+
+### Discovery Accuracy
+
+#### Full Scan { .unnumbered }
 
 To start off, we have our base-line: the full scan.
 
 ![Access Points Discovered for a "full" scan](static/ap_full_scan.png)
+
+
+#### Selective Scan { .unnumbered }
 
 Next up we have the selective scan, which scanned channels 1, 7 and 11. As expected,
 this result discoveres less access points but took less time overall.
@@ -88,6 +77,8 @@ discovery methods, but still does not discover all the access points avaliable.
 
 ![Access Points Discovered for a "selective" scan](static/ap_selective_scan_even.png){#fig:selective-alternate}
 
+#### Smooth Scan { .unnumbered }
+
 For the next three figures, we will take a look at smooth scanning from 300 to 1200 ms
 intervals. Here you can see that the interval parameter doesn't have too much difference
 on the accuracy of the discovery. We'll see more of how these results impact the overall
@@ -98,6 +89,80 @@ performance of the access-point.
 ![Access Points Discovered for a "smooth" scan with 600ms intervals](static/ap_smooth_600_scan.png)
 
 ![Access Points Discovered for a "smooth" scan with 1200ms intervals](static/ap_smooth_1200_scan.png)
+
+### Timing
+
+As expected, there are major timing differences between the different scannning
+methods. Table {@tbl:timing} outlines the mean times for every scan method.
+
+Scan Type                        Time
+--------------------------       ------
+**Full Scan**                    3.47s
+**Selective Scan (1, 6, 11)**    0.18s
+**Selective Scan (Skip 1)**      0.35s
+**Smooth Scan (300ms)**          4.98s
+**Smooth Scan (600ms)**          8.88s
+**Smooth Scan (1200ms)**         17.62s
+
+Table: Mean total time for completing a scan {#tbl:timing}
+
+For each of these scan types, the standard deviation of the total time taken is
+rather low at just a $+-10$ milliseconds appart. This is rather insignificant.
+
+In addition to this, it's worth noting that while smooth scans take significantly
+longer to complete, they don't spend all that time actually scanning. For each of
+the smooth scans only 
+
+$$timeSpent - (channelsScanned * interval)$$
+
+seconds are spent on doing the actuall scanning. Using this information, we can
+recalculate the mean timings above.
+
+Scan Type                        Time
+--------------------------       -----
+**Full Scan**                    3.47s
+**Selective Scan (1, 6, 11)**    0.18s
+**Selective Scan (Skip 1)**      0.35s
+**Smooth Scan (300ms)**          1.68s
+**Smooth Scan (600ms)**          2.28s
+**Smooth Scan (1200ms)**         4.42s
+
+Table: Mean total time for completing a scan (adjusted for scanning intervals) {#tbl:alttiming}
+
+With this in mind, we can see that table {@tbl:alttiming} shows results that are
+more similar to each other.
+
+\todo{
+    Hmm, it's strange that these timings are so seemingly unrelated. Maybe do
+    another run with the access points to verify this? These timings were measured
+    independent of the main scan runs anyways.
+}
+
+
+### Interpreting and analyzing the results
+
+The five scanning algorithm result-sets for the access points shows how the scans
+picked up different access points. As you might notice, the strength of the signal
+isn't everything that matters for being able to discover an access point. Two access
+points that have the same average signal strength might be discovered less.
+
+This phenomenon is most likely because access points that are further away might
+be obstructed while others are not. This fits nicely with _Rice_ and _Rayleigh
+Fading_ as all measurements have taken place in an urban environment. This will
+be clearer once we look at the probability of discovery graphs, where both rice
+and raleigh curves have been added to further show this.
+
+As expected, the different discovery methods take different amounts of time to
+execute. These findings reflect findings of previous studies, for example where
+smooth scanning is slower than alternative discovery methods. Though in the end,
+this doesn't have an impact on our results, but it is worth to highlight in cases
+where this thesis is used in solutions where measurement time is critical.
+
+\todo{
+    While I believe that this statement is true, this has to be confirmed when I have
+    the graph. Confirm that the timing has no effect on the actual results by looking
+    at the final graph.
+}
 
 
 

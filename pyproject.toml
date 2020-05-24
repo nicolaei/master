@@ -10,6 +10,7 @@ matplotlib = "^3.2.1"
 numpy = "^1.18.4"
 scipy = "^1.4.1"
 pandoc-fignos = "^2.2.0"
+pandoc-tablenos = "^2.1.1"
 
 
 [tool.poetry.dev-dependencies]

@@ -22,6 +22,7 @@ pdf:
 	--top-level-division=chapter \
 	-N \
 	--filter pandoc-fignos \
+	--filter pandoc-tablenos \
 	--filter pandoc-citeproc \
 	--verbose
 
