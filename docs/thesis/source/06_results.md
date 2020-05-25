@@ -55,9 +55,9 @@ To start off, we have our base-line: the full scan.
 
 ![Access Points Discovered for a "full" scan](static/ap_full_scan.png)
 
-                          **AP 0**     **AP 1**     **AP 2**
+Scan Type                 **AP 0**     **AP 1**     **AP 2**
 ---------------------     --------     --------     --------
-**Amount Discovered**        68           96           72     
+**Full Scan**                68           96           72     
 
 Table: Access points discovered accross all scans accross the 
        different access points for full scan. { #tbl:amountfull }
@@ -72,8 +72,6 @@ this result discoveres less access points but took less time overall.
     The selective scan results is an assumption, I haven't verified while writing.
 }
 
-![Access Points Discovered for a "selective" scan](static/ap_selective_scan_1_7_11.png)
-
 An alternative selective scan implementation, as seen in [@fig:selective-alternate],
 scans every other channel instead. This also takes shorter time than the alternative
 discovery methods, but still does not discover all the access points avaliable.
@@ -81,6 +79,28 @@ discovery methods, but still does not discover all the access points avaliable.
 \todo{
     Again, this isn't verified by me at the time of writing.
 }
+
+
+\begin{figure}
+  \centering
+  
+  \begin{subfigure}[b]{.75\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{static/ap_selective_main_scan.png}
+    \label{fig:selectivescanresultsa}
+    \caption{Channels 1, 6 and 11}
+  \end{subfigure}
+  
+  \begin{subfigure}[b]{.75\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{static/ap_selective_alt_scan.png}
+    \label{fig:selectivescanresultsb}
+    \caption{Channels 1, 3, 5, 7, 9 and 11}
+  \end{subfigure}
+  
+  \label{fig:smoothscanresults}
+  \caption{Access points discovered for selective scan accross all three access points}
+\end{figure}
 
 Channels Scanned          **AP 0**     **AP 1**     **AP 2**
 ---------------------     --------     --------     --------
@@ -90,8 +110,6 @@ Channels Scanned          **AP 0**     **AP 1**     **AP 2**
 Table: Access points discovered accross all scans accross the different 
        access points for selective scan. { #tbl:amountfull }
 
-![Access Points Discovered for a "selective" scan](static/ap_selective_scan_even.png){#fig:selective-alternate}
-
 #### Smooth Scan { .unnumbered }
 
 For the next three figures, we will take a look at smooth scanning from 300 to 1200 ms
@@ -99,11 +117,34 @@ intervals. Here you can see that the interval parameter doesn't have too much di
 on the accuracy of the discovery. We'll see more of how these results impact the overall
 performance of the access-point.
 
-![Access Points Discovered for a "smooth" scan with 300ms intervals](static/ap_smooth_300_scan.png)
-
-![Access Points Discovered for a "smooth" scan with 600ms intervals](static/ap_smooth_600_scan.png)
-
-![Access Points Discovered for a "smooth" scan with 1200ms intervals](static/ap_smooth_1200_scan.png)
+\begin{figure}
+  \centering
+  
+  \begin{subfigure}[b]{.75\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{static/ap_smooth_300_scan.png}
+    \label{fig:smoothscanresults300}
+    \caption{300ms interval}
+  \end{subfigure}
+  
+  \begin{subfigure}[b]{.75\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{static/ap_smooth_600_scan.png}
+    \label{fig:smoothscanresults600}
+    \caption{600ms interval}
+  \end{subfigure}
+  
+  \begin{subfigure}[b]{.75\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{static/ap_smooth_1200_scan.png}
+    \label{fig:smoothscanresults1200}
+    \caption{1200ms interval}
+  \end{subfigure}
+  
+  \label{fig:smoothscanresults}
+  \caption{Access points discovered for smooth scan results
+           accross all three access points}
+\end{figure}
 
 Interval         **AP 0**     **AP 1**     **AP 2**
 ------------     --------     --------     --------
