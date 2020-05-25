@@ -55,6 +55,13 @@ To start off, we have our base-line: the full scan.
 
 ![Access Points Discovered for a "full" scan](static/ap_full_scan.png)
 
+                          **AP 0**     **AP 1**     **AP 2**
+---------------------     --------     --------     --------
+**Amount Discovered**        68           96           72     
+
+Table: Access points discovered accross all scans accross the 
+       different access points for full scan. { #tbl:amountfull }
+
 
 #### Selective Scan { .unnumbered }
 
@@ -75,6 +82,14 @@ discovery methods, but still does not discover all the access points avaliable.
     Again, this isn't verified by me at the time of writing.
 }
 
+Channels Scanned          **AP 0**     **AP 1**     **AP 2**
+---------------------     --------     --------     --------
+**1, 6, 11**                 30           27           29 
+**1, 3, 5, 7, 9, 11**        26           18           32 
+
+Table: Access points discovered accross all scans accross the different 
+       access points for selective scan. { #tbl:amountfull }
+
 ![Access Points Discovered for a "selective" scan](static/ap_selective_scan_even.png){#fig:selective-alternate}
 
 #### Smooth Scan { .unnumbered }
@@ -89,6 +104,15 @@ performance of the access-point.
 ![Access Points Discovered for a "smooth" scan with 600ms intervals](static/ap_smooth_600_scan.png)
 
 ![Access Points Discovered for a "smooth" scan with 1200ms intervals](static/ap_smooth_1200_scan.png)
+
+Interval         **AP 0**     **AP 1**     **AP 2**
+------------     --------     --------     --------
+**300 ms**          49           47           44
+**600 ms**          43           50           52
+**1200 ms**         43           40           48
+
+Table: Access points discovered accross all scans accross the 
+       different access points for smooth scan. { #tbl:amountfull }
 
 ### Timing
 
@@ -127,7 +151,8 @@ Scan Type                        Time
 **Smooth Scan (600ms)**          2.28s
 **Smooth Scan (1200ms)**         4.42s
 
-Table: Mean total time for completing a scan (adjusted for scanning intervals) {#tbl:alttiming}
+Table: Mean total time for completing a scan
+       (adjusted for scanning intervals) {#tbl:alttiming}
 
 With this in mind, we can see that table {@tbl:alttiming} shows results that are
 more similar to each other.
