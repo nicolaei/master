@@ -14,7 +14,11 @@ lot: yes
 documentclass: ifimaster
 classoption: UKenglish
 
+header-includes: \usepackage{subcaption}
+
 fontfamily: charter
+
+linkcolor: blue
 
 bibliography: source/references.bib
 csl: static/ieee.csl
