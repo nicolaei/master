@@ -57,7 +57,7 @@ To start off, we have our base-line: the full scan.
 
 Scan Type                 **AP 0**     **AP 1**     **AP 2**
 ---------------------     --------     --------     --------
-**Full Scan**                68           96           72     
+**Full Scan**                54           69           61     
 
 Table: Access points discovered accross all scans accross the 
        different access points for full scan. { #tbl:amountfull }
