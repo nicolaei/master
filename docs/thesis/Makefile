@@ -21,7 +21,9 @@ pdf:
 	--template=$(SOURCEDIR)/template.tex \
 	--top-level-division=chapter \
 	-N \
-	--filter pandoc-xnos \
+	--filter pandoc-fignos \
+	--filter pandoc-tablenos \
+	--filter pandoc-secnos \
 	--filter pandoc-citeproc \
 	--verbose
 

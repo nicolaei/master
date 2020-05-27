@@ -205,7 +205,7 @@ other clients that are not currently scanning.
 [^goodput]: _Goodput_ is the application-level throughput.
 
 
-Channel overlapping
+Channel overlapping {#sec:channeloverlap}
 -------------------
 
 In addition to their findings about [Discovery Time](@sec:Discovery Time)) in

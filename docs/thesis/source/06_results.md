@@ -29,7 +29,7 @@ In this section you'll see the results of the three main different
 discovery strategies and how well they picked up the access points that are in 
 its proximity.
 
-In the next few sections we'll take a look at the following measurement runs:
+In the next parts we'll take a look at the following measurement runs:
 
  * Full Scan
  
@@ -51,56 +51,54 @@ In the next few sections we'll take a look at the following measurement runs:
 
 #### Full Scan { .unnumbered }
 
-To start off, we have our base-line: the full scan.
-
-![Access Points Discovered for a "full" scan](static/ap_full_scan.png)
+To start off, we have our base-line: the full scan. As mentioned in previous
+chapters. This scan type is, as expected, discovering a lot of access points.
+See figure {@fig:fullscanresults} and table {@tbl:amountfull}.
 
 Scan Type                 **AP 0**     **AP 1**     **AP 2**
 ---------------------     --------     --------     --------
 **Full Scan**                54           69           61     
 
 Table: Access points discovered accross all scans accross the 
-       different access points for full scan. { #tbl:amountfull }
+       different access points for full scan. {#tbl:amountfull}
+       
+![Access Points Discovered for a "full" scan](static/ap_full_scan.png){ #fig:fullscanresults }
+
+Overall we see that signals without line of sight nicely follows the reighley 
+curve. Though there are also some access points that have a high chance of 
+discovery, even when their signal strenght is low. These access points most 
+likely have line of sight to the access point that is scanning. A naive manual
+verification of these access points loaction confirms this. [^manualverify]
+
+[^manualverify]: Manual verification was partly done by looking at the SSID of
+the access points and partly by trying to walk around with a WiFi scanner app.
+Preferably, we would know the possition of all access points, but the resources
+for this wasn't avaliable.
 
 
 #### Selective Scan { .unnumbered }
 
-Next up we have the selective scan, which scanned channels 1, 7 and 11. As expected,
-this result discoveres less access points but took less time overall.
+Next up we have the selective scan. As expected, this result discoveres less 
+access points but took less time overall. The first test, scanning channels 1,
+6 and 11, discovered the least amount of close access points. These access points
+were probably on a separate channel during our scan.
 
-\todo{
-    The selective scan results is an assumption, I haven't verified while writing.
-}
+An alternative selective scan implementation, which results are found in figure
+{@fig:selectivescanresultalt}, scans every other channel instead. This also takes
+shorter time than the other discovery methods, but still does not discover
+all the access points avaliable.
 
-An alternative selective scan implementation, as seen in [@fig:selective-alternate],
-scans every other channel instead. This also takes shorter time than the alternative
-discovery methods, but still does not discover all the access points avaliable.
+Out of all the scanning methods, selective scan is thus the least performant, but
+has a significant speed increase.
 
-\todo{
-    Again, this isn't verified by me at the time of writing.
-}
+In {@sec:channeloverlap} we took a look at how channel overlapping might help
+our results in the selective scanning, but it seems like this might not be the
+case in this implementation, which can be seen by looking at the amount of access
+points discovered.
 
-
-\begin{figure}
-  \centering
-  
-  \begin{subfigure}[b]{.75\textwidth}
-    \centering
-    \includegraphics[width=\textwidth]{static/ap_selective_main_scan.png}
-    \label{fig:selectivescanresultsa}
-    \caption{Channels 1, 6 and 11}
-  \end{subfigure}
-  
-  \begin{subfigure}[b]{.75\textwidth}
-    \centering
-    \includegraphics[width=\textwidth]{static/ap_selective_alt_scan.png}
-    \label{fig:selectivescanresultsb}
-    \caption{Channels 1, 3, 5, 7, 9 and 11}
-  \end{subfigure}
-  
-  \label{fig:smoothscanresults}
-  \caption{Access points discovered for selective scan accross all three access points}
-\end{figure}
+Unfortunattely it is hard to pinpoint excactly why we're not getting the benifits
+of channel overlapping. It might be because of driver or hardware implementation
+that is filtering out signals from adjacent channels.
 
 Channels Scanned          **AP 0**     **AP 1**     **AP 2**
 ---------------------     --------     --------     --------
@@ -108,16 +106,57 @@ Channels Scanned          **AP 0**     **AP 1**     **AP 2**
 **1, 3, 5, 7, 9, 11**        26           18           32 
 
 Table: Access points discovered accross all scans accross the different 
-       access points for selective scan. { #tbl:amountfull }
+       access points for selective scan. { #tbl:amountselective }
+
+\begin{figure}
+  \centering
+  
+  \begin{subfigure}{.75\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{static/ap_selective_main_scan.png}
+    \label{fig:selectivescanresultsmain}
+    \caption{Channels 1, 6 and 11}
+  \end{subfigure}
+  
+  \begin{subfigure}{.75\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{static/ap_selective_alt_scan.png}
+    \label{fig:selectivescanresultsalt}
+    \caption{Channels 1, 3, 5, 7, 9 and 11}
+  \end{subfigure}
+  
+  \label{fig:smoothscanresults}
+  \caption{Access points discovered for selective scan accross all three access points}
+\end{figure}
+
 
 #### Smooth Scan { .unnumbered }
 
-For the next three figures, we will take a look at smooth scanning from 300 to 1200 ms
-intervals. Here you can see that the interval parameter doesn't have too much difference
-on the accuracy of the discovery. We'll see more of how these results impact the overall
-performance of the access-point.
+In the next three figures, we will take a look at smooth scanning from 300 to 1200 ms
+intervals.
 
-\begin{figure}
+In table {@tbl:amountsmooth}, as well as in {@fig:smoothscanresults} we can see
+that the interval doesn't have a significant impact on discovery. Arguably, the
+difference between them is within a margin of error that can be expected from
+the changing environment that the measurments were conducted in. E.g. some of
+the external access points could probably have been obstructed by items within
+an apartment or something similar.
+
+Overall, the performance here is quite good. Though as discussed in the section
+on Smooth Scanning in [Possible Measurement Strategies and Discovery Methods],
+the time it took to run these scans is significantly longer. We will be looking
+more into the timing differences in the next section.
+
+Interval         **AP 0**     **AP 1**     **AP 2**
+------------     --------     --------     --------
+**300 ms**          49           47           44
+**600 ms**          43           50           52
+**1200 ms**         43           40           48
+
+Table: Access points discovered accross all scans accross the 
+       different access points for smooth scan. { #tbl:amountsmooth }
+
+\begin{figure}[p]
   \centering
   
   \begin{subfigure}[b]{.75\textwidth}
@@ -146,14 +185,6 @@ performance of the access-point.
            accross all three access points}
 \end{figure}
 
-Interval         **AP 0**     **AP 1**     **AP 2**
-------------     --------     --------     --------
-**300 ms**          49           47           44
-**600 ms**          43           50           52
-**1200 ms**         43           40           48
-
-Table: Access points discovered accross all scans accross the 
-       different access points for smooth scan. { #tbl:amountfull }
 
 ### Timing
 
