@@ -277,68 +277,98 @@ In [@fig:all-discoveries] you can see that
      *   Are any of them worse than the others?
 
 
-Client Latency Results
-----------------------
+Client Results
+--------------
 
-The latency is where the results get more interesting. In this subsection we'll take
-a deep dive in how the different discovery methods affect the clients on the network.
+Now we will be taking a deep dive into how the scans affected the clients. 
+As discussed in [Measurement strategies], the clients measured both their latency 
+and goodput to the access point they were connected to. This should give us a 
+good overview of how the discovery methods affected the clients.
 
-A quick recap: As mentioned in [Measuring Points], the client's are measuring both
-latency and goodput to the access point. This should give us a good overview of
-how the scans affect the clients.
-
-\todo{
-    So far only latency has been measured! Need to measure goodput as well.
-}
-
-For all of these results, you'll see the latency graphed every 250ms, and a
-blue vertical line that indicates every time a scan is triggered by the access point.
-Be aware that this blue line isn't 100% accurate due to some issue with clock-skew
-on my Raspberry Pi's. This should however _not_ affect the results at all, these
-lines are only indicators to help finidng when a scan happened. 
+For all of these results, you'll see the latency and goodput measured whenever
+the link was avaliable. In adition you'll see a blue vertical line that represents
+when a scan finished on the access point that the client was connected to. Due
+to problems with the clock on the Raspberri Pi, this isn't 100% accurate but
+still usefull as a guide. This issue is discussed in [Methodic problems]. It is
+worth restating that this issue shouldn't affect our final results, as the lines
+are just used as guides. It does however mean that it will be slightly harder to
+separate normal noise from the scan impact.
 
 
-### The results 
+### Overall impact of scanning
 
 \todo{
     Show close-ups of a single scan for each graph type
 }
 
-Like the [Access Point Scan results], I will be starting off with our baseline:
-the full scan. In the excerpt from the full scan, you'll notice that the latency
-hovers between 100 and 150 ms for quite a few seconds, which is quite substantial
-for real time applications such as VoIP and online video games.
+To get the best overview possible, we will be looking at both latency and goodput
+graphs next to each other as these are closely related.
 
-![Client impact for "full" scan](static/cli_full_scan.png)
+Seeing that over 100 scans have been conducted for each algorithm, we will be
+looking at 8 results where enviornmental noise seems to be rather minimal for
+each example. This should give us a good overview of the overall impact of the
+algorithms, while still being able to weight inn possible variability in the
+results.
+
+#### Full Scan { .unnumbered }
+
+In the excerpt from the full scan, you'll notice that the latency
+hovers between 100 and 150 ms for quite a few seconds, which is substantial for 
+real time applications such as VoIP and online video games.
+
+![Client latency for full scan](static/cli_full_scan_latency.png){@fig:clifulllatency}
+![Client goodput for full scan](static/cli_full_scan_goodput.png){@fig:clifullgoodput}
+
+In addition, as expected, the goodput follows suit with the worst spikes ending
+up almost hitting zero MB/s of goodput.
+
+#### Selective Scan { .unnumbered }
 
 Selective scanning decreases the max and average latency that the client will
 experience, which echos [@citation] that states that latency lineary increeses
-for each channel scanned. This effect can clearly be obeserved here. For example
-the scan which only scans 1, 7 and 11 avereages around 50 ms of latency.
+for each channel scanned. This effect can be obeserved here. 
 
-![Client impact for a simple "selective" scan on ch 1, 7 and 11](static/cli_selective_scan_1_7_11.png)
-![Client impact for a alternating "selective" scan](static/cli_selective_scan_even.png)
+In the examples for scanning channels 1, 6 and 11 the peak latency ends up being
+just a bit lower than the full scan, hovering at around 100 ms and maxing out at
+around 150ms. But in contrast to the full scan, the latency spikes are a lot
+shorter in duration compared to the full scan implementation, which we can see
+as a clear benifit in our goodput results.
 
-Lastly we have the smooth scans which all seamingly hover between 50 and 100 ms
-during scan periods. But the smaller inpact in latency is carried on for a bit longer
-due to the fact that we have intervals between each scan.
+![Client latency for selective (1, 6, 11) scan](static/cli_selective_main_latency.png){@fig:cliselectivemainlatency}
+![Client goodput for selective (1, 6, 11) scan](static/cli_selective_main_goodput.png){@fig:cliselectivemaingoodput}
 
-In my results, the latency of of longer intervals than 300ms are seemingly not
-effective for minimizing client latency. In some cases, the latency is even
-larger than the 300ms run! 
+As for the selective scan which skips every even-numbered channel, we can spot
+roughly the same results here. The peak latency is hovering around 100 to 150ms,
+but the goodput is not hit as badly as the full scan results. However, the 
+goodput for this scanning method does end up taking a slightly worse hit.
 
-\todo{
-    Analze how much longer each scan runs by looking at only a single scan.
-}
+![Client latency for selective (skip 1) scan](static/cli_selective_alt_latency.png){@fig:cliselectivealtlatency}
+![Client goodput for selective (skip 1) scan](static/cli_selective_alt_goodput.png){@fig:cliselectivealtgoodput}
 
-\todo{
-    Check for packet loss in the scans!!!
-}
 
-![Client impact for a "smooth" scan with 300ms intervals](static/cli_smooth_300_scan.png)
-![Client impact for a "smooth" scan with 600ms intervals](static/cli_smooth_600_scan.png)
-![Client impact for a "smooth" scan with 1200ms intervals](static/cli_smooth_1200_scan.png)
-    
+#### Smooth Scan { .unnumbered }
+
+During smooth scan, it seems like clients are largely unaffected by the scans
+conducted by the AP it's connected to.
+
+In figures {#fig:clismooth300laten} trough {#fig:clismooth1200good} we can
+observe that the latency and goodput results does not have periodic spikes. This
+is in contrast to the observations in the full and selective scan algorithms,
+where we can clearly see periodic spikes in latency.
+
+In these results we can only see sporadic spikes in latency and dips in goodput.
+It is more likely these spikes were results of the environment where we
+conducted the tests.
+
+![Client impact for a "smooth" scan with 300ms intervals](static/cli_smooth_300_latency.png){@fig:clismooth300laten}
+![Client impact for a "smooth" scan with 300ms intervals](static/cli_smooth_300_goodput.png){@fig:clismooth300good}
+
+![Client impact for a "smooth" scan with 600ms intervals](static/cli_smooth_600_latency.png){@fig:clismooth600laten}
+![Client impact for a "smooth" scan with 600ms intervals](static/cli_smooth_600_goodput.png){@fig:clismooth600good}
+
+![Client impact for a "smooth" scan with 1200ms intervals](static/cli_smooth_1200_latency.png){@fig:clismooth1200laten}
+![Client impact for a "smooth" scan with 600ms intervals](static/cli_smooth_1200_goodput.png){@fig:clismooth1200good}
+
 
 ### Comparing the results
 
