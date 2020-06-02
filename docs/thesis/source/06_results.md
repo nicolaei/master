@@ -68,37 +68,38 @@ Overall we see that signals without line of sight nicely follows the reighley
 curve. Though there are also some access points that have a high chance of 
 discovery, even when their signal strenght is low. These access points most 
 likely have line of sight to the access point that is scanning. A naive manual
-verification of these access points loaction confirms this. [^manualverify]
+verification of these access point's location confirms this. [^manualverify]
 
 [^manualverify]: Manual verification was partly done by looking at the SSID of
-the access points and partly by trying to walk around with a WiFi scanner app.
-Preferably, we would know the possition of all access points, but the resources
-for this wasn't avaliable.
+the access points and corelating them to nearby shops, and partly by trying to 
+walk around with a WiFi scanner app. Preferably, we would know the possition of 
+all access points, but the resources for this wasn't avaliable.
 
 
 #### Selective Scan { .unnumbered }
 
-Next up we have the selective scan. As expected, this result discoveres less 
+Next up we have selective scanning. As expected, this result discoveres less 
 access points but took less time overall. The first test, scanning channels 1,
 6 and 11, discovered the least amount of close access points. These access points
 were probably on a separate channel during our scan.
 
 An alternative selective scan implementation, which results are found in figure
-{@fig:selectivescanresultalt}, scans every other channel instead. This also takes
+{@fig:selectivescanresultsalt}, scans every other channel instead. This also takes
 shorter time than the other discovery methods, but still does not discover
 all the access points avaliable.
 
 Out of all the scanning methods, selective scan is thus the least performant, but
 has a significant speed increase.
 
-In {@sec:channeloverlap} we took a look at how channel overlapping might help
-our results in the selective scanning, but it seems like this might not be the
-case in this implementation, which can be seen by looking at the amount of access
-points discovered.
+In section {@sec:channeloverlap} we took a look at how channel overlapping might 
+help our results in the selective scanning, but it seems like this might not be
+the case in this implementation, which can be seen by looking at the amount of
+access points discovered.
 
 Unfortunattely it is hard to pinpoint excactly why we're not getting the benifits
-of channel overlapping. It might be because of driver or hardware implementation
-that is filtering out signals from adjacent channels.
+of channel overlapping, which was talked about in [@APDiscovery]. It might be 
+because of driver or hardware implementation that is filtering out signals from
+adjacent channels.
 
 Channels Scanned          **AP 0**     **AP 1**     **AP 2**
 ---------------------     --------     --------     --------
@@ -125,7 +126,7 @@ Table: Access points discovered accross all scans accross the different
     \caption{Channels 1, 3, 5, 7, 9 and 11}
   \end{subfigure}
   
-  \label{fig:smoothscanresults}
+  \label{fig:selectivescanresult}
   \caption{Access points discovered for selective scan accross all three access points}
 \end{figure}
 
@@ -135,12 +136,16 @@ Table: Access points discovered accross all scans accross the different
 In the next three figures, we will take a look at smooth scanning from 300 to 1200 ms
 intervals.
 
-In table {@tbl:amountsmooth}, as well as in {@fig:smoothscanresults} we can see
-that the interval doesn't have a significant impact on discovery. Arguably, the
-difference between them is within a margin of error that can be expected from
-the changing environment that the measurments were conducted in. E.g. some of
-the external access points could probably have been obstructed by items within
-an apartment or something similar.
+In table {@tbl:amountsmooth}, as well as in figure {@fig:smoothscanresults} we 
+can see that the interval doesn't have a significant impact on discovery.
+Arguably, the difference between them is within a margin of error that can be
+expected from the changing environment that the measurments were conducted in.
+E.g. some of the external access points could probably have been obstructed by
+items within an apartment or something similar. [^apartmentreasoning]
+
+[^apartmentreasoning]: As mentioned in the section about methodic problems;
+the experiments were conducted in an urban environment without control of
+most of the access points.
 
 Overall, the performance here is quite good. Though as discussed in the section
 on Smooth Scanning in [Possible Measurement Strategies and Discovery Methods],
@@ -154,7 +159,7 @@ Interval         **AP 0**     **AP 1**     **AP 2**
 **1200 ms**         43           40           48
 
 Table: Access points discovered accross all scans accross the 
-       different access points for smooth scan. { #tbl:amountsmooth }
+       different access points for smooth scan. {#tbl:amountsmooth}
 
 \begin{figure}[p]
   \centering
@@ -229,14 +234,13 @@ Table: Mean total time for completing a scan
 With this in mind, we can see that table {@tbl:alttiming} shows results that are
 more similar to each other.
 
-\todo{
-    Hmm, it's strange that these timings are so seemingly unrelated. Maybe do
-    another run with the access points to verify this? These timings were measured
-    independent of the main scan runs anyways.
-}
-
 
 ### Interpreting and analyzing the results
+
+\todo{
+    This section needs to be rewritten. It was written before the above sections
+    were written, so it doesn't fit in with the overall chapter right now.
+}
 
 The five scanning algorithm result-sets for the access points shows how the scans
 picked up different access points. As you might notice, the strength of the signal
@@ -265,10 +269,6 @@ where this thesis is used in solutions where measurement time is critical.
 
 
 ### Comparing the results
-
-![Comparison of results between all discoveries](static/ap_all.png){#fig:all-discoveries}
-
-In [@fig:all-discoveries] you can see that 
 
  *   Compare the results that were shown off above
 
@@ -313,11 +313,12 @@ results.
 #### Full Scan { .unnumbered }
 
 In the excerpt from the full scan, you'll notice that the latency
-hovers between 100 and 150 ms for quite a few seconds, which is substantial for 
+hovers between 100 and 300 ms for quite a few seconds, which is substantial for 
 real time applications such as VoIP and online video games.
 
-![Client latency for full scan](static/cli_full_scan_latency.png){@fig:clifulllatency}
-![Client goodput for full scan](static/cli_full_scan_goodput.png){@fig:clifullgoodput}
+![Client latency for full scan](static/cli_full_scan_latency.png){#fig:clifulllatency}
+
+![Client goodput for full scan](static/cli_full_scan_goodput.png){#fig:clifullgoodput}
 
 In addition, as expected, the goodput follows suit with the worst spikes ending
 up almost hitting zero MB/s of goodput.
@@ -329,21 +330,23 @@ experience, which echos [@citation] that states that latency lineary increeses
 for each channel scanned. This effect can be obeserved here. 
 
 In the examples for scanning channels 1, 6 and 11 the peak latency ends up being
-just a bit lower than the full scan, hovering at around 100 ms and maxing out at
-around 150ms. But in contrast to the full scan, the latency spikes are a lot
-shorter in duration compared to the full scan implementation, which we can see
-as a clear benifit in our goodput results.
+around half of full scan, hovering at around 100 ms and maxing out at around 
+150ms. In contrast to the full scan, the latency spikes are a lot shorter
+duration compared to the full scan implementation, which we can see as a clear
+benifit in our goodput results.
 
-![Client latency for selective (1, 6, 11) scan](static/cli_selective_main_latency.png){@fig:cliselectivemainlatency}
-![Client goodput for selective (1, 6, 11) scan](static/cli_selective_main_goodput.png){@fig:cliselectivemaingoodput}
+![Client latency for selective (1, 6, 11) scan](static/cli_selective_main_latency.png){#fig:cliselectivemainlatency}
+
+![Client goodput for selective (1, 6, 11) scan](static/cli_selective_main_goodput.png){#fig:cliselectivemaingoodput}
 
 As for the selective scan which skips every even-numbered channel, we can spot
 roughly the same results here. The peak latency is hovering around 100 to 150ms,
 but the goodput is not hit as badly as the full scan results. However, the 
 goodput for this scanning method does end up taking a slightly worse hit.
 
-![Client latency for selective (skip 1) scan](static/cli_selective_alt_latency.png){@fig:cliselectivealtlatency}
-![Client goodput for selective (skip 1) scan](static/cli_selective_alt_goodput.png){@fig:cliselectivealtgoodput}
+![Client latency for selective (skip 1) scan](static/cli_selective_alt_latency.png){#fig:cliselectivealtlatency}
+
+![Client goodput for selective (skip 1) scan](static/cli_selective_alt_goodput.png){#fig:cliselectivealtgoodput}
 
 
 #### Smooth Scan { .unnumbered }
@@ -351,43 +354,23 @@ goodput for this scanning method does end up taking a slightly worse hit.
 During smooth scan, it seems like clients are largely unaffected by the scans
 conducted by the AP it's connected to.
 
-In figures {#fig:clismooth300laten} trough {#fig:clismooth1200good} we can
-observe that the latency and goodput results does not have periodic spikes. This
-is in contrast to the observations in the full and selective scan algorithms,
-where we can clearly see periodic spikes in latency.
+In figures {@fig:clismooth300laten} trough {@fig:clismooth1200good} we can
+observe that the latency and goodput results does not have any periodic spikes.
+This is in contrast to the observations in the full and selective scan algorithms,
+where we can see periodic spikes in latency.
 
 In these results we can only see sporadic spikes in latency and dips in goodput.
-It is more likely these spikes were results of the environment where we
-conducted the tests.
+It is likely these spikes were results of the environment where we conducted 
+the tests or do to RF noise.
 
-![Client impact for a "smooth" scan with 300ms intervals](static/cli_smooth_300_latency.png){@fig:clismooth300laten}
-![Client impact for a "smooth" scan with 300ms intervals](static/cli_smooth_300_goodput.png){@fig:clismooth300good}
+![Client latency for a "smooth" scan with 300ms intervals](static/cli_smooth_300_latency.png){#fig:clismooth300laten}
 
-![Client impact for a "smooth" scan with 600ms intervals](static/cli_smooth_600_latency.png){@fig:clismooth600laten}
-![Client impact for a "smooth" scan with 600ms intervals](static/cli_smooth_600_goodput.png){@fig:clismooth600good}
+![Client goodput for a "smooth" scan with 300ms intervals](static/cli_smooth_300_goodput.png){#fig:clismooth300good}
 
-![Client impact for a "smooth" scan with 1200ms intervals](static/cli_smooth_1200_latency.png){@fig:clismooth1200laten}
-![Client impact for a "smooth" scan with 600ms intervals](static/cli_smooth_1200_goodput.png){@fig:clismooth1200good}
+![Client latency for a "smooth" scan with 600ms intervals](static/cli_smooth_600_latency.png){#fig:clismooth600laten}
 
+![Client goodput for a "smooth" scan with 600ms intervals](static/cli_smooth_600_goodput.png){#fig:clismooth600good}
 
-### Comparing the results
+![Client latency for a "smooth" scan with 1200ms intervals](static/cli_smooth_1200_latency.png){#fig:clismooth1200laten}
 
-\todo{
-    Create a graph or table comparing max latency peaks and their duration for each
-    scanning method. This can include mean and avg of the max latencies. That should
-    be the easiest to implement as we have the when the scan happens.
-}
-
- *   Compare the results that were shown off above
-
-     *   Which results are most promising?
-    
-     *   Which results are to be avoided?
-
-
-A full comparison between AP and Client results
------------------------------------------------
-
-In this section I will be looking at the results, keeping in mind the results of both
-the Access Point discovery and the Client side impact.
-
+![Client goodput for a "smooth" scan with 600ms intervals](static/cli_smooth_1200_goodput.png){#fig:clismooth1200good}
