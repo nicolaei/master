@@ -21,6 +21,7 @@ pdf:
 	--template=$(SOURCEDIR)/template.tex \
 	--top-level-division=chapter \
 	-N \
+	--pdf-engine=xelatex \
 	--filter pandoc-fignos \
 	--filter pandoc-tablenos \
 	--filter pandoc-secnos \

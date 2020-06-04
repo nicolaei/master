@@ -16,7 +16,7 @@ classoption: UKenglish
 
 header-includes: \usepackage{subcaption}
 
-fontfamily: charter
+mainfont: XCharter
 
 linkcolor: blue
 
