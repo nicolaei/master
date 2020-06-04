@@ -10,13 +10,28 @@ Seeing that most consumer equipment today ship without ports for wired
 connections, it's safe to assume that the majority of todays users are using
 Wi-Fi as their primary way of connecting to the internet.
 
-Though with the increasing availiability in developing countries and increasing
-urbanization around the world, the availiable channels for Wi-Fi deployments are
-getting increasingly congested.
+Though there are only 12 avaliable channels on the 2.4GHz band, where only three
+of these are considered to be "usable" due to channel overlap. The 5 GHz band has
+more channels, but suffer from shorter range due to the shorter wavelength, 
+so more access points might have to be deployed for good coverage.
+
+Due to a limited amount of channels and an increasing availiability of the internet
+in developing countries, as well as urbanization around the world, the Wi-Fi
+channels that are avaliable for deployments are getting increasingly congested.
 
 With this problem in mind, it is necessary to figure out how access points can
-have a good overview of the local wirless space to select the best channel
-for themselves and to collaborate with their peers for optimal channal usage.
+have a good overview of the local wirless space to select a channel for 
+themselves and to collaborate with their peers for channal usage.
+
+\todo{
+    Do you have an article I can cite regarding the statement about cooperation
+    below @Madeleine?
+}
+
+Cooperating on the channel allocation problem outperforms non cooperative methods.
+In these methods the channel allocation problem can be considered from a 
+graph colouring perspective where the vertices are Wi-Fi networks, and the 
+edges are neighbouring networks which interfere with each other. 
 
 In this thesis I aim to figure out how to scan the local wireless topology for
 active wireless access points and their signal strength, without affecting
