@@ -40,25 +40,34 @@ access points should be able to more easily collaborate between each other in a
 decentralized or centralized manner.
 
 
-Scope (Problem Statement?)
---------------------------
+Scope
+-----
 
 In this section I'll be discussing what _is_ and what _is not_ in the scope of
 this thesis. The goal, as discussed in the introduction, is to find a way to
 give the channel allocation algorithm all the information it needs to select the
-best channel for a given access point.
+channel for a given access point.
 
 
 ### What am I trying to figure out?
 
-At a glance it would seem rather simple to find other access points in a
-network with a simple scan, but this might not be the case. The implementation
-will have to keep network performance and discovery accuracy in mind.
+The channel allocation algorithm needs data about neighbouring access points
+to figure out which channel the access point should be serving on. To do this
+it has to do a scan, but as we will see in later chapters this comes with a cost
+of client network performance.
+
+In addition, the scanning algorithm must not sacrifice the accuracy of the results
+to achieve this. If only some nearby access points that could cause interference
+are found, we risk not improving the network performance after a potential
+channel switch, or worse; harming the network performance.
+
+In short, the implementation will have to keep both network performance and 
+discovery accuracy in mind.
 
 The definition of this thesis is thus:
 
 **How do you scan a IEE802.11 network from an access point without affecting the
-performance of the connected STAs while still ensuring accurate results?**
+performance of the connected clients while still ensuring accurate results?**
 
 
 ### What problems does this solve?
@@ -67,21 +76,12 @@ In urban areas, there are typically a lot of access points competing for the
 same radio frequencies. Some access points will automatically select their
 channel at random, some will try to do an exhaustive scan of the local area.
 Scanning can increase latency with as much as ten-fold in some cases
-[@ActiveScanningParameters].
+[@ActiveScanPerformance].
 
-Implementing my approach can help to minimize the package loss and latency
-introduced by interference, which is common to see in urban 2.4 GHz
-deployments where channel availability is generally low.
-
-By beig able to scan the network more often - _without affecting the
-connected clients_ - I hope that any future implementers can scan more often to
-select the best channel for their access point. Another possibility is for
+By being able to scan the network _without affecting the
+connected clients_ I hope that any future implementers are able to use scanning
+to select the best channel for their access point. Another possibility is for
 multiple access points to collaborate using this information.
-
-\todo{
-    This last paragraph with talk about usecase should be moved to the
-    discussion or conclusion.
-}
 
 
 Outline
@@ -107,5 +107,5 @@ of scanning in IEEE802.11 and how we can use scans from an access point.
  
  - **Future Work** - A walktrough of issues and ideas that future works can look at.
  
- - **Conclsion** - Conclusion based on the results and subsiquent discussion.
+ - **Conclsion** - Conclusion based on the results and subsequent discussion.
 
