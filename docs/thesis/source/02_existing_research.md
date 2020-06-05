@@ -156,9 +156,10 @@ These are the two typical use-cases found in the wild today [@WifiScanFaq]:
    is currently connected to, but with a better signal. This is typically
    used for mobile STAs to improve service while roaming.
 
-In addition to this, some access points have the ability to trigger a scan in
-order to figure out which channel might be the least congested in the area. With
-this information, the access point might choose to switch channel.
+In addition to this, some access points can trigger a scan in order to figure 
+out which channel might be the least congested in the area. Though these 
+implementations typically require the access point to stop serving clients while
+scanning and are only done when they're deployed.
 
 Lastly, mobile devices may also use IEEE802.11 beacons to enhance their
 positioning service by using a database of known access point poisitions such as
@@ -172,8 +173,8 @@ Differences between active and passive scanning
 
 While both active and passive scanning are means to achieve the same result,
 they have different impacts on the network and use differing amount of time
-to discover all nodes on the network. The impact of them in regards to
-discovery latency and network impact is widely studied.
+to discover all nodes on the network. The impact of them in regard to discovery
+latency and network impact is widely studied.
 
 
 ### Discovery time
@@ -181,7 +182,8 @@ discovery latency and network impact is widely studied.
 Even though both active and passive scanning will converge towards
 discovering all nodes in the network, there is a significant time-difference
 between these two approaches. This difference is especially significant in
-high density WLAN deployments.
+high density WLAN deployments because of increasted interference due to reighley
+and rice fading.
 
 In addition to this there is always going to be some variance in the
 discovery time due to the fact that there are always going to be large
@@ -226,21 +228,21 @@ channels (over 50% utilization), which typically exist in urban
 environments.
 
 This heavy utilization takes a special toll on real-time applications such as
-VoIP and games. Why? Well, there are two aspects to this: The client-side 
+VoIP and games. There are two aspects to this: The client-side 
 impact, and the network-wide impact.
 
 The client-side issues with active scans are quite apparent. In
-[@ActiveScanPerformance], they set up a client to run an active scan
-every minute. While running these active scans they were continuously pinging
-another host over the WLAN to measure the impact these active scans have on
-the latency. The result was that every minute, when the active scans was 
-initialized, a large spike in latency occurred. This spike had a tail of
+[@ActiveScanPerformance], they set up a client to run an active scan every 
+minute. While running these active scans they were continuously pinging another 
+host over the WLAN to measure the impact these active scans have on the latency.
+The result was that every minute, when the active scans was  initialized, a large
+spike in latency occurred (see {+@fig:probelatency}. This spike had a tail of
 latency that lasted a few seconds. This kind of latency spike is problematic,
 as it has an impact on real-time applications like games and VoIP.
 
 ![Scanning can have quite an effect on a client's latency. Every time a
- client scans, it's latency can increase as much as 10 fold.
- From [@ActiveScanPerformance]](static/probe_latency.png){ width=60%; #fig:probelatency }
+ client scans, it's latency can increase as much as 10 fold. This figure is from
+ [@ActiveScanPerformance]](static/probe_latency.png){ width=60%; #fig:probelatency }
 
 I hypothesize that this effect will be even stronger ones access points start
 scanning as well, seeing that this won't just effect the access point, but
@@ -265,11 +267,11 @@ Channel overlapping {#sec:channeloverlap}
 In addition to their findings about [Discovery Time](@sec:Discovery Time)) in
 [@APDiscovery] the authors also highlighted that due to channel overlapping,
 an STA that is scanning a channel $i$ has a propability of also discovering
-access points on channels up to two channels away.
+access points on channels up to two channels away ($i \pm2$).
 
-This can help with discovery of access points, since a scan can potentially
-discover as many as 40% of APs in adjacent channels. See {@fig:channeloverlap}
-for percentages of adjecent channels.
+It is possible that this can help with speeding up discovery of access points,
+since a scan can potentially discover as many as 40% of APs in adjacent channels. 
+See {@fig:channeloverlap} for percentages of adjecent channels.
 
 ![Percent of access points discovered in adjacent channels 
   (From [@APDiscovery])](static/channel_overlap.png){ #fig:channeloverlap }
