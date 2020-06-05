@@ -1,27 +1,27 @@
 Requirements and Problem Areas
 ==============================
 
-Simply scanning the local topology may sound like a simple endevour, but there
-are some caviats that need to be considered to get accurate results while still
-letting clients use the network freely.
+Scanning the local topology may sound like a simple endevour, but there are some
+caviats that need to be considered to get accurate results while still letting
+clients use the network freely.
 
-In this chapter we will take a quick look at conserns and problems that need
+In this chapter we will take a quick look at concerns and problems that need
 to be thought about when selecting and implementing strategies for scanning as
-well as requirements that have to be mett to keep a level of service for clients
+well as requirements that have to be met to keep a level of service for clients
 and access points.
 
 Quality of Service 
 ------------------
 
-The main job of an access point is to be an uplink to it's clients. When a user
+The main job of an access point is to be an uplink to its clients. When a user
 is using their computer they expect that they don't lose connectivety in the
 middle of a large download or in a voice meeting with an important client.
 Because of this, keeping a good _quality of service_ will be a major consern.
 
-But due to the nature of what we're trying to implement here, there are some
-conserns regarding keeping this quality of service.
+Due to the nature of what we're trying to implement here, there are some
+concerns regarding keeping this quality of service.
 
-For example when an access point switches channels, will all its clients will 
+For example when an access point switches channels, will all its clients 
 lose connection and have to re-discover and re-connect to the access point?
 If an access point scans channels for to long, the client might end up thinking
 that the connection is lost and try to go through a scan of its own to reconnect
@@ -35,13 +35,12 @@ at optimal times of day with little network traffic.
 
 In addition to this, if it is not possible for the access point to send data 
 while scanning, then another problem will arise: *How can we make sure that the
-client's are able to continue using the network when the clustering algorithm asks
-for the current status of the network?*.
+clients are able to continue using the network when a channel allocation 
+algorithm asks for the current status of the network?*.
 
-If we can't transmit og receive data during the whole duration of the scan,
-we might even need to schedule the discovery period to periods where the
-network is less utilized, or find a way to decrease the consecutive time that is
-spendt scanning.
+If we can't transmit or receive data during the whole duration of the scan, we 
+might need to schedule the discovery period to when the network is less utilized, 
+or find a way to decrease the consecutive time that is spent scanning.
 
 
 Scan Accuracy
