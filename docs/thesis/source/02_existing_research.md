@@ -59,31 +59,85 @@ has two components:
    if a probe response is received before MinCT.
 
 The min- and maxCT timer pair decides for how long the station will listen in on
-a channel after sending a probe request. 
+a channel after sending a probe request. See {+@fig:activescanexample} how an 
+example of how active scan works, where all of these concepts are incorporated.
+
 
 \begin{figure}
-    \begin{tikzpicture}[scale=1]
-        \node at (0,0) (start) {};
-        \node at (3,0) (min) {};
-        \node at (10,0) (max) {};
+    \begin{subfigure}[b]{\linewidth}
+        \begin{tikzpicture}[scale=1]
+            \node at (0,0) (start) {};
+            \node at (3.5,0) (min) {};
+            \node at (8,0) (max) {};
+            \node at (10,0) (end) {};
+            
+            \draw [|->] (start) -- (end);
+            
+            \draw [->] (start) -- (1, 2) node [midway, above, sloped] 
+                {\footnotesize Probe Request};
+            \draw [->] (1, 2) -- (3, 0) node [midway, above, sloped] 
+                {\footnotesize Probe Response (AP 1)};
+            \draw [->] (3, 2) -- (6, 0) node [midway, above, sloped] 
+                {\footnotesize Probe Response (AP 2)};
+            \draw [decorate, decoration={zigzag}] [->] 
+                (5, 2) -- (9, 0) node [midway, above, sloped] 
+                {\footnotesize Probe Response (AP 3)};
+            
+            \draw [decorate, decoration={brace, amplitude=10pt, mirror}] 
+                (start) -- (min) node [midway, yshift=-1.5em] {$MinCT$};
+            
+            \draw [decorate, decoration={brace, amplitude=10pt, mirror}] 
+                (min) -- (max) node [midway, yshift=-1.5em] {$MaxCT$};
+        \end{tikzpicture}
         
-        \draw [|->] (start) -- (max);
-        \draw [->] (start) -- (1, 2) node [midway, above, sloped] 
-            {\footnotesize Probe Request};
-        \draw [->] (2, 2) -- (4, 0) node [midway, above, sloped] 
-            {\footnotesize Probe Response (AP 1)};
-        \draw [->] (3, 2) -- (6, 0) node [midway, above, sloped] 
-            {\footnotesize Probe Response (AP 2)};
+        \caption{
+            A successfull scan where a probe response was recived before $MinCT$
+            ended. In this senario both AP1 and AP2 would be discovered, but
+            not AP3.
+        }
+        \label{fig:activescansuccess}
+    \end{subfigure}
+    
+    \begin{subfigure}[b]{\linewidth}
+        \begin{tikzpicture}[scale=1]
+            \node at (0,0) (start) {};
+            \node at (3.5,0) (min) {};
+            \node at (8,0) (max) {};
+            \node at (10,0) (end) {};
+            
+            \draw [|->] (start) -- (end);
+            
+            \draw [->] (start) -- (1, 2) node [midway, above, sloped] 
+                {\footnotesize Probe Request};
+            \draw [decorate, decoration={zigzag}] [->] 
+                (2, 2) -- (4, 0) node [midway, above, sloped] 
+                {\footnotesize Probe Response (AP 1)};
+            \draw [decorate, decoration={zigzag}] [->] 
+                (3, 2) -- (6, 0) node [midway, above, sloped] 
+                {\footnotesize Probe Response (AP 2)};
+            \draw [decorate, decoration={zigzag}] [->] 
+                (5, 2) -- (9, 0) node [midway, above, sloped] 
+                {\footnotesize Probe Response (AP 3)};
+            
+            \draw [decorate, decoration={brace, amplitude=10pt, mirror}] 
+                (start) -- (min) node [midway, yshift=-1.5em] {$MinCT$};
+            
+            \draw [decorate, decoration={brace, amplitude=10pt, mirror}] 
+                (min) -- (max) node [midway, yshift=-1.5em] {$MaxCT$};
+        \end{tikzpicture}
         
-        \draw [decorate, decoration={brace, amplitude=10pt, mirror}] 
-            (start) -- (min) node [midway, yshift=-1.5em] {$MinCT$};
-        
-        \draw [decorate, decoration={brace, amplitude=10pt, mirror}] 
-            (min) -- (max) node [midway, yshift=-1.5em] {$MinCT$};
-    \end{tikzpicture}
-\caption{A scenario where no probe response was resieved before $MinCT$. In
-         this case, no access points would be discovered because all responses
-         came after $MinCT$, and thus the $MaxCT$ period will never occur.}
+        \caption{
+            An unsuccessful scan where no access points are discovered. In this 
+            scenario, no access points would be discovered because all responses
+            came after $MinCT$, and thus the $MaxCT$ period will never occur.
+        }
+        \label{fig:activescanfail}
+    \end{subfigure}
+    
+    \caption{
+        Examples of active scanning, with both an successful and unsuccessful scan.
+    }
+    \label{fig:activescanexample}
 \end{figure}
 
 
