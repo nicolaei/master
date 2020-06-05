@@ -4,19 +4,19 @@ Scanning IEEE802.11 networks
 The aim of scanning the local IEE802.11 topology in this thesis is to be able
 to provide information about adjacent nodes to channel allocation algorithms.
 With this information any given channel allocation algorithm should be able to
-give the access point an optimal channel.
+give the access point a channel with the same or less congestion.
 
 In this chapter we will be exploring how a IEEE802.11 scan works and existing
 research on scanning strategies for IEE802.11 networks.
 
-The attonomy of a IEEE802.11 scan
+The anatomy of a IEEE802.11 scan
 ---------------------------------
 
 Scanning in IEEE802.11 [@IEEE802.11] is handled via management frames, and can
-be done in one of two ways: Active- or passive scanning.
+be done in one of two ways: active or passive scanning.
 
-Passive scanning, from a STA's perspective, is simply to listen for
-*beacon frames* that are sent out periodically by all APs. These frames contain
+**Passive scanning**, from a STA's perspective, is simply to listen for
+*beacon frames* that are sent out periodically by all APs. These frames contain:
 
  *  *A timestamp*; indicating when the frame was sent (according to the APs
     synchronization timer.
@@ -28,9 +28,9 @@ Passive scanning, from a STA's perspective, is simply to listen for
     it's SSID and more. Extensions to 802.11 has also typically added some
     information to this field.
 
-[^tu-definition]: TU (time unit) is a period of 1024p.
+[^tu-definition]: TU (time unit) is a period of 1024μs.
 
-Active scanning on the other hand is initiated by the STAs themselves. This
+**Active scanning** however, is initiated by the STAs themselves. This
 process contains two management frames *probe requests* and *probe responses*.
 
 The *probe request* is sent by an STA and either targets a single access point,
@@ -38,11 +38,11 @@ or broadcast to all APs. This is done by specifying the target APs SSID in
 the frame. Leaving the SSID field empty means that the frame is considered as
 a broadcast frame.
 
-*Probe responses* on the other hand are sent by access points that receive the
-*probe request*. These frames' content is almost identical to beacon frames,
-though they do contain some more information than the probe request's frames. 
-This information isn't really relevant for what I wish to accomplish in this
-thesis, so I won't outline it [^beacon-information].
+*Probe responses* are sent by access points that receive the *probe request*.
+These frames' content is almost identical to beacon frames, though they do 
+contain some more information than the probe request's frames.  This information
+isn't really relevant for what I wish to accomplish in this thesis, so I won't
+outline it [^beacon-information].
 
 [^beacon-information]: If you're interested in the rest of the information that
     can be found in a beacon frame, please consult [@802.11Handbook, p. 52-53].
@@ -51,12 +51,12 @@ The window in which the station that sent out the *probe request* is
 listening for *probe responses* is called the *scanning timer*. This timer
 has two components:
 
- * *Minimum Channel Time*: The minimum amount of time a station will listen to
-   the channel for a response from access points.
+ * *Minimum Channel Time (MinCT)*: The minimum amount of time a station will 
+   listen to the channel for a response from access points.
 
- * *Max Channel Time*: The maximum amount of time a station will listen to a
-   channel for a response from an access point. This timer only activates if a
-   probe response is received before MinCT.
+ * *Max Channel Time (MaxCT)*: The maximum amount of time a station will listen 
+   to a channel for a response from an access point. This timer only activates 
+   if a probe response is received before MinCT.
 
 The min- and maxCT timer pair decides for how long the station will listen in on
 a channel after sending a probe request. 
