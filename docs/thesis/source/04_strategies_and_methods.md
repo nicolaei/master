@@ -100,101 +100,113 @@ in previous research.
 }
 
 \begin{figure}
-    \begin{tikzpicture}[scale=1]
-        \node at (0,0) (start) {};
-        \node at (0,0) (ch1) {};
-        \node at (1,0) (ch2) {};
-        \node at (2,0) (ch3) {};
-        \node at (3,0) (ch4) {};
-        \node at (4,0) (ch5) {};
-        \node at (5,0) (ch6) {};
-        \node at (6,0) (ch7) {};
-        \node at (7,0) (ch8) {};
-        \node at (8,0) (ch9) {};
-        \node at (9,0) (ch10) {};
-        \node at (10,0) (ch11) {};
-        \node at (11,0) (end) {};
-        
-        \draw [|-|] (start) -- (end);
-        
-        \draw [decorate, decoration={brace, amplitude=10pt, mirror}] 
-            (ch1) -- (ch2) node [midway, yshift=-1.5em] {$CH 1$};
-        \draw [decorate, decoration={brace, amplitude=10pt}] 
-            (ch2) -- (ch3) node [midway, yshift=1.5em] {$CH 2$};
-        \draw [decorate, decoration={brace, amplitude=10pt, mirror}] 
-            (ch3) -- (ch4) node [midway, yshift=-1.5em] {$CH 3$};
-        \draw [decorate, decoration={brace, amplitude=10pt}] 
-            (ch4) -- (ch5) node [midway, yshift=1.5em] {$CH 4$};
-        \draw [decorate, decoration={brace, amplitude=10pt, mirror}] 
-            (ch5) -- (ch6) node [midway, yshift=-1.5em] {$CH 5$};
-        \draw [decorate, decoration={brace, amplitude=10pt}] 
-            (ch6) -- (ch7) node [midway, yshift=1.5em] {$CH 6$};
-        \draw [decorate, decoration={brace, amplitude=10pt, mirror}] 
-            (ch7) -- (ch8) node [midway, yshift=-1.5em] {$CH 7$};
-        \draw [decorate, decoration={brace, amplitude=10pt}] 
-            (ch8) -- (ch9) node [midway, yshift=1.5em] {$CH 8$};
-        \draw [decorate, decoration={brace, amplitude=10pt, mirror}] 
-            (ch9) -- (ch10) node [midway, yshift=-1.5em] {$CH 9$};
-        \draw [decorate, decoration={brace, amplitude=10pt}] 
-            (ch10) -- (ch11) node [midway, yshift=1.5em] {$CH 10$};
-        \draw [decorate, decoration={brace, amplitude=10pt, mirror}] 
-            (ch11) -- (end) node [midway, yshift=-1.5em] {$CH 11$};
-    \end{tikzpicture}
-    \caption{Representation of a full scan}
+    \begin{subfigure}[b]{\linewidth}
+        \begin{tikzpicture}[scale=1]
+            \node at (0,0) (start) {};
+            \node at (0,0) (ch1) {};
+            \node at (1,0) (ch2) {};
+            \node at (2,0) (ch3) {};
+            \node at (3,0) (ch4) {};
+            \node at (4,0) (ch5) {};
+            \node at (5,0) (ch6) {};
+            \node at (6,0) (ch7) {};
+            \node at (7,0) (ch8) {};
+            \node at (8,0) (ch9) {};
+            \node at (9,0) (ch10) {};
+            \node at (10,0) (ch11) {};
+            \node at (11,0) (end) {};
+            
+            \draw [|-|] (start) -- (end);
+            
+            \draw [decorate, decoration={brace, amplitude=10pt, mirror}] 
+                (ch1) -- (ch2) node [midway, yshift=-1.5em] {$CH 1$};
+            \draw [decorate, decoration={brace, amplitude=10pt}] 
+                (ch2) -- (ch3) node [midway, yshift=1.5em] {$CH 2$};
+            \draw [decorate, decoration={brace, amplitude=10pt, mirror}] 
+                (ch3) -- (ch4) node [midway, yshift=-1.5em] {$CH 3$};
+            \draw [decorate, decoration={brace, amplitude=10pt}] 
+                (ch4) -- (ch5) node [midway, yshift=1.5em] {$CH 4$};
+            \draw [decorate, decoration={brace, amplitude=10pt, mirror}] 
+                (ch5) -- (ch6) node [midway, yshift=-1.5em] {$CH 5$};
+            \draw [decorate, decoration={brace, amplitude=10pt}] 
+                (ch6) -- (ch7) node [midway, yshift=1.5em] {$CH 6$};
+            \draw [decorate, decoration={brace, amplitude=10pt, mirror}] 
+                (ch7) -- (ch8) node [midway, yshift=-1.5em] {$CH 7$};
+            \draw [decorate, decoration={brace, amplitude=10pt}] 
+                (ch8) -- (ch9) node [midway, yshift=1.5em] {$CH 8$};
+            \draw [decorate, decoration={brace, amplitude=10pt, mirror}] 
+                (ch9) -- (ch10) node [midway, yshift=-1.5em] {$CH 9$};
+            \draw [decorate, decoration={brace, amplitude=10pt}] 
+                (ch10) -- (ch11) node [midway, yshift=1.5em] {$CH 10$};
+            \draw [decorate, decoration={brace, amplitude=10pt, mirror}] 
+                (ch11) -- (end) node [midway, yshift=-1.5em] {$CH 11$};
+        \end{tikzpicture}
+        \caption{Representation of a full scan}
+    \end{subfigure}
     
-    \begin{tikzpicture}[scale=1]
-        \node at (0,0) (start) {};
-        \node at (0,0) (ch1) {};
-        \node at (1,0) (ch3) {};
-        \node at (2,0) (ch5) {};
-        \node at (3,0) (ch7) {};
-        \node at (4,0) (ch9) {};
-        \node at (5,0) (ch11) {};
-        \node at (6,0) (ch11_end) {};
-        \node at (11,0) (end) {};
-        
-        \draw [|-|] (start) -- (end);
-        
-        \draw [decorate, decoration={brace, amplitude=10pt, mirror}] 
-            (ch1) -- (ch3) node [midway, yshift=-1.5em] {$CH 1$};
-        \draw [decorate, decoration={brace, amplitude=10pt}] 
-            (ch3) -- (ch5) node [midway, yshift=1.5em] {$CH 3$};
-        \draw [decorate, decoration={brace, amplitude=10pt, mirror}] 
-            (ch5) -- (ch7) node [midway, yshift=-1.5em] {$CH 5$};
-        \draw [decorate, decoration={brace, amplitude=10pt}] 
-            (ch7) -- (ch9) node [midway, yshift=1.5em] {$CH 7$};
-        \draw [decorate, decoration={brace, amplitude=10pt, mirror}] 
-            (ch9) -- (ch11) node [midway, yshift=-1.5em] {$CH 9$};
-        \draw [decorate, decoration={brace, amplitude=10pt}] 
-            (ch11) -- (ch11_end) node [midway, yshift=1.5em] {$CH 11$};
-    \end{tikzpicture}
-    \caption{Representation of a selective scan}
+    \begin{subfigure}[b]{\linewidth}
+        \begin{tikzpicture}[scale=1]
+            \node at (0,0) (start) {};
+            \node at (0,0) (ch1) {};
+            \node at (1,0) (ch3) {};
+            \node at (2,0) (ch5) {};
+            \node at (3,0) (ch7) {};
+            \node at (4,0) (ch9) {};
+            \node at (5,0) (ch11) {};
+            \node at (6,0) (ch11_end) {};
+            \node at (11,0) (end) {};
+            
+            \draw [|-|] (start) -- (end);
+            
+            \draw [decorate, decoration={brace, amplitude=10pt, mirror}] 
+                (ch1) -- (ch3) node [midway, yshift=-1.5em] {$CH 1$};
+            \draw [decorate, decoration={brace, amplitude=10pt}] 
+                (ch3) -- (ch5) node [midway, yshift=1.5em] {$CH 3$};
+            \draw [decorate, decoration={brace, amplitude=10pt, mirror}] 
+                (ch5) -- (ch7) node [midway, yshift=-1.5em] {$CH 5$};
+            \draw [decorate, decoration={brace, amplitude=10pt}] 
+                (ch7) -- (ch9) node [midway, yshift=1.5em] {$CH 7$};
+            \draw [decorate, decoration={brace, amplitude=10pt, mirror}] 
+                (ch9) -- (ch11) node [midway, yshift=-1.5em] {$CH 9$};
+            \draw [decorate, decoration={brace, amplitude=10pt}] 
+                (ch11) -- (ch11_end) node [midway, yshift=1.5em] {$CH 11$};
+        \end{tikzpicture}
+        \caption{Representation of a selective scan}
+    \end{subfigure}
 
-    \begin{tikzpicture}[scale=1]
-        \node at (0,0) (start) {};
-        \node at (0,0) (ch1) {};
-        \node at (1,0) (ch1_end) {};
-        \node at (3,0) (ch2) {};
-        \node at (4,0) (ch2_end) {};
-        \node at (6,0) (ch3) {};
-        \node at (7,0) (ch3_end) {};
-        \node at (9,0) (ch4) {};
-        \node at (10,0) (ch4_end) {};
-        \node at (11,0) (end) {};
-        
-        \draw [->] (start) -- (end);
-        
-        \draw [decorate, decoration={brace, amplitude=10pt, mirror}] 
-            (ch1) -- (ch1_end) node [midway, yshift=-1.5em] {$CH 1$};
-        \draw [decorate, decoration={brace, amplitude=10pt}] 
-            (ch2) -- (ch2_end) node [midway, yshift=1.5em] {$CH 2$};
-        \draw [decorate, decoration={brace, amplitude=10pt, mirror}] 
-            (ch3) -- (ch3_end) node [midway, yshift=-1.5em] {$CH 3$};
-        \draw [decorate, decoration={brace, amplitude=10pt}] 
-            (ch4) -- (ch4_end) node [midway, yshift=1.5em] {$CH 4$};
-    \end{tikzpicture}
-    \caption{Representation of a smooth scan. 
-             Scans continue after the end of the figure.}
+    \begin{subfigure}[b]{\linewidth}
+        \begin{tikzpicture}[scale=1]
+            \node at (0,0) (start) {};
+            \node at (0,0) (ch1) {};
+            \node at (1,0) (ch1_end) {};
+            \node at (3,0) (ch2) {};
+            \node at (4,0) (ch2_end) {};
+            \node at (6,0) (ch3) {};
+            \node at (7,0) (ch3_end) {};
+            \node at (9,0) (ch4) {};
+            \node at (10,0) (ch4_end) {};
+            \node at (11,0) (end) {};
+            
+            \draw [->] (start) -- (end);
+            
+            \draw [decorate, decoration={brace, amplitude=10pt, mirror}] 
+                (ch1) -- (ch1_end) node [midway, yshift=-1.5em] {$CH 1$};
+            \draw [decorate, decoration={brace, amplitude=10pt}] 
+                (ch2) -- (ch2_end) node [midway, yshift=1.5em] {$CH 2$};
+            \draw [decorate, decoration={brace, amplitude=10pt, mirror}] 
+                (ch3) -- (ch3_end) node [midway, yshift=-1.5em] {$CH 3$};
+            \draw [decorate, decoration={brace, amplitude=10pt}] 
+                (ch4) -- (ch4_end) node [midway, yshift=1.5em] {$CH 4$};
+        \end{tikzpicture}
+        \caption{
+            Representation of a smooth scan. 
+            Scans continue after the end of the figure.
+        }
+    \end{subfigure}
+    
+    \caption{
+        Representation of the three scanning strategies. The X-axis is time.
+    }
 \end{figure}
 
 
