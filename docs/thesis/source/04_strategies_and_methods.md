@@ -45,14 +45,17 @@ client's performance.
 ### Access point measurements 
 
 While client latency and goodput from the chosen algorithms are important, it
-is also important to make sure that we're discovering as many access points as
-possible, as accurately as possible. To acomplish this we will have to measure 
-the probability of discovery against the percived strength of the signal.
+is also important to make sure that we're discovering all access points that are 
+in proximity to possibly be able to affect the performance of our access point.
+To acomplish this we will have to measure the probability of discovery against 
+the percived strength of the signal.
 
 It's worth noting that the less time we're spending on _active_ scanning, the
 smaller the chance is that we will be missing packets due to buffer overflows
-on the client [@ActiveScanPerformance]. To measure this, we will be looking
-at the total time spend scanning for access points.
+on the client [@ActiveScanPerformance]. This is because the clients have to queue
+up messages that didn't get an ACK from the recipient when using TCP, or packets
+that simply gets dumped when using UDP. To measure this, we will be looking at 
+the total time spend scanning for access points.
 
 
 Discovery strategies
@@ -69,11 +72,27 @@ Any given scanning algorithm must find the best trade-off between:
  
  *  The discovery of at least one candidate AP after a full scan
 
-An ideal scanning algorithm seeks to discover the maximum number of APs in
-the shortest period [@SelectingScanningParameters].
- 
-I'll be testing multiple discovery strategies that has been outlined in
-various research articles in this thesis.
+For clients, an ideal scanning algorithm seeks to discover the maximum number of 
+APs in the shortest period [@SelectingScanningParameters]. This is due to
+the mobile nature of clients. Take, for example, a scenario where a client is 
+moving down a hallway. If the conenction to the current access point gets too
+poor, and it needs to roam to the next one a scan is triggered. In this case, 
+a scanning algorithm that is to slow might cause the client to not discover any
+access points before it loses the connection.
+
+However, for access points this mobility limitation does not cause an issue.
+Access points are not mobile [^mobile-access-points], and for the problem that
+this thesis aims to solve speed is not as important as the accuracy of the scan.
+Because of this, we don't have to consider the time spent looking for access points.
+
+[^mobile-access-points]: There is an exception here: Mobile phones can work as
+    hotspots. This is a typical usecase in cafes and similar. However, this edge
+    case is out of the scope of this thesis. Besides, these mobile hotspots are
+    typically only around for a limited amount of time. I.e. while a guest is
+    at a cafe.
+
+Now, we will be looking at multiple discovery strategies that has been outlined
+in previous research.
  
 \todo{
     Write a section about each of the strategies and outline their apparent
@@ -193,6 +212,8 @@ order and without pause.
 
 According to [@APDiscovery], some percentage of access points in adjacent
 channels will be discovered while in a given channel due to channel overlapping.
+In addition to this, most 2.4 GHz Wi-Fi deployments only operate on the three
+non-overlapping channels; 1, 6 and 11.
 
 Seeing that our main goal is to find access points that are neighbouring the
 current access point, it's possible that we can find many of these while
@@ -230,14 +251,13 @@ Parameters
 ----------
 
 In addition to changing up the strategies, there are also a few parameters
-that can be changed within every strategy for more optimal results.
+that can be changed within every strategy for more optimal results. These 
+parameters might be set adaptively or statically, depending on the operator's wishes.
 
-These parameters might be set adaptively or statically, depending on the
-operator's wish.
-
-Based on previous research, the following parameters are the most impactfull
-when it comes to time and accuracy. In addition to this, I assume that these
-will have some sort of impact on a client's goodput.
+Based on previous research ([@APDiscovery] [@ProactiveScan] 
+[@SelectingScanningParameters]), the following parameters are the most impactfull
+when it comes to time and accuracy. In addition to this, it's reasonable to
+assume that these will have some sort of impact on a client's goodput.
 
  *  *Minimum number of scans*: How many scans (of the whole channel sequence)
     should be performed before the scan is finished.
@@ -247,6 +267,8 @@ will have some sort of impact on a client's goodput.
  *  *Smooth scan group size*: The number of channels to scan per period
  
  *  *Scanning Trigger*: When should the scans start?
+ 
+ *  *Max and min channel time*: How long to stay on each channel
 
 
 ### Minimum number of scans
@@ -286,11 +308,6 @@ start scanning at the same time, which would both congest the medium and since
 they're all listening and probably not replying, we could end up not discovering
 any other access point.
 
-\todo{
-    I'm not quite sure if access points don't reply while listening for
-    responses. I'll have to verify this.
-}
-
 In typical client handoff schemes, the scan is triggered when the RSSI to the
 connected access point is low or when trying to find a network to connect to.
 Both of these triggers don't exist when searching from an access point, because
@@ -322,18 +339,12 @@ Some possible methods are:
     the same time.
     
     In addition to this, only scanning when there is low traffic could risk
-    getting inaccurate results because other access points might be turned off
-    or getting a different signal strength due to lower traffic.
-    
-\todo{
-    I'm not quite sure about what I'm saying about different signal strength
-    here. Does it actually work like that?
-}
+    getting inaccurate results because other access points might be turned off.
 
 
-[^turned-off]: Some consumer access points have the ability to be turned off
-               during a specified period. For example in households where
-               parents wish to limit access to the internet during the night.
+[^turned-off]: Some consumer access points are can turned off during a specified
+               period. For example in households where parents wish to limit 
+               access to the internet during the night.
 
 
 ### Min and Max Channel Time
