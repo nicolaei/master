@@ -18,16 +18,17 @@ Guiding points while writing:
    talked about in the introduction?
 -->
    
-Access Point Scan results
+Access Point Scan Results
 -------------------------
 
-As mentioned in [Discovery strategies] in an earlier chapter, the access points 
-measure the amount of times an access point was discovered against it's percived
-strenght.
+As mentioned in [Discovery strategies], the access points measure the amount of
+times unique access points were discovered against their percived strenght.
 
 In this section you'll see the results of the three main different
 discovery strategies and how well they picked up the access points that are in 
-its proximity.
+its proximity. For all discovery graphs you'll see two curves overlayed. These
+show the expected _Rice_ and _Reighley_ fading, which was talked about in [Scanning
+IEEE802.11 networks].
 
 In the next parts we'll take a look at the following measurement runs:
 
@@ -43,26 +44,28 @@ In the next parts we'll take a look at the following measurement runs:
  
  * Smooth Scan (1200ms intervals)
  
- 
-<!-- TODO: Write about removing results below 2 discoveries. -->
-
+For each of these measurement runs about 100 scans were conducted to be able to
+get a good view of how scanning affects both clients performance and access point 
+result. In addition to this, we will be using _full scan_ as our baseline due to
+it commonly being used in modern Wi-Fi deployments.
 
 ### Discovery Accuracy
 
 #### Full Scan { .unnumbered }
 
-To start off, we have our base-line: the full scan. As mentioned in previous
+To start off, we have our baseline: the full scan. As mentioned in previous
 chapters. This scan type is, as expected, discovering a lot of access points.
-See figure {@fig:fullscanresults} and table {@tbl:amountfull}.
+See figure {@fig:fullscanresults} and table {@tbl:amountfull}. The results from
+this scan will be used for comparing both selective scan and smooth scan. 
 
 Scan Type                 **AP 0**     **AP 1**     **AP 2**
 ---------------------     --------     --------     --------
 **Full Scan**                54           69           61     
 
-Table: Access points discovered accross all scans accross the 
-       different access points for full scan. {#tbl:amountfull}
+Table: Unique Access points discovered accross 100 full scans for APs 1, 2 and 3. 
+       {#tbl:amountfull}
        
-![Access Points Discovered for a "full" scan](static/ap_full_scan.png){ #fig:fullscanresults }
+![Access Points Discovered for a "full" scan](static/ap_full_scan.png){#fig:fullscanresults}
 
 Overall we see that signals without line of sight nicely follows the reighley 
 curve. Though there are also some access points that have a high chance of 
@@ -84,12 +87,12 @@ access points but took less time overall. The first test, scanning channels 1,
 were probably on a separate channel during our scan.
 
 An alternative selective scan implementation, which results are found in figure
-{@fig:selectivescanresultsalt}, scans every other channel instead. This also takes
+{@fig:selectivescanresult}, scans every other channel instead. This also takes
 shorter time than the other discovery methods, but still does not discover
 all the access points avaliable.
 
-Out of all the scanning methods, selective scan is thus the least performant, but
-has a significant speed increase.
+Out of all the scanning methods, selective scan is thus the method that gives
+the worst results, but it has a significant speed increase.
 
 In section {@sec:channeloverlap} we took a look at how channel overlapping might 
 help our results in the selective scanning, but it seems like this might not be
@@ -110,24 +113,28 @@ Table: Access points discovered accross all scans accross the different
        access points for selective scan. { #tbl:amountselective }
 
 \begin{figure}
-  \centering
-  
-  \begin{subfigure}{.75\textwidth}
     \centering
-    \includegraphics[width=\textwidth]{static/ap_selective_main_scan.png}
-    \label{fig:selectivescanresultsmain}
-    \caption{Channels 1, 6 and 11}
-  \end{subfigure}
-  
-  \begin{subfigure}{.75\textwidth}
-    \centering
-    \includegraphics[width=\textwidth]{static/ap_selective_alt_scan.png}
-    \label{fig:selectivescanresultsalt}
-    \caption{Channels 1, 3, 5, 7, 9 and 11}
-  \end{subfigure}
-  
-  \label{fig:selectivescanresult}
-  \caption{Access points discovered for selective scan accross all three access points}
+      
+    \begin{subfigure}[b]{\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{static/ap_selective_main_scan.png}
+        
+        \caption{Scanning channels 1, 6 and 11}
+        \label{fig:selectivescanresultsmain}
+    \end{subfigure}
+      
+    \begin{subfigure}[b]{\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{static/ap_selective_alt_scan.png}
+        
+        \caption{Scanning channels 1, 3, 5, 7, 9 and 11}
+        \label{fig:selectivescanresultsalt}
+    \end{subfigure}
+      
+    \caption{
+        Access points discovered for selective scan accross all three access points
+    }
+    \label{fig:selectivescanresult}
 \end{figure}
 
 
@@ -161,33 +168,36 @@ Interval         **AP 0**     **AP 1**     **AP 2**
 Table: Access points discovered accross all scans accross the 
        different access points for smooth scan. {#tbl:amountsmooth}
 
-\begin{figure}[p]
-  \centering
-  
-  \begin{subfigure}[b]{.75\textwidth}
+\begin{figure}
     \centering
-    \includegraphics[width=\textwidth]{static/ap_smooth_300_scan.png}
-    \label{fig:smoothscanresults300}
-    \caption{300ms interval}
-  \end{subfigure}
-  
-  \begin{subfigure}[b]{.75\textwidth}
-    \centering
-    \includegraphics[width=\textwidth]{static/ap_smooth_600_scan.png}
-    \label{fig:smoothscanresults600}
-    \caption{600ms interval}
-  \end{subfigure}
-  
-  \begin{subfigure}[b]{.75\textwidth}
-    \centering
-    \includegraphics[width=\textwidth]{static/ap_smooth_1200_scan.png}
-    \label{fig:smoothscanresults1200}
-    \caption{1200ms interval}
-  \end{subfigure}
-  
-  \label{fig:smoothscanresults}
-  \caption{Access points discovered for smooth scan results
-           accross all three access points}
+      
+    \begin{subfigure}[b]{\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{static/ap_smooth_300_scan.png}
+        
+        \caption{300ms interval}
+        \label{fig:smoothscanresults300}
+    \end{subfigure}
+      
+    \begin{subfigure}[b]{\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{static/ap_smooth_600_scan.png}
+        
+        \caption{600ms interval}
+        \label{fig:smoothscanresults600}
+    \end{subfigure}
+      
+    \begin{subfigure}[b]{\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{static/ap_smooth_1200_scan.png}
+        
+        \caption{1200ms interval}
+        \label{fig:smoothscanresults1200}
+    \end{subfigure}
+      
+    \caption{Access points discovered for smooth scan results
+               accross all three access points}
+    \label{fig:smoothscanresults}
 \end{figure}
 
 
@@ -237,44 +247,22 @@ more similar to each other.
 
 ### Interpreting and analyzing the results
 
-\todo{
-    This section needs to be rewritten. It was written before the above sections
-    were written, so it doesn't fit in with the overall chapter right now.
-}
-
-The five scanning algorithm result-sets for the access points shows how the scans
+The six scanning algorithm result-sets for the access points shows how the scans
 picked up different access points. As you might notice, the strength of the signal
 isn't everything that matters for being able to discover an access point. Two access
-points that have the same average signal strength might be discovered less.
+points that have the same average signal strength might not be discovered the
+same amount of times.
 
-This phenomenon is most likely because access points that are further away might
-be obstructed while others are not. This fits nicely with _Rice_ and _Rayleigh
-Fading_ as all measurements have taken place in an urban environment. This will
-be clearer once we look at the probability of discovery graphs, where both rice
-and raleigh curves have been added to further show this.
+This phenomenon is most likely because some access points that are might be
+obstructed while others are not, which fits nicely with _Rice_ and _Rayleigh
+Fading_ as all measurements have taken place in an urban environment. The 
+overlayed Rice and Rayleigh curves in the graphs shows this.
 
 As expected, the different discovery methods take different amounts of time to
 execute. These findings reflect findings of previous studies, for example where
 smooth scanning is slower than alternative discovery methods. Though in the end,
 this doesn't have an impact on our results, but it is worth to highlight in cases
 where this thesis is used in solutions where measurement time is critical.
-
-\todo{
-    While I believe that this statement is true, this has to be confirmed when I have
-    the graph. Confirm that the timing has no effect on the actual results by looking
-    at the final graph.
-}
-
-
-
-
-### Comparing the results
-
- *   Compare the results that were shown off above
-
-     *   Which results are most promising?
-
-     *   Are any of them worse than the others?
 
 
 Client Results
@@ -374,3 +362,22 @@ the tests or do to RF noise.
 ![Client latency for a "smooth" scan with 1200ms intervals](static/cli_smooth_1200_latency.png){#fig:clismooth1200laten}
 
 ![Client goodput for a "smooth" scan with 600ms intervals](static/cli_smooth_1200_goodput.png){#fig:clismooth1200good}
+
+
+### Interpreting and analyzing the results
+
+* Why are clients largly unaffected by the scans?
+
+    * Probably due to the timing. Backed up by the results in 
+      [@SelectingScanningParameters], [@ProactiveScan], and [@PracticalSchemes].
+      
+* Why are selective scans way less effected?
+
+    * The linear time difference.
+    
+    * Future work can confirm how long the time difference is.
+
+* Why are goodput affected by the latency?
+
+    * Because goodput and troughput is a function of data delivered over X time.
+
