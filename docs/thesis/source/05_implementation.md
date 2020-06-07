@@ -27,10 +27,10 @@ due to channel overlapping.
  *  **Scanning channels 1, 6 and 11**: These are the only channels that don't
     overlap with each other in the normal 2.4 GHz space.
  
- *  **Scanning every alternating channel**: If scanning every alternating
-    channel is feasible, it might halve our total scanning time seeing that
-    the time to scan is proportional to the amount of channels scanned
-    [@SeamlessHandoff].
+ *  **Scanning every alternating channel**: This means scanning channels 1, 3, 5,
+    7, 9, and 11. If scanning every alternating channel is feasible, it might 
+    halve our total scanning time seeing that the time to scan is proportional 
+    to the amount of channels scanned [@SeamlessHandoff].
 
 
 ### Smooth Scanning
@@ -79,8 +79,7 @@ Hardware and dependencies
 -------------------------
 
 To do the actual measurements, I will be using Raspberry Pi 4 Model B (4 GB) as
-make-shift access points and clients. The RPi 4 has a built in Wi-Fi antenna 
-which supports both 2.4 and 5 GHz.
+make-shift access points and clients.
 
 Both clients and the access points are using Raspian 10 (Buster), which are based
 on the popular Linux distribution Debian (Buster).
@@ -127,10 +126,10 @@ To do the actual measurements, I will be using:
 ### Latency and goodput measurement
 
 To measure latency and goodput a `socket` server is set up on the access points,
-which the client connects to over UDP. UPD was selected to avoid potential backoff
-from an TCP implementation. Packets are sent as soon as the channel is avaliable
-for aditional sends. Each packet is numbered to make sure that timing is matched
-to the correct packet.
+which the client connects to over UDP. UDP was selected to avoid potential backoff
+from an TCP implementation. Packets are sent from the client as soon as the 
+channel is avaliable for aditional data. Each packet is numbered to make sure 
+that timing is matched to the correct packet.
 
 By only checking latency and goodput between the client and access point, instead
 of a remote host, we make sure that only the connection between the two nodes
@@ -144,10 +143,10 @@ Scans are triggered at 2 minute intervals and use `iw`, a linux tool to show
 and manipulate wireless devices and their configuration [@iw], to initiate and
 gather information about the scans.
 
-To see how performat the scanning algorithms were, multiple scans were conducted
-over the course of a few hours. Discovered access points with less than 2 results
-have been discarded as these were typically mobile access-points that passed by
-the measuring environment.
+To see how performant the scanning algorithms were, multiple scans were conducted
+over the course of a few hours. Discovered access points with less than two
+discoveries over the total scanning period  have been discarded as these were 
+typically mobile access-points that passed by the measuring environment.
 
 
 Methodic problems
@@ -167,7 +166,7 @@ scanning).
 
 Due to this, programatic corelation between when a scan occured and the resulting
 latency proved problematic. To leviate this, in the results I will be manually
-corelating the results. Furture works might be able to leviate this problems by
+corelating the results. Future works might be able to leviate this problems by
 keeping all access points and clients connected with an uplink to sync to an NTP
 server or use hardware that has an hardware clock.
 
