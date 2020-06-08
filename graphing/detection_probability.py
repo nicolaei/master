@@ -90,12 +90,15 @@ def detection_probability(
     ap_probabilities["Signal Strength (dB)"] = \
         dbm_to_snr(ap_probabilities["Signal Strength (dB)"])
 
-    plt.figure(figsize=(20, 12))
+    fig = plt.figure(figsize=(20, 12))
 
     plt.scatter(
         x=ap_probabilities["Signal Strength (dB)"],
         y=ap_probabilities["Probability of Discovery"],
     )
+
+    plt.xlabel("Signal Strength (dB SNR)")
+    plt.ylabel("Probability of Discovery")
 
     x = numpy.linspace(stats.rayleigh.ppf(0.1), stats.rayleigh.ppf(0.99), 100)
 
