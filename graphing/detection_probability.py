@@ -95,6 +95,7 @@ def detection_probability(
     plt.scatter(
         x=ap_probabilities["Signal Strength (dB)"],
         y=ap_probabilities["Probability of Discovery"],
+        label="Discovered Access Point"
     )
 
     plt.xlabel("Signal Strength (dB SNR)")
@@ -104,10 +105,25 @@ def detection_probability(
 
     plt.plot(
         numpy.linspace(0, 60, 100),
-        stats.rayleigh.cdf(x, loc=0.48, scale=0.8)
+        stats.rayleigh.cdf(x, loc=0.48, scale=0.8),
+        "y",
+        label="Rayleigh",
+    )
+
+    bessel = 0.1
+    x = numpy.linspace(
+        stats.rice.ppf(0.1, b=bessel), stats.rice.ppf(0.99, b=bessel), 100
+    )
+
+    plt.plot(
+        numpy.linspace(0, 60, 100),
+        stats.rice.cdf(x, loc=0.9, b=bessel, scale=0.4),
+        "r",
+        label="Rice"
     )
 
     plt.suptitle(
         f"Probability of discovery ({title})"
     )
+    plt.legend()
     plt.show()
