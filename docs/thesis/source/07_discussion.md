@@ -14,29 +14,31 @@ applications and research.
 Increasing accuracy with multiple scans
 ---------------------------------------
 
-* Having multiple passes of the scanning algorithm will improve the amount of
-  access points discovered.
-  
-* Figuring out how many scans are needed seems to depend on ho
+As we've seen from the [Access Point Scan Results], an AP is not guaranteed to
+be discovered with a single scan [^fading]. Thus, it neccesary to have multiple 
+scan passes to increase the likelyhood of discovering all access points that 
+needs to be taken in account when choosing a channel.
 
-* From the results, we can see that even access points with high signal strength
-  might have a low discovery rate due to reighley fading.
- 
-    * These access points might be a good idea to avoid conflicts with, as they
-      might cause trouble the times they do actually show up.
-    
-        * Hidden terminal problem?
-    
-* Multiple scans can cause more performance problems for clients if the wrong
-  discovery method is utilized.
-  
-    * Make sure that you're using the right scanning method for your 
+[^fading]: As discussed in earlier chapters and seen in the results, the curves 
+that determine the likelyhood of discovery can be explained with the _Reighley_ 
+and _Ricean_ fading models.
 
-    * This is a nice segway into next subsection
+The amount of passes that needs to be run needs to be determined on a per deployment
+basis. The characterisitiscs of the local radio environment for every deployment
+might vary slightly and there is a performance-to-accuracy benifit that needs
+to be accounted for; Is it most important to not disturb clients or to get a
+detailed image of the local network?
+
+However, it is worth noting that scanning multiple times might cause an even
+more noticable negative impact on clients if a non-optimal scanning strategy such 
+as full scan is used. Multiple stutters can become rather notisable and annoying
+for users. To leviate this, an implementation can either spread the scan pases
+over a longer time period, or even better: utilize a more optimal scanning strategy
+such as smooth scanning.
 
 
-Temporal spread of channel scanning
------------------------------------
+Temporal spread of channel scanning with smooth scan
+----------------------------------------------------
 
 As hyphotezised, spreading the scanning of channels temporally by adding a
 backoff period between each channel proved to keep client latency low, while
