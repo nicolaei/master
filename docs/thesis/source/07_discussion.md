@@ -11,7 +11,7 @@ that has been presented, as well as how these discoveries might be used in futur
 applications and research. 
 
 
-Increasing accuracy with multiple scans
+Increasing accuracy with multiple scans {#sec:multiplescans}
 ---------------------------------------
 
 As we've seen from the [Access Point Scan Results], an AP is not guaranteed to
@@ -59,36 +59,43 @@ Though all in all, these results do seem to reflect nicely on the problem statem
 that was defined in the introduction. It is possible to scan the wireless network
 without affecting the clients.
 
-### Access Point Accuracy
+### Scan accuracy and performance
 
-As shown in the resutls, the discovery accuracy of the smooth scan was comparable
+As shown in the results, the discovery accuracy of the smooth scan was comparable
 to the full scan implementation. This, together with the fact that smooth scan 
 had a minimal impact on the client's performance, this strategy seems like a good 
 way to conduct scans from access points.
- 
- * Smooth scan has comparable results to full scan in relation to amount of
-   neighbouring access points discovered.
-   
-    * Anecdotally, most applications of access points doesn't require a the scan
-      results to be quick. In clients, this requirements is there because mobile
-      devices need to find a new access point while on the move. Having a 20-30
-      second gap where there is no connection is not acceptable in those situations.
-      
-    * It would however not be a good idea to spread the scans over a to long
-      timespan, even though it is possible. This is because that if the
-      environment was to change
-      
-    * *Weakness of smooth scan*: In situations where there are a lot of mobile
-      access points (for example in a cafe or in an outdoors environment), the
-      scan might get corrupted data if the scan goes on for too long. Mobile
-      access points might come in to view for a few seconds. 
-      
-        * Due to this, the access point might want ****to do multiple scans before
-          switching channels to get a more accurate reading of the local network.
-          
-            * This should not affect clients, as we have discovered, smooth scanning
-              from an access point has minimal impact on the clients that are
-              connected to it.
+
+\todo{
+    The argument in the paragraph below feels kinda week.
+}
+
+However, the scans might not show a correct picture of the local environment if
+there are a lot of mobile access points in one location. For example at a cafe 
+or outdoors. The data from the scan might show a large amount of mobile access
+points, and a possible channel selection might be done based on an environment
+that might not exist a few hours later. This can probably be leviated by scanning
+and switching channels more often, i.e. every hour.
+
+In addition to the accuracy of the results, the time to complete a complete scan
+was also recorded in the tests. Smooth scan was the slowest of the three purposed
+strategies, but seeing that these scans are done from an access point that won't
+be moving, it shouldn't be a problem.
+
+There is an edge case for mobile hotspots, however. Since these access points
+are able to move, they need to keep the time to scan lower. In a previous study
+on mobile hotspots in urban environments of $50 APs/km^2$, it was found that for 
+a mobile hotspot moving at $16.2 km/h$, $32.4 km/h$, $64.8 km/h$ or $97.2 km/h$ 
+the optimal scanning periods were 10, 7, 5 or 4 seconds respectively 
+[@MobileHotspots]. These timings are well within the measured times of a single 
+pass of a smooth scans, but if an implementation chose to run with multiple scans,
+as argued in section {@sec:multiplescans}, it might become a problem.
+
+However, it could also be argued that these devices do not benefit from actively
+switching between channels, as their environment is constantly changing. 
+Especially for mobile devices where battery capacity is limited. Though this is
+out of scope for this thesis and should probably be looked into by future research.
+
 
 
 ### On the issue of time
