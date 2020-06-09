@@ -366,18 +366,28 @@ the tests or do to RF noise.
 
 ### Interpreting and analyzing the results
 
-* Why are clients largly unaffected by the scans?
+We've now looked at how the six different scans have affected the clients. As
+expected, the full scan is the worst strategy to utilize from the clients
+point of view. It ends up disturbing the client's performance in such a manner
+that it would be obvious to any real-time application users.
 
-    * Probably due to the timing. Backed up by the results in 
-      [@SelectingScanningParameters], [@ProactiveScan], and [@PracticalSchemes].
-      
-* Why are selective scans way less effected?
+As we've seen, the selective scan strategies gets shorter and lower spikes of
+latency than the full scan. However, the smooth scans ends up stealing the 
+show with what looks like no latency introduced by the scanning, regardless of 
+parameters used.
 
-    * The linear time difference.
-    
-    * Future work can confirm how long the time difference is.
+This reduction of client latency nicely matches what we've come to expect from
+the studies on how clients are affected when they scan ([@PracticalSchemes]), 
+as layed out in previous chapters. These results show that with shorter interuptions, 
+comes less latency. For smooth scanning this reduced interuption comes from
+the fact that there is a break between every channel scanned, while the selective
+scan achieved the shorter interuption time by just scanning fewer channels.
 
-* Why are goodput affected by the latency?
+\todo{
+    I'm not to sure about this paragraph below. Feels kinda tacked on.
+    Not really sure how to add meat to it. Should I just remove it?
+}
 
-    * Because goodput and troughput is a function of data delivered over X time.
-
+We can also dissern that the goodput dips can affect non-realtime applications,
+such as video on-demand where the user can end up with buffering.
+ 
