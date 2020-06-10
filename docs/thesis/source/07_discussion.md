@@ -108,9 +108,21 @@ out of scope for this thesis and should probably be looked into by future resear
 
 
 ### The impact of multiple clients
-    
- * More research should probably be done with a large amount of clients to
-   verify that these results are able to scale.
+
+With few devices avaliable, it wasn't possible to test the impact of multiple
+clients for each of the scanning algorithms, but it's likely that introducing
+more clients can increase the impact of the scanning algorithm due to more 
+clients have to be able to transmit their data within the period between channel
+scans.
+
+No difference in performance was shown between the 300ms, 600ms or 1200ms results
+during the tests. It is likely that differences will start to show when multiple
+clients are connected to the same access point. Meaning that the smooth scan
+interval needs to be adjusted based on the amount of clients connected.
+
+Unfortunately it is not possible to confirm these claims based on the data from
+this thesis, so future work has to confirm how multiple connected clients
+impact the scan results.
 
 
 ### In a 5 GHz environment
