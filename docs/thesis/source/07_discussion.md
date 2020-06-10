@@ -15,26 +15,26 @@ Increasing accuracy with multiple scans {#sec:multiplescans}
 ---------------------------------------
 
 As we've seen from the [Access Point Scan Results], an AP is not guaranteed to
-be discovered with a single scan [^fading]. Thus, it neccesary to have multiple 
-scan passes to increase the likelyhood of discovering all access points that 
-needs to be taken in account when choosing a channel.
+be discovered with a single scan [^fading]. Thus, it is neccesary to use multiple 
+scans to increase the likelyhood of discovering all access points that needs to
+be taken in account when choosing a channel.
 
 [^fading]: As discussed in earlier chapters and seen in the results, the curves 
 that determine the likelyhood of discovery can be explained with the _Reighley_ 
 and _Ricean_ fading models.
 
-The amount of passes that needs to be run needs to be determined on a per deployment
+The amount of scans that needs to be run has to be determined on a per deployment
 basis. The characterisitiscs of the local radio environment for every deployment
 might vary slightly and there is a performance-to-accuracy benifit that needs
 to be accounted for; Is it most important to not disturb clients or to get a
 detailed image of the local network?
 
 However, it is worth noting that scanning multiple times might cause an even
-more noticable negative impact on clients if a non-optimal scanning strategy such 
-as full scan is used. Multiple stutters can become rather notisable and annoying
-for users. To leviate this, an implementation can either spread the scan pases
-over a longer time period, or even better: utilize a more optimal scanning strategy
-such as smooth scanning.
+more noticable negative impact on clients if a non-optimal scanning strategy, 
+such as full scan, is used. Multiple stutters can become rather noticable and 
+annoying for users. To leviate this, an implementation can either spread the 
+scans over a longer time period, or even better: utilize a more optimal scanning 
+strategy such as smooth scanning.
 
 
 Temporal spread of channel scanning with smooth scan
@@ -43,11 +43,12 @@ Temporal spread of channel scanning with smooth scan
 As hyphotezised, spreading the scanning of channels temporally by adding a
 backoff period between each channel proved to keep client latency low, while
 keeping similar results as the full scan. This reflects the findings in
-[@PracticalSchemes] rather nicely, where they found that when employing smooth scan
-in client scanning, packet loss and delay will be greatly reduced. [^noteonpacketloss]
+[@PracticalSchemes] rather nicely. In this study they found that by employing
+smooth scan in client scanning, packet loss and delay will be greatly reduced.
+[^noteonpacketloss]
 
-[^noteonpacketloss]: Regarding packet loss, it is worth keeping in mind that none
-of the scans in the results showed any sign of packet loss due to scanning.
+[^noteonpacketloss]: Regarding packet loss, it is worth noting that none of the 
+scans in the results showed any sign of packet loss due to scanning.
 [@PracticalSchemes] was written in 2007, so buffer overflow in clients and access
 points might have been more of an issue back then than now.
 
