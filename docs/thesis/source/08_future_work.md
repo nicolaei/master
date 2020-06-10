@@ -76,3 +76,17 @@ local access points might not move often enough to warrant a scan.
 
 Instead, something like a trigger to scan only when traffic is low might be a
 good idea to investigate for future research.
+
+This could be acomplished by looking at a survey dump, which the linux kernel
+provides [@SurveyDump]. A survey dump gives the access point the possibility of
+looking at the status of the current channel. This tool provides the amount of 
+time that:
+
+ * the channel was active
+ * the channel was busy
+ * was used to recieve data
+ * was used to transmit data
+ 
+By utilizing this data, an implementer can determine when it is a good time to
+start a scan based on previous activity levels. By doing this it would be possible
+to avoid periods of the day that has heavy useage.
