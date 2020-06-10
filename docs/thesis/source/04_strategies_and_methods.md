@@ -61,14 +61,10 @@ To further visualize the accuracy of our scans, every access point result graph
 will have an approximated _Ricean_ and _Reyleigh_ fading curve overayed to 
 visualize the expected probability of discovery for a given access point.
 
-\todo{
-    Do I need a reference for this explenation of Rice and Reyleigh?
-    If yes, any tips?
-}
-
 Simply put, both Ricean and Reyleigh fading are stochastic models for radio 
 propagation anomalies caused by partial cancellation of a signal by itself. The
-two fading models are utilized for two different scenarios:
+two fading models are utilized for two different scenarios 
+[@RayleighFading] [@RicianFading]:
 
  * _Ricean fading_ occurs when one of the signal paths are much stronger than
    the others. This is typically associated with signals that have line of sight,
