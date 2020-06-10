@@ -153,17 +153,30 @@ needed in a more predictable environment to see if this is going to be a problem
 Optimizing the approach
 -----------------------
 
- * The way I've been doing my scans could be way more optimized by
-   doing them in the driver. For example the selective scan ends up (after
-   my understanding) switching back and forth between listening and serving
-   while scanning. This is because I'm just using the IW tool.
-   Though however, the results still show that there is a benifit in client
-   latency when it comes to this.
+While the results shown in this thesis are promising, it is possible that they 
+could be improved with some optimization. Since all the tests were done by 
+interfacing with the Wi-Fi card from `python`, which was talking to `iw`, both
+smooth scan and selective scan would probably show better results if implemented
+directly at the driver level.
+
+This is because every call to iw launches a new scan for the selected channel,
+so both smooth scan and selective scan will experience some overhead. While
+full scan was only a single call to `iw`, and then the drivers took care of the
+rest. By implementing this logic in the driver it is possible that the scans
+would take even shorter, and thus improve the results even further.
+
+In addition to that, `iw` did not allow for customizing MinCT and MaxCT, which
+could further improve the results by limiting the scanning period for typically
+less populated channels.
   
- * Move min and max channel time sections from [Future Work] to this chapter?
- 
- * Move extra radio operation on a separate channel from [Future Work] to
-   this chapter?
+\todo{
+    Move min and max channel time sections from [Future Work] to this location?
+}
+
+\todo{ 
+    Move extra radio operation on a separate channel from [Future Work] to 
+    this location?
+}
 
 
 <!--
