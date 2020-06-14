@@ -306,9 +306,13 @@ In the excerpt from the full scan, you'll notice that the latency
 hovers between 100 and 300 ms for quite a few seconds, which is substantial for 
 real time applications such as VoIP and online video games.
 
-![Client latency for full scan](static/cli_full_scan_latency.png){#fig:clifulllatency}
+![Client latency for a full scan. The spikes are a result of the access point
+ scanning the network, and thus not allowing traffic.
+](static/cli_full_scan_latency.png){#fig:clifulllatency}
 
-![Client goodput for full scan](static/cli_full_scan_goodput.png){#fig:clifullgoodput}
+![Client goodput for full scan. The dips are a result of the access point
+ scanning the network, and thus not allowing traffic.
+](static/cli_full_scan_goodput.png){#fig:clifullgoodput}
 
 In addition, as expected, the goodput follows suit with the worst spikes ending
 up almost hitting zero MB/s of goodput.
@@ -316,8 +320,8 @@ up almost hitting zero MB/s of goodput.
 #### Selective Scan { .unnumbered }
 
 Selective scanning decreases the max and average latency that the client will
-experience, which echos [@citation] that states that latency lineary increeses
-for each channel scanned. This effect can be obeserved here. 
+experience, which echos [@SeamlessHandoff] that states that latency lineary 
+increeses for each channel scanned. This effect can be obeserved here. 
 
 In the examples for scanning channels 1, 6 and 11 the peak latency ends up being
 around half of full scan, hovering at around 100 ms and maxing out at around 
@@ -325,18 +329,33 @@ around half of full scan, hovering at around 100 ms and maxing out at around
 duration compared to the full scan implementation, which we can see as a clear
 benifit in our goodput results.
 
-![Client latency for selective (1, 6, 11) scan](static/cli_selective_main_latency.png){#fig:cliselectivemainlatency}
+![Client latency for selective (channel 1, 6 and 11) scan. The spikes here are
+ lower than the full scan, but still severe enough to be noticable for real time
+ applications.
+](static/cli_selective_main_latency.png){#fig:cliselectivemainlatency}
 
-![Client goodput for selective (1, 6, 11) scan](static/cli_selective_main_goodput.png){#fig:cliselectivemaingoodput}
+![Client goodput for selective (channel 1, 6 and 11) scan. The dips in goodput
+ are smaler in this case, but might be noticable for users.
+](static/cli_selective_main_goodput.png){#fig:cliselectivemaingoodput}
 
 As for the selective scan which skips every even-numbered channel, we can spot
 roughly the same results here. The peak latency is hovering around 100 to 150ms,
 but the goodput is not hit as badly as the full scan results. However, the 
 goodput for this scanning method does end up taking a slightly worse hit.
 
-![Client latency for selective (skip 1) scan](static/cli_selective_alt_latency.png){#fig:cliselectivealtlatency}
+![Client latency for selective (channel 1, 3, 5, 7, 9 and 11) scan. The latency
+ spikes seems to show roughly the same pattern as the results for channels
+ 1, 6 and 11. 
+](static/cli_selective_alt_latency.png){#fig:cliselectivealtlatency}
 
-![Client goodput for selective (skip 1) scan](static/cli_selective_alt_goodput.png){#fig:cliselectivealtgoodput}
+![Client goodput for selective (channel 1, 3, 5, 7, 9 and 11) scan.
+](static/cli_selective_alt_goodput.png){#fig:cliselectivealtgoodput}
+
+Though for both selective scans, there are sometimes scan periods where the 
+latency seems to not be affected by the scan. This can be seen in the third last
+period of figure {@fig:cliselectivemainlatency} and in the middle of figure
+{@fig:cliselectivealtlatency}. Why this is, is unclear. It might have to do with
+the environment the scans were conducted in, or due to some fault.
 
 
 #### Smooth Scan { .unnumbered }
@@ -351,19 +370,27 @@ where we can see periodic spikes in latency.
 
 In these results we can only see sporadic spikes in latency and dips in goodput.
 It is likely these spikes were results of the environment where we conducted 
-the tests or do to RF noise.
+the tests or due to RF noise.
 
-![Client latency for a "smooth" scan with 300ms intervals](static/cli_smooth_300_latency.png){#fig:clismooth300laten}
+![Client latency for a "smooth" scan with 300ms intervals. In these results
+ the spikes in latency seems random, suggesting that they're caused by the 
+ environment or other factors, and not the scanning itself.
+](static/cli_smooth_300_latency.png){#fig:clismooth300laten}
 
-![Client goodput for a "smooth" scan with 300ms intervals](static/cli_smooth_300_goodput.png){#fig:clismooth300good}
+![Client goodput for a "smooth" scan with 300ms intervals.
+](static/cli_smooth_300_goodput.png){#fig:clismooth300good}
 
-![Client latency for a "smooth" scan with 600ms intervals](static/cli_smooth_600_latency.png){#fig:clismooth600laten}
+![Client latency for a "smooth" scan with 600ms intervals.
+](static/cli_smooth_600_latency.png){#fig:clismooth600laten}
 
-![Client goodput for a "smooth" scan with 600ms intervals](static/cli_smooth_600_goodput.png){#fig:clismooth600good}
+![Client goodput for a "smooth" scan with 600ms intervals.
+](static/cli_smooth_600_goodput.png){#fig:clismooth600good}
 
-![Client latency for a "smooth" scan with 1200ms intervals](static/cli_smooth_1200_latency.png){#fig:clismooth1200laten}
+![Client latency for a "smooth" scan with 1200ms intervals.
+](static/cli_smooth_1200_latency.png){#fig:clismooth1200laten}
 
-![Client goodput for a "smooth" scan with 600ms intervals](static/cli_smooth_1200_goodput.png){#fig:clismooth1200good}
+![Client goodput for a "smooth" scan with 600ms intervals.
+](static/cli_smooth_1200_goodput.png){#fig:clismooth1200good}
 
 
 ### Interpreting and analyzing the results
