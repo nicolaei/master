@@ -272,7 +272,8 @@ Client Results
 Now we will be taking a deep dive into how the scans affected the clients. 
 As discussed in [Measurement strategies], the clients measured both their latency 
 and goodput to the access point they were connected to. This should give us a 
-good overview of how the discovery methods affected the clients.
+good overview of how the discovery methods affected the clients. No scanning
+was done from the clients during these trails.
 
 For all of these results, you'll see the latency and goodput measured whenever
 the link was avaliable. In adition you'll see a blue vertical line that represents
