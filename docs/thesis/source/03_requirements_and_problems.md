@@ -25,7 +25,7 @@ For example when an access point switches channels, will all its clients
 lose connection and have to re-discover and re-connect to the access point?
 If an access point scans channels for to long, the client might end up thinking
 that the connection is lost and try to go through a scan of its own to reconnect
-to the network. This can increse used airtime on the channel with unnececary
+to the network. This can increase used airtime on the channel with unnececary
 management packets, and lead to lower bandwidth for all clients. Which again 
 might also affect the results of the scans that we are trying to do in the first
 place.
