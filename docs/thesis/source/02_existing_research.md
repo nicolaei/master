@@ -196,8 +196,10 @@ the given area. The main takeaway from this study is that you'll need
 multiple scans to discover as many APs as possible, and even then you're not
 guaranteed to find all the access points in your vicinity.
 
-![Probe responses vs beacon frames. Here you can clearly see the how
- probe responses almost disappear after 100ms. Taken from [@APDiscovery]
+![Probe responses vs beacon frames. In this figure from [@APDiscovery] you can 
+ clearly see the how probe responses (blue) almost disappear after 100ms after a
+ scan is initiated. However beacon responses (red) are continiously transmitted,
+ and do not depend on a probe request to be broadcast.
 ](static/probe_vs_beacon.png){ width=40%; #fig:probevsbeacons }
 
 In their tests, they found that the scanning timer for a probe request
