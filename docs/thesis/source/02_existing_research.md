@@ -265,14 +265,17 @@ other clients that are not currently scanning.
 Channel overlapping {#sec:channeloverlap}
 -------------------
 
-In addition to their findings about [Discovery Time](@sec:Discovery Time)) in
+In addition to their findings about [Discovery Time](@sec:Discovery Time) in
 [@APDiscovery] the authors also highlighted that due to channel overlapping,
 an STA that is scanning a channel $i$ has a propability of also discovering
 access points on channels up to two channels away ($i \pm2$).
 
 It is possible that this can help with speeding up discovery of access points,
 since a scan can potentially discover as many as 40% of APs in adjacent channels. 
-See {@fig:channeloverlap} for percentages of adjecent channels.
+The percentage of access points discovered for adjecent chanels are visualized 
+in figure {@fig:channeloverlap}.
 
-![Percent of access points discovered in adjacent channels 
-  (From [@APDiscovery])](static/channel_overlap.png){ #fig:channeloverlap }
+![Access Points discovered in adjecent channels, from [@APDiscovery]. This shows
+ the likelyhood of discovering access points on other channels in their environment,
+ and might change based on the environment.
+](static/channel_overlap.png){ #fig:channeloverlap }
