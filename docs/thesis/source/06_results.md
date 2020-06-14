@@ -261,8 +261,9 @@ overlayed Rice and Rayleigh curves in the graphs shows this.
 As expected, the different discovery methods take different amounts of time to
 execute. These findings reflect findings of previous studies, for example where
 smooth scanning is slower than alternative discovery methods. Though in the end,
-this doesn't have an impact on our results, but it is worth to highlight in cases
-where this thesis is used in solutions where measurement time is critical.
+the speed of the scan doesn't have an impact on our results, but it is worth to
+highlight in cases where this thesis is used in solutions where measurement time 
+is critical.
 
 
 Client Results
