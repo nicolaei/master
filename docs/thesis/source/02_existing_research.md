@@ -210,9 +210,8 @@ responses were received after this time, and the discovered APs mainly came
 from normal beacon frames.
 
 In addition to the length of the timer, they also found that the amount of
-scans mattered a lot to the discovery (see the figure that I haven't added
-yet). Even after 100 scans, the study found that up to 15% of all APs were
-not discovered.
+scans mattered a lot to the discovery . Even after 100 scans, the study found 
+that up to 15% of all APs were not discovered.
 
 \todo{
     Why are some access points discovered, while others are not?
