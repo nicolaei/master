@@ -76,15 +76,24 @@ def detection_probability(
 
     ap_probabilities = {
         "Signal Strength (dB)": [],
-        "Probability of Discovery": []
+        "Probability of Discovery": [],
+        "Signal Strength Variance": [[], []]
     }
     for amount, aps in db_sorted:
         for ap_measurements in aps.values():
-            ap_probabilities["Signal Strength (dB)"].append(
-                max(ap.signal_strength for ap in ap_measurements)
-            )
             ap_probabilities["Probability of Discovery"].append(
                 len(ap_measurements) / amount
+            )
+
+            signal_strenghts = [ap.signal_strength for ap in ap_measurements]
+            ap_probabilities["Signal Strength (dB)"].append(
+                mean(signal_strenghts)
+            )
+            ap_probabilities["Signal Strength Variance"][0].append(
+                mean(signal_strenghts) - min(signal_strenghts)
+            )
+            ap_probabilities["Signal Strength Variance"][1].append(
+                max(signal_strenghts) - mean(signal_strenghts)
             )
 
     ap_probabilities["Signal Strength (dB)"] = \
@@ -92,10 +101,12 @@ def detection_probability(
 
     fig = plt.figure(figsize=(20, 12))
 
-    plt.scatter(
+    plt.errorbar(
         x=ap_probabilities["Signal Strength (dB)"],
         y=ap_probabilities["Probability of Discovery"],
-        label="Discovered Access Point"
+        xerr=ap_probabilities["Signal Strength Variance"],
+        fmt="o",
+        label="Discovered Access Point",
     )
 
     plt.xlabel("Signal Strength (dB SNR)")
