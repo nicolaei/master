@@ -62,7 +62,6 @@ def dbm_to_snr(measurements: List[float], noise_power: float = -90):
     ]
 
 
-
 def detection_probability(
     access_point_data: Tuple,
     title: str = None,
@@ -74,12 +73,14 @@ def detection_probability(
     """
     db_sorted = [(len(scan), group_by_bss(scan)) for scan in access_point_data]
 
-    ap_probabilities = {
-        "Signal Strength (dB)": [],
-        "Probability of Discovery": [],
-        "Signal Strength Variance": [[], []]
-    }
-    for amount, aps in db_sorted:
+    fig, axs = plt.subplots(ncols=len(db_sorted), figsize=(28, 12))
+
+    for index, (amount, aps) in enumerate(db_sorted):
+        ap_probabilities = {
+            "Signal Strength (dB)": [],
+            "Probability of Discovery": [],
+            "Signal Strength Variance": [[], []]
+        }
         for ap_measurements in aps.values():
             ap_probabilities["Probability of Discovery"].append(
                 len(ap_measurements) / amount
@@ -96,45 +97,47 @@ def detection_probability(
                 max(signal_strenghts) - mean(signal_strenghts)
             )
 
-    ap_probabilities["Signal Strength (dB)"] = \
-        dbm_to_snr(ap_probabilities["Signal Strength (dB)"])
+        ap_probabilities["Signal Strength (dB)"] = \
+            dbm_to_snr(ap_probabilities["Signal Strength (dB)"])
 
-    fig = plt.figure(figsize=(20, 12))
+        axs[index].set_title(f"Access Point {index}")
 
-    plt.errorbar(
-        x=ap_probabilities["Signal Strength (dB)"],
-        y=ap_probabilities["Probability of Discovery"],
-        xerr=ap_probabilities["Signal Strength Variance"],
-        fmt="o",
-        label="Discovered Access Point",
-    )
+        axs[index].errorbar(
+            x=ap_probabilities["Signal Strength (dB)"],
+            y=ap_probabilities["Probability of Discovery"],
+            xerr=ap_probabilities["Signal Strength Variance"],
+            fmt="o",
+            label="Discovered Access Point",
+        )
 
-    plt.xlabel("Signal Strength (dB SNR)")
-    plt.ylabel("Probability of Discovery")
+        x = numpy.linspace(stats.rayleigh.ppf(0.1), stats.rayleigh.ppf(0.99), 100)
 
-    x = numpy.linspace(stats.rayleigh.ppf(0.1), stats.rayleigh.ppf(0.99), 100)
+        axs[index].plot(
+            numpy.linspace(0, 60, 100),
+            stats.rayleigh.cdf(x, loc=0.3, scale=0.75),
+            "y",
+            label="Rayleigh",
+        )
 
-    plt.plot(
-        numpy.linspace(0, 60, 100),
-        stats.rayleigh.cdf(x, loc=0.48, scale=0.8),
-        "y",
-        label="Rayleigh",
-    )
+        bessel = 0.1
+        x = numpy.linspace(
+            stats.rice.ppf(0.1, b=bessel), stats.rice.ppf(0.99, b=bessel), 100
+        )
 
-    bessel = 0.1
-    x = numpy.linspace(
-        stats.rice.ppf(0.1, b=bessel), stats.rice.ppf(0.99, b=bessel), 100
-    )
+        axs[index].plot(
+            numpy.linspace(0, 60, 100),
+            stats.rice.cdf(x, loc=0.7, b=bessel, scale=0.4),
+            "r",
+            label="Rice"
+        )
 
-    plt.plot(
-        numpy.linspace(0, 60, 100),
-        stats.rice.cdf(x, loc=0.9, b=bessel, scale=0.4),
-        "r",
-        label="Rice"
-    )
 
-    plt.suptitle(
-        f"Probability of discovery ({title})"
-    )
+    # plt.suptitle(
+    #     f"Probability of discovery ({title})"
+    # )
     plt.legend()
+
+    for ax in axs.flat:
+        ax.set(xlabel="Signal Strength (dB SNR)", ylabel="Probability of Discovery")
+
     plt.show()
