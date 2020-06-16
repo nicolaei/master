@@ -105,6 +105,8 @@ of scanning in IEEE802.11 and how we can use scans from an access point.
  
  - **Results** - The results from the implemented experiments
  
+ - **Discussion** - Looking at how the results can be utilized
+ 
  - **Future Work** - A walktrough of issues and ideas that future works can look at.
  
  - **Conclsion** - Conclusion based on the results and subsequent discussion.
