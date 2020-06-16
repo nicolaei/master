@@ -173,8 +173,9 @@ Differences between active and passive scanning
 
 While both active and passive scanning are means to achieve the same result,
 they have different impacts on the network and use differing amount of time
-to discover all nodes on the network. The impact of them in regard to discovery
-latency and network impact is widely studied.
+to discover all nodes on the network. The impact of them in relation to discovery
+latency and network impact is widely studied [@ActiveScanPerformance] [@APDiscovery]
+[@SelectingScanningParameters] [@active-resfi-scans].
 
 
 ### Discovery time
