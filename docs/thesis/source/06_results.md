@@ -306,13 +306,35 @@ In the excerpt from the full scan, you'll notice that the latency
 hovers between 100 and 300 ms for quite a few seconds, which is substantial for 
 real time applications such as VoIP and online video games.
 
-![Client latency for a full scan. The spikes are a result of the access point
- scanning the network, and thus not allowing traffic.
-](static/cli_full_scan_latency.png){#fig:clifulllatency}
-
-![Client goodput for full scan. The dips are a result of the access point
- scanning the network, and thus not allowing traffic.
-](static/cli_full_scan_goodput.png){#fig:clifullgoodput}
+\begin{figure}
+    \centering
+      
+    \begin{subfigure}[b]{\textwidth}
+        \centering
+        \includegraphics[width=\textwidth,center]{static/cli_full_scan_latency.png}
+        
+        \caption{
+            Client latency. The spikes are a result of the access point scanning 
+            the network, and thus not allowing traffic.
+        }
+        \label{fig:clifulllatency}
+    \end{subfigure}
+      
+    \begin{subfigure}[b]{\textwidth}
+        \centering
+        \includegraphics[width=\textwidth,center]{static/cli_full_scan_goodput.png}
+        
+        \caption{
+            Client goodput.
+        }
+        \label{fig:clifullgoodput}
+    \end{subfigure}
+      
+    \caption{
+        Client latency and goodput results for full scan.
+    }
+    \label{fig:clifull}
+\end{figure}
 
 In addition, as expected, the goodput follows suit with the worst spikes ending
 up almost hitting zero MB/s of goodput.
@@ -329,27 +351,72 @@ around half of full scan, hovering at around 100 ms and maxing out at around
 duration compared to the full scan implementation, which we can see as a clear
 benifit in our goodput results.
 
-![Client latency for selective (channel 1, 6 and 11) scan. The spikes here are
- lower than the full scan, but still severe enough to be noticable for real time
- applications.
-](static/cli_selective_main_latency.png){#fig:cliselectivemainlatency}
-
-![Client goodput for selective (channel 1, 6 and 11) scan. The dips in goodput
- are smaler in this case, but might be noticable for users.
-](static/cli_selective_main_goodput.png){#fig:cliselectivemaingoodput}
+\begin{figure}
+    \centering
+      
+    \begin{subfigure}[b]{\textwidth}
+        \centering
+        \includegraphics[width=\textwidth,center]{static/cli_selective_main_latency.png}
+        
+        \caption{
+            Client latency. The spikes here are lower than the full scan, but 
+            still severe enough to be noticable for real time applications.
+        }
+        \label{fig:cliselectivemainlatency}
+    \end{subfigure}
+      
+    \begin{subfigure}[b]{\textwidth}
+        \centering
+        \includegraphics[width=\textwidth,center]{static/cli_selective_main_goodput.png}
+        
+        \caption{
+            Client goodput. The dips in goodput are smaler in this case, 
+            but might be noticable for users.
+        }
+        \label{fig:cliselectivemaingoodput}
+    \end{subfigure}
+      
+    \caption{
+        Client latency and goodput results for selective scan on channels 1, 6 and 11.
+    }
+    \label{fig:cliselectivemain}
+\end{figure}
 
 As for the selective scan which skips every even-numbered channel, we can spot
 roughly the same results here. The peak latency is hovering around 100 to 150ms,
 but the goodput is not hit as badly as the full scan results. However, the 
 goodput for this scanning method does end up taking a slightly worse hit.
 
-![Client latency for selective (channel 1, 3, 5, 7, 9 and 11) scan. The latency
- spikes seems to show roughly the same pattern as the results for channels
- 1, 6 and 11. 
-](static/cli_selective_alt_latency.png){#fig:cliselectivealtlatency}
-
-![Client goodput for selective (channel 1, 3, 5, 7, 9 and 11) scan.
-](static/cli_selective_alt_goodput.png){#fig:cliselectivealtgoodput}
+\begin{figure}
+    \centering
+      
+    \begin{subfigure}[b]{\textwidth}
+        \centering
+        \includegraphics[width=\textwidth,center]{static/cli_selective_alt_latency.png}
+        
+        \caption{
+            Client latency. The latency spikes seems to show roughly the same 
+            pattern as the results for channels 1, 6 and 11. 
+        }
+        \label{fig:cliselectivealtlatency}
+    \end{subfigure}
+      
+    \begin{subfigure}[b]{\textwidth}
+        \centering
+        \includegraphics[width=\textwidth,center]{static/cli_selective_alt_goodput.png}
+        
+        \caption{
+            Client goodput
+        }
+        \label{fig:cliselectivealtgoodput}
+    \end{subfigure}
+      
+    \caption{
+        Client latency and goodput results for selective scan on 
+        channels 1, 3, 5, 7, 9 and 11.
+    }
+    \label{fig:cliselectivealt}
+\end{figure}
 
 Though for both selective scans, there are sometimes scan periods where the 
 latency seems to not be affected by the scan. This can be seen in the third last
@@ -372,25 +439,94 @@ In these results we can only see sporadic spikes in latency and dips in goodput.
 It is likely these spikes were results of the environment where we conducted 
 the tests or due to RF noise.
 
-![Client latency for a "smooth" scan with 300ms intervals. In these results
- the spikes in latency seems random, suggesting that they're caused by the 
- environment or other factors, and not the scanning itself.
-](static/cli_smooth_300_latency.png){#fig:clismooth300laten}
+\begin{figure}
+    \centering
+      
+    \begin{subfigure}[b]{\textwidth}
+        \centering
+        \includegraphics[width=\textwidth,center]{static/cli_smooth_300_latency.png}
+        
+        \caption{
+            Client latency. In these results the spikes in latency seems random,
+            suggesting that they're caused by the environment or other factors, 
+            and not the scanning itself.
+        }
+        \label{fig:clismooth300laten}
+    \end{subfigure}
+      
+    \begin{subfigure}[b]{\textwidth}
+        \centering
+        \includegraphics[width=\textwidth,center]{static/cli_smooth_300_goodput.png}
+        
+        \caption{
+            Client goodput
+        }
+        \label{fig:clismooth300good}
+    \end{subfigure}
+      
+    \caption{
+        Client latency and goodput results for smooth scan with 300 ms intervals
+    }
+    \label{fig:clismooth300}
+\end{figure}
 
-![Client goodput for a "smooth" scan with 300ms intervals.
-](static/cli_smooth_300_goodput.png){#fig:clismooth300good}
+\begin{figure}
+    \centering
+      
+    \begin{subfigure}[b]{\textwidth}
+        \centering
+        \includegraphics[width=\textwidth,center]{static/cli_smooth_600_latency.png}
+        
+        \caption{
+            Client latency
+        }
+        \label{fig:clismooth600laten}
+    \end{subfigure}
+      
+    \begin{subfigure}[b]{\textwidth}
+        \centering
+        \includegraphics[width=\textwidth,center]{static/cli_smooth_600_goodput.png}
+        
+        \caption{
+            Client goodput
+        }
+        \label{fig:clismooth600good}
+    \end{subfigure}
+      
+    \caption{
+        Client latency and goodput results for smooth scan with 600 ms intervals
+    }
+    \label{fig:clismooth600}
+\end{figure}
 
-![Client latency for a "smooth" scan with 600ms intervals.
-](static/cli_smooth_600_latency.png){#fig:clismooth600laten}
-
-![Client goodput for a "smooth" scan with 600ms intervals.
-](static/cli_smooth_600_goodput.png){#fig:clismooth600good}
-
-![Client latency for a "smooth" scan with 1200ms intervals.
-](static/cli_smooth_1200_latency.png){#fig:clismooth1200laten}
-
-![Client goodput for a "smooth" scan with 600ms intervals.
-](static/cli_smooth_1200_goodput.png){#fig:clismooth1200good}
+\begin{figure}
+    \centering
+      
+    \begin{subfigure}[b]{\textwidth}
+        \centering
+        \includegraphics[width=\textwidth,center]{static/cli_smooth_1200_latency.png}
+        
+        \caption{
+            Client latency
+        }
+        \label{fig:clismooth1200laten}
+    \end{subfigure}
+      
+    \begin{subfigure}[b]{\textwidth}
+        \centering
+        \includegraphics[width=\textwidth,center]{static/cli_smooth_1200_goodput.png}
+        
+        \caption{
+            Client goodput
+        }
+        \label{fig:clismooth1200good}
+    \end{subfigure}
+      
+    \caption{
+        Client latency and goodput results for smooth scan with 1200 ms intervals
+    }
+    \label{fig:clismooth1200}
+\end{figure}
 
 
 ### Interpreting and analyzing the results
