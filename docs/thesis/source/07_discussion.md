@@ -98,8 +98,7 @@ Especially for mobile devices where battery capacity is limited. Though this is
 out of scope for this thesis and should probably be looked into by future research.
 
 
-
-### On the issue of time
+### On the issue of latency
 
 \todo{
     Find a source to quote about what the requirements for VoIP, games and

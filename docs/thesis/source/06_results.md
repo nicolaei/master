@@ -22,7 +22,7 @@ Access Point Scan Results
 -------------------------
 
 As mentioned in [Discovery strategies], the access points measure the amount of
-times unique access points were discovered against their percived strenght.
+times unique access points were discovered against their percived strength.
 
 In this section you'll see the results of the three main different
 discovery strategies and how well they picked up the access points that are in 
@@ -62,7 +62,9 @@ Scan Type                 **AP 0**     **AP 1**     **AP 2**
 ---------------------     --------     --------     --------
 **Full Scan**                54           69           61     
 
-Table: Unique Access points discovered accross 100 full scans for APs 1, 2 and 3. 
+Table: Unique Access points discovered accross 100 full scans. The columns define 
+       the access point that was scanning, and the numbers are the amount of 
+       unique access points that were discovered by the given access point.
        {#tbl:amountfull}
        
 ![Access Points Discovered for a "full" scan](static/ap_full_scan.png){#fig:fullscanresults}

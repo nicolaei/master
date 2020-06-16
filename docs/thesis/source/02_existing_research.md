@@ -1,10 +1,10 @@
 Scanning IEEE802.11 networks
 ============================
 
-The aim of scanning the local IEE802.11 topology in this thesis is to be able
-to provide information about adjacent nodes to channel allocation algorithms.
-With this information any given channel allocation algorithm should be able to
-give the access point a channel with the same or less congestion.
+The aim of scanning the local IEE802.11 topology from an access point is to be 
+able to provide information about adjacent nodes to an channel allocation 
+algorithm. With this information any given channel allocation algorithm should 
+be able to give the access point a channel with the same or less congestion.
 
 In this chapter we will be exploring how a IEEE802.11 scan works and existing
 research on scanning strategies for IEE802.11 networks.
@@ -147,7 +147,7 @@ Scanning in modern day IEE802.11 networks
 While the aim of this thesis is to use scanning to discover other APs from
 our own AP, the main use of scanning in IEEE802.11 networks is for clients 
 (STAs) to find access points to connect to and keep their connection alive. 
-These are the two typical use-cases found in the wild today [@WifiScanFaq]:
+These are the two typical use-cases [@WifiScanFaq]:
 
  * When disconnected; finding available APs to connect to or ask for
    specific APs that the STA has connected to before.

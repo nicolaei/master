@@ -180,7 +180,7 @@ This introduced some issues, outlined below:
  * There is more chance of interference due to the appartment being in the middle
    of a high density residential area.
  
- * There was constant movement in the appartment and thus LoS between some of the
-   access points would at times be broken. In addition a clothing rack would be
-   in the general area which chould have affected the results.
+ * There was constant movement in the appartment and thus line of sight between 
+   some of the access points would at times be broken. In addition, a clothing 
+   rack would be in the general area which chould have affected the results.
 

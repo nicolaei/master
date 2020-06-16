@@ -1,5 +1,5 @@
-Possible Measurement Strategies and Discovery Methods
-=====================================================
+Possible Measurement and Discovery Strategies 
+=============================================
 
 In this chapter I'll be talking about which methods that I will be using in my
 experiments and how I implemented these methods.
@@ -58,7 +58,7 @@ that simply gets dumped when using UDP. To measure this, we will be looking at
 the total time spend scanning for access points.
 
 To further visualize the accuracy of our scans, every access point result graph
-will have an approximated _Ricean_ and _Reyleigh_ fading curve overayed to 
+will have an approximated _Ricean_ and _Rayleigh_ fading curve overlayed to 
 visualize the expected probability of discovery for a given access point.
 
 Simply put, both Ricean and Reyleigh fading are stochastic models for radio 
@@ -94,18 +94,19 @@ Any given scanning algorithm must find the best trade-off between:
  
  *  The discovery of at least one candidate AP after a full scan
 
-For clients, an ideal scanning algorithm seeks to discover the maximum number of 
-APs in the shortest period [@SelectingScanningParameters]. This is due to
-the mobile nature of clients. Take, for example, a scenario where a client is 
-moving down a hallway. If the conenction to the current access point gets too
-poor, and it needs to roam to the next one a scan is triggered. In this case, 
-a scanning algorithm that is to slow might cause the client to not discover any
-access points before it loses the connection.
+When scanning from a client, an ideal scanning algorithm seeks to discover the 
+maximum number of APs in the shortest period [@SelectingScanningParameters]. 
+This is due to the mobile nature of clients. Take, for example, a scenario where 
+a client is moving down a hallway. If the conenction to the current access point
+gets too poor, and it needs to roam to the next one a scan is triggered. In this
+case, a scanning algorithm that is to slow might cause the client to not discover 
+any access points before it loses the connection.
 
-However, for access points this mobility limitation does not cause an issue.
-Access points are not mobile [^mobile-access-points], and for the problem that
-this thesis aims to solve speed is not as important as the accuracy of the scan.
-Because of this, we don't have to consider the time spent looking for access points.
+However, when scanning from an access point this mobility limitation does not 
+cause an issue. Access points are not mobile [^mobile-access-points], and for the
+problem that this thesis aims to solve speed is not as important as the accuracy 
+of the scan. Because of this, we don't have to consider the time spent looking 
+for access points.
 
 [^mobile-access-points]: There is an exception here: Mobile phones can work as
     hotspots. This is a typical usecase in cafes and similar. However, this edge
@@ -249,7 +250,7 @@ channels will be discovered while in a given channel due to channel overlapping.
 In addition to this, most 2.4 GHz Wi-Fi deployments only operate on the three
 non-overlapping channels; 1, 6 and 11.
 
-Seeing that our main goal is to find access points that are neighbouring the
+Seeing that our main goal is to find access points that are in proximity to the
 current access point, it's possible that we can find many of these while
 scanning fewer channels. This could give a huge boost in speed if successful.
 
@@ -308,8 +309,9 @@ assume that these will have some sort of impact on a client's goodput.
 ### Minimum number of scans
 
 This parameter is important to make sure that we have a reply from all access
-points in our vicinity before sending of our results. As [@APDiscovery]
-notes, all access points will most likely not be discovered with just one scan.
+points in our vicinity before sending of our results. As [@APDiscovery] notes,
+all access points will most likely not be discovered with just one scan of
+the entire frequency space.
 
 
 ### Smooth scanning interval
@@ -322,7 +324,8 @@ total scan.
 [@ProactiveScan] has done research regarding which interval to choose. The
 longer the interval is, the more time clients will have to send packets that
 were cued up during the last scan. Though these longer intervals will
-increase the total time of our scan.
+increase the total time of our scan. However, the results of the scan should not
+be effected by the longer scan time.
 
 
 ### Smooth scanning group size 

@@ -51,7 +51,7 @@ channel for a given access point.
 
 ### What am I trying to figure out?
 
-The channel allocation algorithm needs data about neighbouring access points
+Any channel allocation algorithm needs data about neighbouring access points
 to figure out which channel the access point should be serving on. To do this
 it has to do a scan, but as we will see in later chapters this comes with a cost
 of client network performance.
@@ -97,9 +97,9 @@ of scanning in IEEE802.11 and how we can use scans from an access point.
    that needs to be met when scanning from an access point and possible problems
    that we might face.
  
- - **Possible Measurement Strategies and Discovery Methods** - A look into
-   different scanning strategies from existing litterature and how to measure
-   if we're meeting the defined requirements.
+ - **Possible Measurement and Discovery Strategies** - A look into different 
+   scanning strategies from existing litterature and how to measure if we're 
+   meeting the defined requirements.
  
  - **Implementation** - A look into how the experiments were implemented.
  

@@ -2,7 +2,7 @@ Requirements and Problem Areas
 ==============================
 
 Scanning the local topology may sound like a simple endevour, but there are some
-caviats that need to be considered to get accurate results while still letting
+caveats that need to be considered to get accurate results while still letting
 clients use the network freely.
 
 In this chapter we will take a quick look at concerns and problems that need
@@ -16,7 +16,7 @@ Quality of Service
 The main job of an access point is to be an uplink to its clients. When a user
 is using their computer they expect that they don't lose connectivety in the
 middle of a large download or in a voice meeting with an important client.
-Because of this, keeping a good _quality of service_ will be a major consern.
+Because of this, keeping a good _quality of service_ will be a major concern.
 
 Due to the nature of what we're trying to implement here, there are some
 concerns regarding keeping this quality of service.
@@ -30,7 +30,7 @@ management packets, and lead to lower bandwidth for all clients. Which again
 might also affect the results of the scans that we are trying to do in the first
 place.
 
-If this does become a problem, it might be extra important to schedule scans
+If this becomes a problem, it might be extra important to schedule scans
 at optimal times of day with little network traffic.
 
 In addition to this, if it is not possible for the access point to send data 
@@ -62,10 +62,9 @@ access points.
 Weighting requirements against each other
 -----------------------------------------
 
-Now, you might notice that our two requirements, _scan accuracy_ and _quality of
-service_ create two opposing forces. To be more accurate we might have to do more
-scanning (which will be discussed in later chapters), while quality of service 
-might suffer from the increased scanning activity.
+_Scan accuracy_ and _quality of service_ create two opposing forces. To be more
+accurate we might have to do more scanning (which will be discussed in later 
+chapters), while quality of service might suffer from the increased scanning activity.
 
 This is yet another parameter that needs to be looked into and weighted to make
 sure that optimal results are achived.
