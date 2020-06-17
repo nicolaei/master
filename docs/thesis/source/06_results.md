@@ -255,7 +255,7 @@ Scan Type                                   Time
 **Selective Scan (1, 6, 11)**               0.18s
 **Selective Scan (1, 3, 5, 7, 9, 11)**      0.35s
 **Smooth Scan (300ms)**                     4.98s
-**Smooth Scan (600ms)**                     8.88s
+**Smooth Scan (600ms)**                     9.19s
 **Smooth Scan (1200ms)**                    17.62s
 
 Table: Mean total time for completing a scan {#tbl:timing}
@@ -277,15 +277,16 @@ Scan Type                        Time
 **Full Scan**                    0.74s
 **Selective Scan (1, 6, 11)**    0.18s
 **Selective Scan (Skip 1)**      0.35s
-**Smooth Scan (300ms)**          1.68s
-**Smooth Scan (600ms)**          2.28s
-**Smooth Scan (1200ms)**         4.42s
+**Smooth Scan (300ms)**          0.78s
+**Smooth Scan (600ms)**          0.79s
+**Smooth Scan (1200ms)**         0.82s
 
 Table: Mean total time for completing a scan
        (adjusted for scanning intervals) {#tbl:alttiming}
 
 With this in mind, we can see that table {@tbl:alttiming} shows results that are
-more similar to each other.
+more similar to each other, but there is still a small difference for smooth scan.
+This difference is probably due to implementation overhead.
 
 
 ### Interpreting and analyzing the results
