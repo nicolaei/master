@@ -10,7 +10,19 @@ log = logging.getLogger(__name__)
 
 def full_scan():
     """A simple scan of all channels, concecutivelly"""
-    return scan()
+    channel = {ch: freq for ch, freq in CHANNEL_FREQUENCY.items()}
+
+    access_points = set()
+    for channel, frequency in channel.items():
+        found = scan(frequency)
+
+        log.debug(f"Found {len(found)} APs on channel {channel}. "
+                  f"{len(found & access_points)} of these were already "
+                  f"discovered.")
+
+        access_points |= found
+
+    return access_points
 
 
 def selective_scan(channels: list):
