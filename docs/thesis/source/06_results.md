@@ -53,10 +53,19 @@ it commonly being used in modern Wi-Fi deployments.
 
 #### Full Scan { .unnumbered }
 
-To start off, we have our baseline: the full scan. As mentioned in previous
-chapters. This scan type is, as expected, discovering a lot of access points.
-See figure {@fig:fullscanresults} and table {@tbl:amountfull}. The results from
-this scan will be used for comparing both selective scan and smooth scan. 
+To start off, we have our baseline: the full scan. This scan type is, as expected,
+discovering a lot of access points. We can see from table {@tbl:amountfull} that
+there are a lot of access points in the area where we scanned from.
+
+The numbers from this won't tell us much on their own however. It's first when 
+we put them up against the next tests that we will see how the performance of the
+other strategies measure up against the full scan. For now, we can assume that 
+the amounts for each of the access points are the maximum amount of access points
+that can be seen from the location of AP 0, AP 1 and AP 2 respectivly.[^measurement]
+
+[^measurement]: While we can assume that this is around the maximum, as stated in
+    the methodic problems section, these tests were done in an appartment in the
+    middle of a city so changes might happen between tests.
 
 Scan Type                 **AP 0**     **AP 1**     **AP 2**
 ---------------------     --------     --------     --------
@@ -66,35 +75,54 @@ Table: Unique Access points discovered accross 100 full scans. The columns defin
        the access point that was scanning, and the numbers are the amount of 
        unique access points that were discovered by the given access point.
        {#tbl:amountfull}
+
+In addition to the total amount of access points found, it is also interesting
+to see how likely it is that we are to discover an access point, given the percived
+signal strength. This relationship can be seen in figure {@fig:fullscanresults},
+and in addition we can see the variation in the observed signal strength via the
+bars going left to right of each point.
        
-![Access Points Discovered for a "full" scan](static/ap_full_scan.png){#fig:fullscanresults}
+![Access points discovered for a "full" scan](static/ap_full_scan.png){#fig:fullscanresults}
 
 Overall we see that signals without line of sight nicely follows the reighley 
 curve. Though there are also some access points that have a high chance of 
 discovery, even when their signal strenght is low. These access points most 
-likely have line of sight to the access point that is scanning. A naive manual
-verification of these access point's location confirms this. [^manualverify]
+likely have line of sight to the access point that is scanning, which is modeled
+by the rice curve. A naive manual verification of these access point's location
+confirms this. [^manualverify]
 
 [^manualverify]: Manual verification was partly done by looking at the SSID of
-the access points and corelating them to nearby shops, and partly by trying to 
-walk around with a WiFi scanner app. Preferably, we would know the possition of 
-all access points, but the resources for this wasn't avaliable.
+    the access points and corelating them to nearby shops, and partly by trying 
+    to walk around with a Wi-Fi scanner app. Preferably, we would know the 
+    possition of all access points, but the resources for this wasn't avaliable.
+
+In the sections next sections, about selective and smooth scan, we will be using 
+the results from this scan to compare the performance.
 
 
 #### Selective Scan { .unnumbered }
 
 Next up we have selective scanning. As expected, this result discoveres less 
 access points but took less time overall. The first test, scanning channels 1,
-6 and 11, discovered the least amount of close access points. These access points
-were probably on a separate channel during our scan.
+6 and 11, discovered the least amount of close access points, as seen in table
+{@tbl:amountselective}. Quite a few of the access points in the area were on
+channels that were not within the specified channels of our scans.
+
+In figure {@fig:selectivescanresultsmain} the top left of the graph is quite 
+empty, in contrast to all other result sets. The access points that normally show 
+up in this section of the graphs are AP 0 through AP 2, but these were not configured 
+to run on channel 1, 6 or 11, which can explain why we do not observe them.
 
 An alternative selective scan implementation, which results are found in figure
-{@fig:selectivescanresult}, scans every other channel instead. This also takes
+{@fig:selectivescanresultalt}, scans every other channel instead. This also takes
 shorter time than the other discovery methods, but still does not discover
-all the access points avaliable.
+all the access points avaliable. In the case of AP 0 and 1 it even discovers less 
+than with the approach that only scanned channels 1, 6 and 11. This might be 
+because it did not scan channel 6, which is a typical channel for access points 
+to use.
 
-Out of all the scanning methods, selective scan is thus the method that gives
-the worst results, but it has a significant speed increase.
+Out of all the scanning methods, selective scan is the method that gives the 
+worst results, but it has a significant speed increase.
 
 In section {@sec:channeloverlap} we took a look at how channel overlapping might 
 help our results in the selective scanning, but it seems like this might not be
@@ -108,11 +136,12 @@ adjacent channels.
 
 Channels Scanned          **AP 0**     **AP 1**     **AP 2**
 ---------------------     --------     --------     --------
-**1, 6, 11**                 30           27           29 
-**1, 3, 5, 7, 9, 11**        26           18           32 
+**1, 6, 11**              30 (70%)     27 (48%)     29 (46%)
+**1, 3, 5, 7, 9, 11**     26 (60%)     18 (32%)     32 (51%) 
 
 Table: Access points discovered accross all scans accross the different 
-       access points for selective scan. { #tbl:amountselective }
+       access points for selective scan. The percentages are relative to the
+       amount of access points found in the full scan. {#tbl:amountselective}
 
 \begin{figure}
     \centering
@@ -142,33 +171,45 @@ Table: Access points discovered accross all scans accross the different
 
 #### Smooth Scan { .unnumbered }
 
-In the next three figures, we will take a look at smooth scanning from 300 to 1200 ms
-intervals.
+Now we will take a look at smooth scanning from 300 to 1200 ms intervals.
 
-In table {@tbl:amountsmooth}, as well as in figure {@fig:smoothscanresults} we 
-can see that the interval doesn't have a significant impact on discovery.
-Arguably, the difference between them is within a margin of error that can be
-expected from the changing environment that the measurments were conducted in.
-E.g. some of the external access points could probably have been obstructed by
-items within an apartment or something similar. [^apartmentreasoning]
+These tests seem to perform quite similar as the full scan in terms of the amount
+of access points discovered. As can be seen in table {@tbl:amountsmooth}, AP 0
+discovers the same amount of access points as our full scan experiment. AP 1 and
+AP 2 also performs better than the results in the selective scan, but does not
+live up to the results from AP 0. Why only AP 0 discovers the same amount as
+the full scan approach is hard to say, but might be because the environment had
+changed.
+
+As for the probability of discovery, we're seeing almost exactly the same sort
+of results as in the full scan. In figure {@fig:smoothscanresults} we can see
+yet again that the results match up with what we'd expect from reyleigh and 
+ricean fading.
+
+We can also can see that the interval doesn't have a significant impact on 
+discovery accuracy. Arguably, the difference between them is within a margin of 
+error that can be expected from the changing environment that the measurments 
+were conducted in. E.g. external access points could probably have been 
+obstructed by items within an apartment or something similar. [^apartmentreasoning]
 
 [^apartmentreasoning]: As mentioned in the section about methodic problems;
 the experiments were conducted in an urban environment without control of
 most of the access points.
 
 Overall, the performance here is quite good. Though as discussed in the section
-on Smooth Scanning in [Possible Measurement Strategies and Discovery Methods],
+on Smooth Scanning in [Possible Measurement and Discovery Strategies],
 the time it took to run these scans is significantly longer. We will be looking
 more into the timing differences in the next section.
 
-Interval         **AP 0**     **AP 1**     **AP 2**
-------------     --------     --------     --------
-**300 ms**          49           47           44
-**600 ms**          43           50           52
-**1200 ms**         43           40           48
+Interval         **AP 0**      **AP 1**     **AP 2**
+------------     ---------     --------     --------
+**300 ms**       49 (114%)     47 (84%)     44 (69%)
+**600 ms**       43 (100%)     50 (89%)     52 (82%)
+**1200 ms**      43 (100%)     40 (71%)     48 (76%)
 
 Table: Access points discovered accross all scans accross the 
-       different access points for smooth scan. {#tbl:amountsmooth}
+       different access points for smooth scan. The percentages are relative to 
+       the amount of access points found in the full scan. {#tbl:amountsmooth}
 
 \begin{figure}
     \centering
