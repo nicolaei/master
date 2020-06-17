@@ -60,7 +60,7 @@ this scan will be used for comparing both selective scan and smooth scan.
 
 Scan Type                 **AP 0**     **AP 1**     **AP 2**
 ---------------------     --------     --------     --------
-**Full Scan**                54           69           61     
+**Full Scan**                43           56           63     
 
 Table: Unique Access points discovered accross 100 full scans. The columns define 
        the access point that was scanning, and the numbers are the amount of 
@@ -208,14 +208,14 @@ Table: Access points discovered accross all scans accross the
 As expected, there are major timing differences between the different scannning
 methods. Table {@tbl:timing} outlines the mean times for every scan method.
 
-Scan Type                        Time
---------------------------       ------
-**Full Scan**                    3.47s
-**Selective Scan (1, 6, 11)**    0.18s
-**Selective Scan (Skip 1)**      0.35s
-**Smooth Scan (300ms)**          4.98s
-**Smooth Scan (600ms)**          8.88s
-**Smooth Scan (1200ms)**         17.62s
+Scan Type                                   Time
+--------------------------------------      ------
+**Full Scan**                               0.74s
+**Selective Scan (1, 6, 11)**               0.18s
+**Selective Scan (1, 3, 5, 7, 9, 11)**      0.35s
+**Smooth Scan (300ms)**                     4.98s
+**Smooth Scan (600ms)**                     8.88s
+**Smooth Scan (1200ms)**                    17.62s
 
 Table: Mean total time for completing a scan {#tbl:timing}
 
@@ -233,7 +233,7 @@ recalculate the mean timings above.
 
 Scan Type                        Time
 --------------------------       -----
-**Full Scan**                    3.47s
+**Full Scan**                    0.74s
 **Selective Scan (1, 6, 11)**    0.18s
 **Selective Scan (Skip 1)**      0.35s
 **Smooth Scan (300ms)**          1.68s
@@ -305,8 +305,9 @@ results.
 #### Full Scan { .unnumbered }
 
 In the excerpt from the full scan, you'll notice that the latency
-hovers between 100 and 300 ms for quite a few seconds, which is substantial for 
-real time applications such as VoIP and online video games.
+hovers between 100 and 300 ms for over a second, which is substantial for 
+real time applications such as VoIP and online video games. Spikes of over 400 ms 
+in latency was also observed.
 
 \begin{figure}
     \centering
