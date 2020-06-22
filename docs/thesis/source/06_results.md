@@ -297,17 +297,33 @@ isn't everything that matters for being able to discover an access point. Two ac
 points that have the same average signal strength might not be discovered the
 same amount of times.
 
-This phenomenon is most likely because some access points that are might be
-obstructed while others are not, which fits nicely with _Rice_ and _Rayleigh
-Fading_ as all measurements have taken place in an urban environment. The 
-overlayed Rice and Rayleigh curves in the graphs shows this.
+This phenomenon is most likely caused by _Rice_ and _Rayleigh fading_. As all
+measurements have taken place in an urban environment, the likelyhood of different
+objects, cars, or similar moving in the way of the signal and slightly obstructing
+the access points is large due to the long time-frame that has been used for these
+test. 
 
-As expected, the different discovery methods take different amounts of time to
-execute. These findings reflect findings of previous studies, for example where
-smooth scanning is slower than alternative discovery methods. Though in the end,
-the speed of the scan doesn't have an impact on our results, but it is worth to
-highlight in cases where this thesis is used in solutions where measurement time 
-is critical.
+In addition to this, the variance in the signals (the horizontal bars) seem to
+decrease as they move further towards the lower left in all the experiments.
+This is mostly a result of the weak access points only being measured a few
+times in total, so the sample size is small. Since the experiments were conducted
+over such a long time-frame (a few days), there were a lot of possibilities for
+changes in the environment that the experiments were conducted in. Due to this, 
+the larger spikes in difference might be as a result of obstructions or similar. 
+
+There is also a difference between AP 0, AP 1 and AP 2 when it comes to the 
+relative amount of access points found when compared to the full scan. 
+Consistently there is about a 15-30 percentage point difference between the 
+results of AP 0, as compared to AP 1 and 2. Again, it is likely that this is 
+caused by the difference in environment as the full scan measurements were done 
+a few days after the selective and smooth scan runs.
+
+Lastly, as expected, the different discovery methods take different amounts of 
+time to execute. These findings reflect findings of previous studies, for example 
+where smooth scanning is slower than alternative discovery methods. Though in the 
+end, the speed of the scan doesn't have an impact on our results, but it is worth
+to highlight in cases where this thesis is used in solutions where measurement 
+time is critical.
 
 
 Client Results
