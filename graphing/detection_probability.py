@@ -97,9 +97,6 @@ def detection_probability(
                 max(signal_strenghts) - mean(signal_strenghts)
             )
 
-        ap_probabilities["Signal Strength (dB)"] = \
-            dbm_to_snr(ap_probabilities["Signal Strength (dB)"])
-
         axs[index].set_title(f"Access Point {index}")
 
         axs[index].errorbar(
@@ -113,7 +110,7 @@ def detection_probability(
         x = numpy.linspace(stats.rayleigh.ppf(0.1), stats.rayleigh.ppf(0.99), 100)
 
         axs[index].plot(
-            numpy.linspace(0, 60, 100),
+            numpy.linspace(-90, -30, 100),
             stats.rayleigh.cdf(x, loc=0.3, scale=0.75),
             "y",
             label="Rayleigh",
@@ -125,19 +122,15 @@ def detection_probability(
         )
 
         axs[index].plot(
-            numpy.linspace(0, 60, 100),
+            numpy.linspace(-90, -30, 100),
             stats.rice.cdf(x, loc=0.7, b=bessel, scale=0.4),
             "r",
             label="Rice"
         )
 
-
-    # plt.suptitle(
-    #     f"Probability of discovery ({title})"
-    # )
     plt.legend()
 
     for ax in axs.flat:
-        ax.set(xlabel="Signal Strength (dB SNR)", ylabel="Probability of Discovery")
+        ax.set(xlabel="Signal Strength (dB)", ylabel="Probability of Discovery")
 
     plt.show()
