@@ -23,15 +23,11 @@ With this problem in mind, it is necessary to figure out how access points can
 have a good overview of the local wirless space to select a channel for 
 themselves and to collaborate with their peers for channal usage.
 
-\todo{
-    Do you have an article I can cite regarding the statement about cooperation
-    below @Madeleine?
-}
-
-Cooperating on the channel allocation problem outperforms non cooperative methods.
-In these methods the channel allocation problem can be considered from a 
-graph colouring perspective where the vertices are Wi-Fi networks, and the 
-edges are neighbouring networks which interfere with each other. 
+Cooperating on the channel allocation problem outperforms non cooperative methods
+[@mishra2005weighted] [@baid2015understanding]. In these methods the channel
+allocation problem can be considered from a graph colouring perspective where the
+vertices are Wi-Fi networks, and the edges are neighbouring networks which 
+interfere with each other. 
 
 In this thesis I aim to figure out how to scan the local wireless topology for
 active wireless access points and their signal strength, without affecting
