@@ -56,15 +56,13 @@ Min and Max Channel Time
 ------------------------
 
 As noted in [Possible Measurement Strategies and Discovery Methods], using a
-minimum and maximum channel time 
+minimum and maximum channel to shorten scan times might be helpfull to further
+improve the client latency. 
 
-As suggested in for possible future work to improve scanning results or client latency
-can be to investigate the use of different Min- and MaxCT strategies. I originally
-outlined two strategies for this thesis, but due to implementation constraints I
-was not able to test them.
-
-By looking at documentation found on `iw`'s [@iw] kernel page, these changes probably
-had to be done in the driver.
+I originally outlined two strategies for this thesis, but due to implementation
+constraints I was not able to test them. By looking at documentation found on 
+`iw`'s [@iw] kernel page, these changes probably has to be done in the driver,
+and futher work can probably implement this.
 
 
 Scanning Triggers

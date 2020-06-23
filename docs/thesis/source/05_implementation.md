@@ -169,6 +169,21 @@ latency proved problematic. To leviate this, in the results I will be manually
 corelating the results. Future works might be able to leviate this problems by
 keeping all access points and clients connected with an uplink to sync to an NTP
 server or use hardware that has an hardware clock.
+   
+   
+### The lack of customization of MinCT and MaxCT in CFG80211
+
+While working on the implementation, it became clear that the Linux API for
+configuring 802.11 devices, CFG802.11, did not support changing the min- and max
+channel time parameters.
+
+Because of this, no experiments on the minimum and maximum channel time has been
+done through any of the tests, and the default implementation on the Rasperry Pi
+4 is being used. It was not possible to figure out what these values were, so
+these are unkown at the time of writing. 
+
+However, seeing that existing research has been able to modify this on other
+devices, further reserach could probably solve this by modifying drivers. 
 
 ### Problems with doing measurements in an appartment
 

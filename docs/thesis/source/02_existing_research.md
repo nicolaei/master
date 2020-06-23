@@ -62,6 +62,13 @@ The min- and maxCT timer pair decides for how long the station will listen in on
 a channel after sending a probe request. See {+@fig:activescanexample} how an 
 example of how active scan works, where all of these concepts are incorporated.
 
+The benifit of this approach is that we can maximize the amount of time spent
+on any given channel if there are access points to be discovered there, while
+minimizing the time spendt on channels that do not have any access points on them.
+This does, however, come with a slight risk of missing access points on a given
+channel. Though, this risk can be mitigated by doing multiple scans of the channel
+space.
+
 
 \begin{figure}
     \begin{subfigure}[b]{\linewidth}
