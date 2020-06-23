@@ -88,3 +88,19 @@ time that:
 By utilizing this data, an implementer can determine when it is a good time to
 start a scan based on previous activity levels. By doing this it would be possible
 to avoid periods of the day that has heavy useage.
+
+
+Improving channel selection by checking channel congestion
+----------------------------------------------------------
+
+While this thesis mainly looked at how to do scanning while not impacting client
+latency, there are more methods that probably can be experimented with to further
+improve channel selection. Looking at the congestion on a given channel in addition
+to the amount of access points on it might yield even better results for channel
+selection.
+
+By using the _survey dump_ that was outlined in the previous section, future work 
+can measure the usage of a given channel. Using this information together with 
+the amount of access points that are active on the channel can help the channel
+allocation algorithm to more intelligently select a channel that is both least
+populated and least congested.
