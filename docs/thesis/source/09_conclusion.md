@@ -1,27 +1,22 @@
 Conclusion
 ==========
 
-<!--
- * Smooth Scan seems like a good idea
- 
- * Talk about the impact of length of scans (impact and accuracy)
- 
- * The amount of times to scan might not be that important if we wish to find the
-   top amount of access points.
--->
-
-
-In this thesis, we've been looking at how we can enable active channel selection
+In this thesis, we've looked at how we can enable active channel selection
 by actively scanning the local environment with an access point. We've seen how
 three different scanning strategies impact the accuracy of scans, and how these
 scanning strategies impact the performance of clients on the network.
+
+In our tests, we've checked the performance and impact of _full scan_, the "normal"
+scanning strategy mostly used today; _selective scan_, an optimistic approach that
+tries to scan less; and _smooth scan_, a full scan implementation that spreads
+scanning of each channel into distinct periods with intervals in between.
 
 Out of these strategies, *smooth scan* is a promesing approach that shows high
 accuracy while there is close to no impact on clients. We've seen how this 
 approach compares to other two other scanning strategies; *full scan* and 
 *selective scan*. The improvements from these two strategies are quite major.
 In a full scan scenario, a client had to endure around 150ms latency for over
-multiple seconds, while in the smooth scan scenario the latency was close to zero.
+a period of tiem, while in the smooth scan scenario the latency was close to zero.
 
 As we've also talked about in the discussion and future work, it is possible to 
 get even better performance out of these alternate scanning strategies by 
@@ -33,9 +28,8 @@ use for dedicated scanning of the network (as previously suggested by
 [@SeamlessHandoff]).
 
 These results are overall exciting and show that it is possible to give users a
-better experience on modern day networks by doing active channel switching.
-
- 
+better experience on modern day networks by scanning the network to do active 
+channel switching.
 
 
 References
