@@ -362,10 +362,14 @@ results.
 
 #### Full Scan { .unnumbered }
 
-In the excerpt from the full scan, you'll notice that the latency
-hovers between 100 and 300 ms for over a second, which is substantial for 
+In the excerpt from the full scan in figure {@fig:clifull}, you'll notice that the 
+latency hovers between 100 and 300 ms for over a second, which is substantial for 
 real time applications such as VoIP and online video games. Spikes of over 400 ms 
 in latency was also observed.
+
+This nicely fits with the results from [@ActiveScanPerformance] where the client 
+itself was scanning the local network, and observed the same pattern of latency 
+issues while scanning.
 
 \begin{figure}
     \centering
@@ -398,7 +402,8 @@ in latency was also observed.
 \end{figure}
 
 In addition, as expected, the goodput follows suit with the worst spikes ending
-up almost hitting zero MB/s of goodput.
+up almost hitting zero MB/s of goodput. This is expected as throughput and goodput
+is linked to the latency.
 
 #### Selective Scan { .unnumbered }
 
