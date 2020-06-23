@@ -104,3 +104,16 @@ can measure the usage of a given channel. Using this information together with
 the amount of access points that are active on the channel can help the channel
 allocation algorithm to more intelligently select a channel that is both least
 populated and least congested.
+
+
+Using neighbour reports
+-----------------------
+
+In IEEE802.11k, a feature called "neighbor reports" were added to speed up scanning.
+These reports enable clients to send a request to their access point for a report
+about neighboring APs [@CiscoNeighborReport].
+
+While this is mainly aimed at client to access point, rather than access point
+to client or access point to access point, it might be worth investigating if 
+this is feasable to use for an even more detailed overview of the local 
+wireless space.
