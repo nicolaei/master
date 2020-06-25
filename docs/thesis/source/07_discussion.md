@@ -98,14 +98,6 @@ Especially for mobile devices where battery capacity is limited. Though this is
 out of scope for this thesis and should probably be looked into by future research.
 
 
-### On the issue of latency
-
-\todo{
-    Find a source to quote about what the requirements for VoIP, games and
-    remote vehicle operations are.
-}
-
-
 ### The impact of multiple clients
 
 With few devices avaliable, it wasn't possible to test the impact of multiple
