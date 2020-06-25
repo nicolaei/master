@@ -2,7 +2,23 @@
 title: Improving channel selection in IEEE802.11 networks by scanning from access points
 author: Nicolas Harlem Eide
 
-abstract: Write the abstract!
+abstract: |
+  The bands that Wi-Fi operate at are getting increasingly congested.
+  If access points are unable to get an overview of the local wireless network,
+  they can't make good decisions about what channel to be placed on.
+
+  In addition, most modern networks might select a channel at random and might
+  only do that seleciton when the access point is first deployed. These kinds of
+  strategies do not take account for our evershifting environments, especially
+  in urban residential areas.
+
+  This thesis takes a look at how access points can scan the network with as little
+  impact on clients as possible. Through various methods and experiments it
+  shows promising results that further reserach can leviate to make access points
+  actively select their operational channel while still serving its clients. In
+  addition, it suggests topics that can be explored to further evolve the field,
+  and to aid further research.
+
 
 preface: I would like to thank _Torleiv Maseng_, _Madeleine Victoria Kongshavn_,
   and _Magnus Skjegstad_ for all their help and supervision while writing this
