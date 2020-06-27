@@ -73,7 +73,7 @@ if __name__ == "__main__":
     )
     render_graphs([
         (Path("./measurements/full"), "Full Scan"),
-        (Path("./measurements/selective_1_6_11"), "Selective Scan (Ch 1,7,11)"),
+        (Path("./measurements/selective_1_6_11"), "Selective Scan (Ch 1,6,11)"),
         (Path("./measurements/selective_odd"), "Selective Scan (Every otherchannel)"),
         (Path("./measurements/smooth_300"), "Smooth Scan (300ms)"),
         (Path("./measurements/smooth_600"), "Smooth Scan (600ms)"),
