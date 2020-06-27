@@ -55,7 +55,6 @@ def latency_graph(
         for before, after in zip(client_data[1], client_data[2])
     ]
 
-    _modify_axis(ax1, start_time, decibels, color="tab:red", label="dB")
     _modify_axis(
         ax2, start_time, round_trip_time, color="tab:green", label="Latency (ms)"
     )

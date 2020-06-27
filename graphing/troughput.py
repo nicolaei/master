@@ -50,7 +50,6 @@ def troughput_graph(
     print(f"Min avg Troughput: {min(troughput) / 10**6} MB/s")
     print(f"Max avg Troughput: {max(troughput) / 10**6} MB/s")
 
-    _modify_axis(ax1, start_time, decibels, color="tab:red", label="dB")
     _modify_axis(
         ax2, start_time[::5], troughput, color="tab:blue", label="Goodput (bytes)"
     )
