@@ -1,5 +1,5 @@
 from datetime import timedelta
-from statistics import mean
+from statistics import mean, median
 from typing import List, Dict
 
 import matplotlib.pyplot as plt
@@ -27,7 +27,7 @@ def scan_time(timings: dict):
         timings = (
             min(taken).total_seconds(),
             max(taken).total_seconds(),
-            (sum(taken, timedelta()) / len(taken)).total_seconds()
+            median(taken).total_seconds()
         )
         bars.append(
             ax.bar(
