@@ -50,8 +50,8 @@ performance of the connected clients while still ensuring accurate results?**
 
 To solve this problem we will be looking at previous research that has been done
 to help clients better scan the local network and applying it to scanning from
-access points. We will also be looking at how these methods effect the results,
-and how they impact the clients.
+access points. Through experiments, we will also be looking at how these methods 
+effect the results, and how they impact the clients.
 
 In addition to this we will be discussing probable strategies to further add to
 the findings in this thesis, such as when to scan or other methods that can give
