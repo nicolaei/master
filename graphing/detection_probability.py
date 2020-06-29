@@ -91,10 +91,10 @@ def detection_probability(
                 mean(signal_strenghts)
             )
             ap_probabilities["Signal Strength Variance"][0].append(
-                mean(signal_strenghts) - min(signal_strenghts)
+                mean(signal_strenghts) - numpy.percentile(signal_strenghts, 5)
             )
             ap_probabilities["Signal Strength Variance"][1].append(
-                max(signal_strenghts) - mean(signal_strenghts)
+                numpy.percentile(signal_strenghts, 95) - mean(signal_strenghts)
             )
 
         axs[index].set_title(f"Access Point {index}")
