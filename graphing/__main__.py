@@ -2,6 +2,7 @@ import logging
 from pathlib import Path
 from typing import List, Tuple
 
+from graphing.detection_histogram import detection_histogram
 from graphing.detection_probability import detection_probability
 from graphing.latency import latency_graph
 from graphing.scan_accuracy import accuracy_graph
@@ -41,7 +42,7 @@ def render_graphs(
             logger.warning(f"Couldn't find {e.filename}. Continuing to next scan type")
             continue
 
-        render_range = time_range or [client_0[1][15000], client_0[1][25000]]
+        render_range = time_range or [client_0[1][95000], client_0[1][105000]]
 
         logger.info(f"Creating graphs for {scan_name}")
 
@@ -64,6 +65,7 @@ def render_graphs(
         accuracy_graph(ap_2, title=f"{scan_name} (AP2)")
 
         detection_probability((ap_0, ap_1, ap_2), title=f"{scan_name}")
+        detection_histogram((ap_0, ap_1, ap_2))
 
 
 if __name__ == "__main__":
