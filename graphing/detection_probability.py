@@ -73,7 +73,7 @@ def detection_probability(
     """
     db_sorted = [(len(scan), group_by_bss(scan)) for scan in access_point_data]
 
-    fig, axs = plt.subplots(ncols=len(db_sorted), figsize=(28, 12))
+    fig, axs = plt.subplots(ncols=len(db_sorted), figsize=(30, 10))
 
     for index, (amount, aps) in enumerate(db_sorted):
         ap_probabilities = {

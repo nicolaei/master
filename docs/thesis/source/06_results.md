@@ -69,8 +69,14 @@ signal strength. This relationship can be seen in figure {@fig:fullscanresults},
 and in addition we can see the variation in the observed signal strength via the
 bars going left to right of each point. These bars are limited to the 95th 
 percentile to weed out outliers in the dataset.
-       
-![Access points discovered for a "full" scan](static/ap_full_scan.png){#fig:fullscanresults}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=1.3\textwidth,center]{static/ap_full_scan.png}
+    
+    \caption{Access points discovered for a "full" scan}
+    \label{fig:fullscanresults}
+\end{figure}
 
 Overall we see that signals without line of sight nicely follows the reighley 
 curve. Though there are also some access points that have a high chance of 
@@ -134,17 +140,17 @@ Table: Access points discovered accross all scans accross the different
 \begin{figure}
     \centering
       
-    \begin{subfigure}[b]{\textwidth}
+    \begin{subfigure}{\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{static/ap_selective_main_scan.png}
+        \includegraphics[width=1.3\textwidth,center]{static/ap_selective_main_scan.png}
         
         \caption{Scanning channels 1, 6 and 11}
         \label{fig:selectivescanresultsmain}
     \end{subfigure}
       
-    \begin{subfigure}[b]{\textwidth}
+    \begin{subfigure}{\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{static/ap_selective_alt_scan.png}
+        \includegraphics[width=1.3\textwidth,center]{static/ap_selective_alt_scan.png}
         
         \caption{Scanning channels 1, 3, 5, 7, 9 and 11}
         \label{fig:selectivescanresultsalt}
@@ -202,25 +208,25 @@ Table: Access points discovered accross all scans accross the
 \begin{figure}
     \centering
       
-    \begin{subfigure}[b]{\textwidth}
+    \begin{subfigure}{\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{static/ap_smooth_300_scan.png}
+        \includegraphics[width=1.3\textwidth,center]{static/ap_smooth_300_scan.png}
         
         \caption{300ms interval}
         \label{fig:smoothscanresults300}
     \end{subfigure}
       
-    \begin{subfigure}[b]{\textwidth}
+    \begin{subfigure}{\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{static/ap_smooth_600_scan.png}
+        \includegraphics[width=1.3\textwidth,center]{static/ap_smooth_600_scan.png}
         
         \caption{600ms interval}
         \label{fig:smoothscanresults600}
     \end{subfigure}
       
-    \begin{subfigure}[b]{\textwidth}
+    \begin{subfigure}{\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{static/ap_smooth_1200_scan.png}
+        \includegraphics[width=1.3\textwidth,center]{static/ap_smooth_1200_scan.png}
         
         \caption{1200ms interval}
         \label{fig:smoothscanresults1200}
@@ -360,7 +366,7 @@ issues while scanning.
       
     \begin{subfigure}[b]{\textwidth}
         \centering
-        \includegraphics[width=\textwidth,center]{static/cli_full_scan_latency.png}
+        \includegraphics[width=1.3\textwidth,center]{static/cli_full_scan_latency.png}
         
         \caption{
             Client latency. The spikes are a result of the access point scanning 
@@ -371,7 +377,7 @@ issues while scanning.
       
     \begin{subfigure}[b]{\textwidth}
         \centering
-        \includegraphics[width=\textwidth,center]{static/cli_full_scan_goodput.png}
+        \includegraphics[width=1.3\textwidth,center]{static/cli_full_scan_goodput.png}
         
         \caption{
             Client goodput.
@@ -408,7 +414,7 @@ benifit in our goodput results.
       
     \begin{subfigure}[b]{\textwidth}
         \centering
-        \includegraphics[width=\textwidth,center]{static/cli_selective_main_latency.png}
+        \includegraphics[width=1.3\textwidth,center]{static/cli_selective_main_latency.png}
         
         \caption{
             Client latency. The spikes here are lower than the full scan, but 
@@ -419,7 +425,7 @@ benifit in our goodput results.
       
     \begin{subfigure}[b]{\textwidth}
         \centering
-        \includegraphics[width=\textwidth,center]{static/cli_selective_main_goodput.png}
+        \includegraphics[width=1.3\textwidth,center]{static/cli_selective_main_goodput.png}
         
         \caption{
             Client goodput. The dips in goodput are smaler in this case, 
@@ -445,7 +451,7 @@ selective scan on channels 1, 6 and 11.
       
     \begin{subfigure}[b]{\textwidth}
         \centering
-        \includegraphics[width=\textwidth,center]{static/cli_selective_alt_latency.png}
+        \includegraphics[width=1.3\textwidth,center]{static/cli_selective_alt_latency.png}
         
         \caption{
             Client latency. The latency spikes seems to show roughly the same 
@@ -456,7 +462,7 @@ selective scan on channels 1, 6 and 11.
       
     \begin{subfigure}[b]{\textwidth}
         \centering
-        \includegraphics[width=\textwidth,center]{static/cli_selective_alt_goodput.png}
+        \includegraphics[width=1.3\textwidth,center]{static/cli_selective_alt_goodput.png}
         
         \caption{
             Client goodput
@@ -497,7 +503,7 @@ the tests or due to RF noise.
       
     \begin{subfigure}[b]{\textwidth}
         \centering
-        \includegraphics[width=\textwidth,center]{static/cli_smooth_300_latency.png}
+        \includegraphics[width=1.3\textwidth,center]{static/cli_smooth_300_latency.png}
         
         \caption{
             Client latency. In these results the spikes in latency seems random,
@@ -509,7 +515,7 @@ the tests or due to RF noise.
       
     \begin{subfigure}[b]{\textwidth}
         \centering
-        \includegraphics[width=\textwidth,center]{static/cli_smooth_300_goodput.png}
+        \includegraphics[width=1.3\textwidth,center]{static/cli_smooth_300_goodput.png}
         
         \caption{
             Client goodput
@@ -528,7 +534,7 @@ the tests or due to RF noise.
       
     \begin{subfigure}[b]{\textwidth}
         \centering
-        \includegraphics[width=\textwidth,center]{static/cli_smooth_600_latency.png}
+        \includegraphics[width=1.3\textwidth,center]{static/cli_smooth_600_latency.png}
         
         \caption{
             Client latency
@@ -538,7 +544,7 @@ the tests or due to RF noise.
       
     \begin{subfigure}[b]{\textwidth}
         \centering
-        \includegraphics[width=\textwidth,center]{static/cli_smooth_600_goodput.png}
+        \includegraphics[width=1.3\textwidth,center]{static/cli_smooth_600_goodput.png}
         
         \caption{
             Client goodput
@@ -557,7 +563,7 @@ the tests or due to RF noise.
       
     \begin{subfigure}[b]{\textwidth}
         \centering
-        \includegraphics[width=\textwidth,center]{static/cli_smooth_1200_latency.png}
+        \includegraphics[width=1.3\textwidth,center]{static/cli_smooth_1200_latency.png}
         
         \caption{
             Client latency
@@ -567,7 +573,7 @@ the tests or due to RF noise.
       
     \begin{subfigure}[b]{\textwidth}
         \centering
-        \includegraphics[width=\textwidth,center]{static/cli_smooth_1200_goodput.png}
+        \includegraphics[width=1.3\textwidth,center]{static/cli_smooth_1200_goodput.png}
         
         \caption{
             Client goodput
