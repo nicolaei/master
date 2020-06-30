@@ -8,13 +8,13 @@ abstract: |
   they cannot make good decisions about which channel to be placed on.
 
   In addition, most modern networks might select a channel at random and might
-  only do that seleciton when the access point is first deployed. These kinds of
+  only do that selection when the access point is first deployed. These kinds of
   strategies do not take account for our evershifting environments, especially
   in urban residential areas.
 
   This thesis takes a look at how access points can scan the network with as little
   impact on clients as possible. Through various methods and experiments it
-  shows promising results that further reserach can leviate to make access points
+  shows promising results that further research can alleviate to make access points
   actively select their operational channel while still serving its clients. In
   addition, it suggests topics that can be explored to further evolve the field,
   and to aid further research.
