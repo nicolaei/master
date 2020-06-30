@@ -9,7 +9,8 @@ and during the execution of these experiments.
 Scanning Strategies
 -------------------
 
-\todo{Write an intro to this section!}
+A total of six different test trials will be conducted in the tests. These are
+full scan, as well as selective scan and smooth scan with different parameters.
 
 ### Full Scan
 
@@ -20,7 +21,7 @@ This is how a typical scan works with most modern implementations.
 The full scan results are used as a base-line test for comparisons.
 
 
-### Selective Scanning
+### Selective Scan
 
 Two strategies will be tested for the selective channel approach.
 As mentioned in the previous chapter, according to [@APDiscovery], some
@@ -36,7 +37,7 @@ due to channel overlapping.
     to the amount of channels scanned [@SeamlessHandoff].
 
 
-### Smooth Scanning
+### Smooth Scan
 
 The smooth scanning implementation has been tested with static smooth scanning
 parameters based on [@ProactiveScan] and [@PracticalSchemes]'s results. These 
