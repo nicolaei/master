@@ -75,11 +75,6 @@ two fading models are utilized for two different scenarios
    This is usefull for modeling signals without line of sight, which are typical
    in urban environments.
 
-\todo{
-    Might be worth creating a graph here to visualize the difference between the
-    two propagation models?
-}
-
 
 Discovery strategies {#sec:discoverystrategies}
 --------------------
@@ -118,11 +113,6 @@ for access points.
 Now, we will be looking at multiple discovery strategies that has been outlined
 in previous research.
  
-\todo{
-    Write a section about each of the strategies and outline their apparent
-    weaknesses that has been discussed in the given research articles.
-}
-
 \begin{figure}
     \begin{subfigure}[b]{\linewidth}
         \begin{tikzpicture}[scale=1]

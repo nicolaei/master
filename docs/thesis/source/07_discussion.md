@@ -1,10 +1,6 @@
 Discussion
 ==========
 
-\todo{
-    Alternative title: "Scanning from the access point with minimal impact"
-}
-
 Now we will be discussing the results from the previous chapter. We will be
 looking into how this relates to and reflects the theory and earlier research 
 that has been presented, as well as how these discoveries might be used in future
