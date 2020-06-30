@@ -401,13 +401,11 @@ Selective scanning decreases the max and average latency that the client will
 experience, which echos [@SeamlessHandoff] that states that latency lineary 
 increeses for each channel scanned.
 
-In the examples for scanning channels 1, 6 and 11 the peak latency ends up being
-around half of full scan, hovering at around 100 ms and maxing out at around 
-150ms. In contrast to the full scan, the latency spikes are a lot shorter
-duration compared to the full scan implementation, which we can see as a clear
-benifit in our goodput results.
-
-\todo{Reference to the figures in the paragraph above!}
+The results for scanning channel 1, 6 and 11 can be seen in figure 
+{@fig:cliselectivemain}. Here the peak latency ends up being around half of 
+full scan, hovering at around 100 ms and maxing out at around 150ms. In contrast
+to the full scan, the latency spikes are a lot shorter duration compared to the 
+full scan implementation, which we can see as a clear benifit in our goodput results.
 
 \begin{figure}
     \centering
@@ -441,10 +439,10 @@ benifit in our goodput results.
 \end{figure}
 
 As for the selective scan which skips every even-numbered channel, we can spot
-roughly the same results here. The peak latency is hovering around 100 to 150ms,
-but the goodput is not hit as badly as the full scan results. However, the 
-goodput for this scanning method does end up taking a slightly worse hit than
-selective scan on channels 1, 6 and 11.
+roughly the same results here. As seen in figure {@fig:cliselectivealt}, peak 
+latency is hovering around 100 to 150ms, but the goodput is not hit as badly as 
+the full scan results. However, the goodput for this scanning method does end up 
+taking a slightly worse hit than selective scan on channels 1, 6 and 11.
 
 \begin{figure}
     \centering
