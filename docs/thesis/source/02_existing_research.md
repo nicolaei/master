@@ -25,20 +25,20 @@ be done in one of two ways: active or passive scanning.
     transmission in TUs[^tu-definition].
 
  *  *The capability information*; Various information about the AP, such as
-    it's SSID and more. Extensions to 802.11 has also typically added some
-    information to this field.
+    its SSID and more. Extensions to 802.11 has also typically added some
+    information to this field, though these are not relevant to this thesis.
 
 [^tu-definition]: TU (time unit) is a period of 1024μs.
 
 **Active scanning** however, is initiated by the STAs themselves. This
 process contains two management frames *probe requests* and *probe responses*.
 
-The *probe request* is sent by an STA and either targets a single access point,
-or broadcast to all APs. This is done by specifying the target APs SSID in
+The *probe request* is sent by an STA, and either targets a single access point
+or broadcasts to all APs. This is done by specifying the target APs SSID in
 the frame. Leaving the SSID field empty means that the frame is considered as
 a broadcast frame.
 
-*Probe responses* are sent by access points that receive the *probe request*.
+*Probe responses* are sent by access points that receive the probe request.
 These frames' content is almost identical to beacon frames, though they do 
 contain some more information than the probe request's frames.  This information
 isn't really relevant for what I wish to accomplish in this thesis, so I won't
@@ -58,8 +58,8 @@ has two components:
    to a channel for a response from an access point. This timer only activates 
    if a probe response is received before MinCT.
 
-The min- and maxCT timer pair decides for how long the station will listen in on
-a channel after sending a probe request. See {+@fig:activescanexample} how an 
+This min- and maxCT timer pair decides for how long the station will listen in 
+on a channel after sending a probe request. See {+@fig:activescanexample} for an 
 example of how active scan works, where all of these concepts are incorporated.
 
 The benifit of this approach is that we can maximize the amount of time spent
@@ -128,9 +128,6 @@ space.
             
             \draw [decorate, decoration={brace, amplitude=10pt, mirror}] 
                 (start) -- (min) node [midway, yshift=-1.5em] {$MinCT$};
-            
-            \draw [decorate, decoration={brace, amplitude=10pt, mirror}] 
-                (min) -- (max) node [midway, yshift=-1.5em] {$MaxCT$};
         \end{tikzpicture}
         
         \caption{
@@ -152,12 +149,12 @@ Scanning in modern day IEE802.11 networks
 -----------------------------------------
 
 While the aim of this thesis is to use scanning to discover other APs from
-our own AP, the main use of scanning in IEEE802.11 networks is for clients 
+a single AP, the main use of scanning in IEEE802.11 networks is for clients 
 (STAs) to find access points to connect to and keep their connection alive. 
 These are the two typical use-cases [@WifiScanFaq]:
 
- * When disconnected; finding available APs to connect to or ask for
-   specific APs that the STA has connected to before.
+ * When disconnected; finding available APs to connect to or specific APs that 
+   the STA has connected to before.
 
  * While connected; finding APs with the same SSID as the one that the STA
    is currently connected to, but with a better signal. This is typically
@@ -166,7 +163,7 @@ These are the two typical use-cases [@WifiScanFaq]:
 In addition to this, some access points can trigger a scan in order to figure 
 out which channel might be the least congested in the area. Though these 
 implementations typically require the access point to stop serving clients while
-scanning and are only done when they're deployed.
+scanning and are only done when they are being deployed.
 
 Lastly, mobile devices may also use IEEE802.11 beacons to enhance their
 positioning service by using a database of known access point poisitions such as
@@ -181,17 +178,17 @@ Differences between active and passive scanning
 While both active and passive scanning are means to achieve the same result,
 they have different impacts on the network and use differing amount of time
 to discover all nodes on the network. The impact of them in relation to discovery
-latency and network impact is widely studied [@ActiveScanPerformance] [@APDiscovery]
+time and network impact is widely studied [@ActiveScanPerformance] [@APDiscovery]
 [@SelectingScanningParameters] [@active-resfi-scans].
 
 
 ### Discovery time
 
 Even though both active and passive scanning will converge towards
-discovering all nodes in the network, there is a significant time-difference
+discovering all nodes in the area, there is a significant time-difference
 between these two approaches. This difference is especially significant in
-high density WLAN deployments because of increasted interference due to reighley
-and rice fading.
+high density WLAN deployments because of increasted interference due to Reighley
+and Rice fading.
 
 In addition to this there is always going to be some variance in the
 discovery time due to the fact that there are always going to be large
@@ -211,21 +208,15 @@ guaranteed to find all the access points in your vicinity.
 ](static/probe_vs_beacon.png){ width=40%; #fig:probevsbeacons }
 
 In their tests, they found that the scanning timer for a probe request
-had a lot to say about your ability to discover other APs. In general,
+had a lot to say about the STA's ability to discover other APs. In general,
 the longer the timer, the better the chance of discovering other access points.
 Though over 100ms the benefit quickly diminish, as very few or no probe
 responses were received after this time, and the discovered APs mainly came
 from normal beacon frames.
 
 In addition to the length of the timer, they also found that the amount of
-scans mattered a lot to the discovery . Even after 100 scans, the study found 
+scans mattered a lot to the discovery. Even after 100 scans, the study found 
 that up to 15% of all APs were not discovered.
-
-\todo{
-    Why are some access points discovered, while others are not?
-    Which APs are these (like, is it the distance that matters)?
-    Maybe it's their distance (ie. quality of the connection).
-}
 
 
 ### Network impact
@@ -233,7 +224,7 @@ that up to 15% of all APs were not discovered.
 According to [@ActiveScanPerformance] up to 90% of all probe responses
 carry redundant information, and up to 60 percent of all management traffic
 in a WLAN can be probe traffic. This is especially true for heavily utilized
-channels (over 50% utilization), which typically exist in urban
+channels (channels with over 50% utilization), which typically exist in urban
 environments.
 
 This heavy utilization takes a special toll on real-time applications such as
@@ -244,8 +235,8 @@ The client-side issues with active scans are quite apparent. In
 [@ActiveScanPerformance], they set up a client to run an active scan every 
 minute. While running these active scans they were continuously pinging another 
 host over the WLAN to measure the impact these active scans have on the latency.
-The result was that every minute, when the active scans was  initialized, a large
-spike in latency occurred (see {+@fig:probelatency}. This spike had a tail of
+The result was that every minute, when the active scans was initialized, a large
+spike in latency occurred (see {+@fig:probelatency}). This spike had a tail of
 latency that lasted a few seconds. This kind of latency spike is problematic,
 as it has an impact on real-time applications like games and VoIP.
 
@@ -253,7 +244,7 @@ as it has an impact on real-time applications like games and VoIP.
  client scans, it's latency can increase as much as 10 fold. This figure is from
  [@ActiveScanPerformance]](static/probe_latency.png){ width=60%; #fig:probelatency }
 
-I hypothesize that this effect will be even stronger ones access points start
+I hypothesize that this effect will be even stronger once access points start
 scanning as well, seeing that this won't just effect the access point, but
 all of it's connected clients as well.
 

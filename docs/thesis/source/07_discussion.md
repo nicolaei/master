@@ -15,13 +15,9 @@ Increasing accuracy with multiple scans {#sec:multiplescans}
 ---------------------------------------
 
 As we've seen from the [Access Point Scan Results], an AP is not guaranteed to
-be discovered with a single scan [^fading]. Thus, it is neccesary to use multiple 
+be discovered with a single scan. Thus, it is neccesary to use multiple 
 scans to increase the likelyhood of discovering all access points that needs to
 be taken in account when choosing a channel.
-
-[^fading]: As discussed in earlier chapters and seen in the results, the curves 
-that determine the likelyhood of discovery can be explained with the _Reighley_ 
-and _Ricean_ fading models.
 
 The amount of scans that needs to be run has to be determined on a per deployment
 basis. The characterisitiscs of the local radio environment for every deployment
@@ -67,10 +63,6 @@ to the full scan implementation. This, together with the fact that smooth scan
 had a minimal impact on the client's performance, this strategy seems like a good 
 way to conduct scans from access points.
 
-\todo{
-    The argument in the paragraph below feels kinda week.
-}
-
 However, the scans might not show a correct picture of the local environment if
 there are a lot of mobile access points in one location. For example at a cafe 
 or outdoors. The data from the scan might show a large amount of mobile access
@@ -80,8 +72,8 @@ and switching channels more often, i.e. every hour.
 
 In addition to the accuracy of the results, the time to complete a complete scan
 was also recorded in the tests. Smooth scan was the slowest of the three purposed
-strategies, but seeing that these scans are done from an access point that won't
-be moving, it shouldn't be a problem.
+strategies, but seeing that these scans are done from an access point that will
+not be moving, it should not be a problem.
 
 There is an edge case for mobile hotspots, however. Since these access points
 are able to move, they need to keep the time to scan lower. In a previous study
@@ -100,7 +92,7 @@ out of scope for this thesis and should probably be looked into by future resear
 
 ### The impact of multiple clients
 
-With few devices avaliable, it wasn't possible to test the impact of multiple
+With few devices avaliable, it was not possible to test the impact of multiple
 clients for each of the scanning algorithms, but it's likely that introducing
 more clients can increase the impact of the scanning algorithm due to more 
 clients have to be able to transmit their data within the period between channel
@@ -125,20 +117,14 @@ However, the time it takes to complete a single scan will increase significantly
 The 5 GHz spectrum offers a greater amount of channels than the 2.4 GHz spectrum,
 and with that the time to complete a single run of all channels might pose a
 problem. Though, as noted previously, as long as the access point scans multiple
-times, this shouldn't pose a problem as potential missing access points from one
-scan can be picked up in later scans.
+times, this should not pose a problem as potential missing access points from 
+one scan can be picked up in later scans.
 
 The notion of running multiple scans that take longer time might prove
-problematic for applications that are especially time sensitive. Here we're not
+problematic for applications that are especially time sensitive. Here we are not
 thinking about VoIP and similar, but next generation applications that require
 especially low latency such as remotely operated veichles. Though more reasearch is
 needed in a more predictable environment to see if this is going to be a problem.
-
-\todo{
-    Find a citation for how low latency is needed for remotely operated veichles.
-    This is just intuition right now and based on what I've heard from 5G marketing
-    videos.
-}
 
 
 Optimizing the approach
@@ -146,15 +132,14 @@ Optimizing the approach
 
 While the results shown in this thesis are promising, it is possible that they 
 could be improved with some optimization. Since all the tests were done by 
-interfacing with the Wi-Fi card from `python`, which was talking to `iw`, both
-smooth scan and selective scan would probably show better results if implemented
+interfacing with the Wi-Fi card from `python`, which in turn was talking to `iw`, 
+both smooth scan and selective scan could show better results if implemented 
 directly at the driver level.
 
-This is because every call to iw launches a new scan for the selected channel,
-so both smooth scan and selective scan will experience some overhead. While
-full scan was only a single call to `iw`, and then the drivers took care of the
-rest. By implementing this logic in the driver it is possible that the scans
-would take even shorter, and thus improve the results even further.
+This is because every call to `iw` launches a new scan for the selected channel,
+so both smooth scan and selective scan experienced some overhead. By 
+implementing the logic on the driver level it is possible that the scans could 
+take even shorter time, and thus improve the results even further.
 
 In addition to that, `iw` did not allow for customizing MinCT and MaxCT, which
 could further improve the results by limiting the scanning period for typically

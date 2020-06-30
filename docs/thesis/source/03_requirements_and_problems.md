@@ -66,5 +66,5 @@ _Scan accuracy_ and _quality of service_ create two opposing forces. To be more
 accurate we might have to do more scanning (which will be discussed in later 
 chapters), while quality of service might suffer from the increased scanning activity.
 
-This is yet another parameter that needs to be looked into and weighted to make
-sure that optimal results are achived.
+The combination of these two requirements is a parameter that needs to be thought
+about to make sure that optimal results are achived in a real world implementation.

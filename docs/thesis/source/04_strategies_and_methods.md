@@ -1,8 +1,9 @@
 Possible Measurement and Discovery Strategies 
 =============================================
 
-In this chapter I'll be talking about which methods that I will be using in my
-experiments and how I implemented these methods.
+In this chapter we will be looking at previous research regarding discovery
+strategies and how to measure these. These will be used as a basis in the next 
+chapter, where we will be looking at how the experiments have been implemented.
 
 These methods aim to measure and discover the optimal way to get a good overview
 of the local topology, while not impacting the clients connected to the
@@ -12,8 +13,8 @@ access point.
 Measurement strategies 
 ----------------------
 
-During my tests, I've tried to gather the following data to verify the
-effectiveness of my results:
+During the tests, the following data has been gathered to verify the
+effectiveness of the results:
 
 - Client latency
 - Client goodput [^goodput]
@@ -22,7 +23,7 @@ effectiveness of my results:
 
 [^goodput]: _Goodput_ is the application-level throughput.
 
-These data points will help me figure out which methods are best fit for
+These data points will help to figure out which methods are best fit for
 discovering a high percentage of access points, while still letting clients 
 utilize the network like normal.
 
@@ -31,11 +32,11 @@ utilize the network like normal.
 
 Client latency and goodput will be used to measure how a given algorithm affects
 the clients on the network. With these two measurements combined we can see how
-much impact each scanning method has on both real-time and non-real-time .
+much impact each scanning method has on both real-time and non-real-time applications.
 
 As [@ActiveScanPerformance] mentions, a large amount of probe traffic can
 negatively impact the network's clients, and when access points are scanning they
-won't be able to recive traffic from the clients.
+won't be able to transmit or recive traffic from the clients.
 
 To summarize: The main objective of these measurement points is to make sure
 that we can choose an algorithm that has the least negative impact on our
@@ -50,18 +51,18 @@ in proximity to possibly be able to affect the performance of our access point.
 To acomplish this we will have to measure the probability of discovery against 
 the percived strength of the signal.
 
-It's worth noting that the less time we're spending on _active_ scanning, the
-smaller the chance is that we will be missing packets due to buffer overflows
-on the client [@ActiveScanPerformance]. This is because the clients have to queue
-up messages that didn't get an ACK from the recipient when using TCP, or packets
-that simply gets dumped when using UDP. To measure this, we will be looking at 
-the total time spend scanning for access points.
+It is worth noting that the less time we are spending on _active_ scanning, the
+less chance there is that the connected clients will lose packets
+[@ActiveScanPerformance]. This is because the clients have to queue up messages 
+that did not get an ACK from the recipient when using TCP, or packets that simply 
+gets dumped when using UDP. To measure this, we will be looking at the total time
+spend scanning for access points.
 
 To further visualize the accuracy of our scans, every access point result graph
 will have an approximated _Ricean_ and _Rayleigh_ fading curve overlayed to 
 visualize the expected probability of discovery for a given access point.
 
-Simply put, both Ricean and Reyleigh fading are stochastic models for radio 
+Simply put, both Ricean and Rayleigh fading are stochastic models for radio 
 propagation anomalies caused by partial cancellation of a signal by itself. The
 two fading models are utilized for two different scenarios 
 [@RayleighFading] [@RicianFading]:
@@ -80,11 +81,11 @@ two fading models are utilized for two different scenarios
 }
 
 
-Discovery strategies
+Discovery strategies {#sec:discoverystrategies}
 --------------------
 
-Discovery strategies are a well discussed topic within IEEE802.11, but these
-are mainly aimed at clients trying to discover access points.
+Discovery strategies are a well discussed topic within IEEE802.11 literature, 
+but these are mainly aimed at clients trying to discover access points.
 
 Any given scanning algorithm must find the best trade-off between:
 
@@ -264,19 +265,19 @@ total time of the scan.
 
 ### Smooth Scanning
 
-Smooth scanning utilizes a staggered approach where channels are scanned in
-multiple batches. Each channel is assigned to a group, and in between the
+Smooth scanning utilizes a temporaly spaced approach where channels are scanned 
+in multiple batches. Each channel is assigned to a group, and in between the
 groups the access point will return to "normal" operations where it will
 serve clients. 
 
 Both the group size and time between each scan is configurable, and has their
-trade-offs. For more on this, see [Parameters].
+trade-offs. This will be discussed further in the next section about parameters.
 
 This approach has previously been explored in
 [@SelectingScanningParameters], [@ProactiveScan], and [@PracticalSchemes].
 Though in these cases, it was specifically tested on the client.
 
-The use of intervals of normal operations in these articles prove quite
+The use of intervals of normal operations in these papers prove quite
 beneficial for the client's latency, goodput and packet loss, though at the
 expense of scanning speed. This longer scanning period should hopefully not have
 any impact when scanning as the access-point.
@@ -294,29 +295,29 @@ Based on previous research ([@APDiscovery] [@ProactiveScan]
 when it comes to time and accuracy. In addition to this, it's reasonable to
 assume that these will have some sort of impact on a client's goodput.
 
- *  *Minimum number of scans*: How many scans (of the whole channel sequence)
-    should be performed before the scan is finished.
+ *  *Minimum number of scans*: The amount of scans of the whole channel sequence
+    that should be performed before the scan is finished.
  
- *  *Smooth scan interval*: How long to wait between each scan 
+ *  *Smooth scan interval*: The amount of time to wait between each scan 
 
  *  *Smooth scan group size*: The number of channels to scan per period
  
- *  *Scanning Trigger*: When should the scans start?
+ *  *Scanning Trigger*: When to start a scan
  
- *  *Max and min channel time*: How long to stay on each channel
+ *  *Max and min channel time*: The amount of time to stay on each channel
 
 
 ### Minimum number of scans
 
-This parameter is important to make sure that we have a reply from all access
-points in our vicinity before sending of our results. As [@APDiscovery] notes,
-all access points will most likely not be discovered with just one scan of
-the entire frequency space.
+As [@APDiscovery] notes, all access points will most likely not be discovered 
+with just one scan of the entire frequency space. By specifying a minimum number 
+of scans we make sure that more access points in the vicinity are found before
+submitting the results of the scan. 
 
 
 ### Smooth scanning interval
 
-As mentioned in [Smooth Scanning], there is a possibility to adjust the time
+As mentioned in [Smooth Scanning], it is possible to adjust the time
 spent serving clients in between each scanning group. This parameter is a
 trade off between the latency and package loss of clients, and the speed of the
 total scan.
@@ -341,18 +342,18 @@ the expense of clients in form of possible packet loss.
 ### Scanning Trigger
 
 When to start scanning is important. In an extreme case, all access points can
-start scanning at the same time, which would both congest the medium and since
-they're all listening and probably not replying, we could end up not discovering
+start scanning at the same time, which would both congest the medium, and since
+they are all listening and probably not replying, we could end up not discovering
 any other access point.
 
 In typical client handoff schemes, the scan is triggered when the RSSI to the
 connected access point is low or when trying to find a network to connect to.
-Both of these triggers don't exist when searching from an access point, because
-the client isn't connected to another access point, nor does it need to find
-another one.
+Both of these triggers do not exist when searching from an access point, 
+because it is not connected to another access point, nor does it need to find
+another access point to establish an uplink. 
 
 There is also a question of how often the access points should scan to keep a
-accurate view of its neighbourhood. I hypothesize that new access points won't
+accurate view of its neighbourhood. I hypothesize that new access points will not
 be introduced and removed within a day. Though with the advent of sharing mobile
 data over Wi-Fi, this assumption might be wrong. Mobile phones that share their
 data are mobile, as opposed to traditional access points.
@@ -369,7 +370,7 @@ Some possible methods are:
     of always scanning at the same time as another access point or scanning
     while another access point is turned off [^turned-off].
  
- *  **Traffic based trigger**: Having times of low traffic be the trigger could
+ *  **Traffic based trigger**: Using periods of low traffic as a trigger could
     also be a possible solution. Though here we also introduce the risk of
     scanning at the wrong time. Seeing that workplaces and homes usually empty
     and fill up at the same time, we could risk having access points scanning at
@@ -387,8 +388,8 @@ Some possible methods are:
 ### Min and Max Channel Time
 
 Minimum and maximum channel time is mentioned in a lot of literature
-regarding Wi-Fi. This parameter can change weather or not the scanning node
-spend too much time on a channel or if it doesn't spend enough time.
+regarding Wi-Fi. This parameter can change whether or not the scanning node
+spend too much time on a channel or if it does not spend enough time.
 
 For example [@SelectingScanningParameters] suggests having a set of minimum and maximum
 channel times for each available channel. This way we can optimize the time
@@ -401,10 +402,8 @@ channel scanned. Reducing the total time of a scan and possibly improving goodpu
 and latency. Two prevelant strategies from literature are:
 
  *  **Scanning with a constant Min-/MaxCT for all channels**: This means that
-    the channel time won't change for each individual channel. [@APDiscovery]
-    showed that higher timers yield higher discovery rates, but since I'm also
-    interested in the impact towards clients, I will be using the same set of
-    timers that they used.
+    the channel time will not change for each individual channel. [@APDiscovery]
+    showed that higher timers yield higher discovery rates.
  
  *  **Scanning with a variable Min-/MaxCT for each channel**: As suggested in
     [@SelectingScanningParameters], a variable Min-/MaxCT for each channel

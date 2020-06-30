@@ -1,8 +1,8 @@
 Future Work
 ============
 
-In this section I'll outline similar approaches and other work that can build
-on my findings.
+This chapter outlines similar approaches and other work that can build on the
+findings in this thesis.
 
 Caching
 -------
@@ -12,6 +12,11 @@ is something that might be useful to look at.
 
 This approach is based on an assumption that access points rarely or never move,
 and that new access points are rarely introduced [^mobile-aps].
+
+[^mobile-aps]: Mobile access points in the form of smart phones might become
+    more prevent in the future, and they might not have a strong enough signal
+    to actively cause a problem for other clients on the network. Though this is
+    just a hypothesis, so more research has to be done to confirm this.
 
 
 Persistent connection
@@ -27,11 +32,6 @@ access points has been removed from the area.
 
 This approach might be useful in cases where a centralized or decentralized
 system is in charge of channel allocation, rather than the single access point.
-
-[^mobile-aps]: Mobile access points in the form of smart phones might become
-    more prevent in the future, and they might not have a strong enough signal
-    to actively cause a problem for other clients on the network. Though this is
-    just a hypothesis, so more research has to be done to confirm this.
     
     
 Extra radio operating on a separate channel
@@ -55,14 +55,14 @@ effective, most access points need to have this extra radio.
 Min and Max Channel Time
 ------------------------
 
-As noted in [Possible Measurement Strategies and Discovery Methods], using a
-minimum and maximum channel to shorten scan times might be helpfull to further
-improve the client latency. 
+As noted in [Possible Measurement and Discovery Strategies], using a minimum and
+maximum channel to shorten scan times might be helpfull to further improve the 
+client latency. 
 
-I originally outlined two strategies for this thesis, but due to implementation
-constraints I was not able to test them. By looking at documentation found on 
-`iw`'s [@iw] kernel page, these changes probably has to be done in the driver,
-and futher work can probably implement this.
+Originally there were two strategies outlined for this thesis, but due to
+implementation constraints these were not tested. By looking at documentation
+found on `iw`'s page on the linux kernel documentation [@iw], these changes 
+probably has to be done in the driver.
 
 
 Scanning Triggers
@@ -87,7 +87,7 @@ time that:
  
 By utilizing this data, an implementer can determine when it is a good time to
 start a scan based on previous activity levels. By doing this it would be possible
-to avoid periods of the day that has heavy useage.
+to avoid periods of the day that has heavy Wi-Fi usage.
 
 
 Improving channel selection by checking channel congestion

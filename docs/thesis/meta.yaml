@@ -3,9 +3,9 @@ title: Improving channel selection in IEEE802.11 networks by scanning from acces
 author: Nicolas Harlem Eide
 
 abstract: |
-  The bands that Wi-Fi operate at are getting increasingly congested.
+  The bands that Wi-Fi operate on are getting increasingly congested.
   If access points are unable to get an overview of the local wireless network,
-  they can't make good decisions about what channel to be placed on.
+  they cannot make good decisions about which channel to be placed on.
 
   In addition, most modern networks might select a channel at random and might
   only do that seleciton when the access point is first deployed. These kinds of
@@ -26,7 +26,7 @@ preface: I would like to thank _Torleiv Maseng_, _Madeleine Victoria Kongshavn_,
   and being an all around amazing girlfriend. Thanks to _Thor Høgås_ and
   _Karl Hole Totland_ for being my good friends and study-budies via video-chat
   almost every day while we wrote each of our theses. Last but not least, thanks
-  to my parrents for helping me get to this point!
+  to my parents for helping me get to this point!
 
 toc: yes
 lof: yes

@@ -1,36 +1,23 @@
 Results
 =======
 
-In this chapter I will present my findings, discuss them and elaborate on how
-this impacts my problem statement.
+In this chapter we will look at the findings from the experiments, discuss them 
+and elaborate on how this impacts the problem statement.
 
-
-<!--
-Guiding points while writing:
-
- * Present my findings
- 
- * Organize, classify and analyze the data
- 
- * Interpret and explain the findings.
- 
- * Check if these findings are in line with what I expected from the work I 
-   talked about in the introduction?
--->
    
 Access Point Scan Results
 -------------------------
 
-As mentioned in [Discovery strategies], the access points measure the amount of
-times unique access points were discovered against their percived strength.
+As mentioned in section {@sec:discoverystrategies}, the access points measure the
+amount of times unique access points were discovered against their percived strength.
 
-In this section you'll see the results of the three main different
+In this section you will see the results of the three main different
 discovery strategies and how well they picked up the access points that are in 
-its proximity. For all discovery graphs you'll see two curves overlayed. These
-show the expected _Rice_ and _Reighley_ fading, which was talked about in [Scanning
-IEEE802.11 networks].
+its proximity. For all discovery graphs you will see two curves overlayed. These
+show the expected _Rice_ and _Reighley_ fading, which was talked about in 
+previous chapters.
 
-In the next parts we'll take a look at the following measurement runs:
+In the next sections we will take a look at the following measurement runs:
 
  * Full Scan
  
@@ -46,7 +33,7 @@ In the next parts we'll take a look at the following measurement runs:
  
 For each of these measurement runs about 100 scans were conducted to be able to
 get a good view of how scanning affects both clients performance and access point 
-result. In addition to this, we will be using _full scan_ as our baseline due to
+result. In addition to this, the _full scan_ will be used as a baseline due to
 it commonly being used in modern Wi-Fi deployments.
 
 ### Discovery Accuracy
@@ -80,7 +67,8 @@ In addition to the total amount of access points found, it is also interesting
 to see how likely it is that we are to discover an access point, given the percived
 signal strength. This relationship can be seen in figure {@fig:fullscanresults},
 and in addition we can see the variation in the observed signal strength via the
-bars going left to right of each point.
+bars going left to right of each point. These bars are limited to the 95th 
+percentile to weed out outliers in the dataset.
        
 ![Access points discovered for a "full" scan](static/ap_full_scan.png){#fig:fullscanresults}
 
@@ -104,7 +92,7 @@ the results from this scan to compare the performance.
 
 Next up we have selective scanning. As expected, this result discoveres less 
 access points but took less time overall. The first test, scanning channels 1,
-6 and 11, discovered the least amount of close access points, as seen in table
+6 and 11, discovered the least amount of access points, as seen in table
 {@tbl:amountselective}. Quite a few of the access points in the area were on
 channels that were not within the specified channels of our scans.
 
@@ -114,7 +102,7 @@ up in this section of the graphs are AP 0 through AP 2, but these were not confi
 to run on channel 1, 6 or 11, which can explain why we do not observe them.
 
 An alternative selective scan implementation, which results are found in figure
-{@fig:selectivescanresultalt}, scans every other channel instead. This also takes
+{@fig:selectivescanresultsalt}, scans every other channel instead. This also takes
 shorter time than the other discovery methods, but still does not discover
 all the access points avaliable. In the case of AP 0 and 1 it even discovers less 
 than with the approach that only scanned channels 1, 6 and 11. This might be 
@@ -183,8 +171,8 @@ changed.
 
 As for the probability of discovery, we're seeing almost exactly the same sort
 of results as in the full scan. In figure {@fig:smoothscanresults} we can see
-yet again that the results match up with what we'd expect from reyleigh and 
-ricean fading.
+yet again that the results match up with what we'd expect from Reyleigh and 
+Ricean fading.
 
 We can also can see that the interval doesn't have a significant impact on 
 discovery accuracy. Arguably, the difference between them is within a margin of 
@@ -330,39 +318,35 @@ Client Results
 --------------
 
 Now we will be taking a deep dive into how the scans affected the clients. 
-As discussed in [Measurement strategies], the clients measured both their latency 
-and goodput to the access point they were connected to. This should give us a 
-good overview of how the discovery methods affected the clients. No scanning
-was done from the clients during these trails.
+As discussed in previous sections about measurement strategies, the clients measured 
+both their latency and goodput to the access point they were connected to. This 
+should give us a good overview of how the discovery methods affected the clients. 
+No scanning was done from the clients during these trails.
 
-For all of these results, you'll see the latency and goodput measured whenever
-the link was avaliable. In adition you'll see a blue vertical line that represents
-when a scan finished on the access point that the client was connected to. Due
-to problems with the clock on the Raspberri Pi, this isn't 100% accurate but
-still usefull as a guide. This issue is discussed in [Methodic problems]. It is
-worth restating that this issue shouldn't affect our final results, as the lines
-are just used as guides. It does however mean that it will be slightly harder to
-separate normal noise from the scan impact.
+For all of these results, you will see the latency and goodput measured whenever
+the link was avaliable. In adition you will see a blue vertical line for every
+two minutes that represents when a scan finished on the access point that the 
+client was connected to. Due to problems with the clock on the Raspberri Pi, 
+this is not 100% accurate but still usefull as a guide. This issue is discussed 
+in [Methodic problems]. It is worth restating that this issue shouldn't affect our
+final results, as the lines are just used as guides. It does however mean that it
+will be slightly harder to separate normal noise from the scan impact.
 
 
 ### Overall impact of scanning
-
-\todo{
-    Show close-ups of a single scan for each graph type
-}
 
 To get the best overview possible, we will be looking at both latency and goodput
 graphs next to each other as these are closely related.
 
 Seeing that over 100 scans have been conducted for each algorithm, we will be
-looking at 8 results where enviornmental noise seems to be rather minimal for
+looking at eight results where enviornmental noise seems to be rather minimal for
 each example. This should give us a good overview of the overall impact of the
 algorithms, while still being able to weight inn possible variability in the
 results.
 
 #### Full Scan { .unnumbered }
 
-In the excerpt from the full scan in figure {@fig:clifull}, you'll notice that the 
+In the excerpt from the full scan in figure {@fig:clifull}, you will notice that the 
 latency hovers between 100 and 300 ms for over a second, which is substantial for 
 real time applications such as VoIP and online video games. Spikes of over 400 ms 
 in latency was also observed.
@@ -409,13 +393,15 @@ is linked to the latency.
 
 Selective scanning decreases the max and average latency that the client will
 experience, which echos [@SeamlessHandoff] that states that latency lineary 
-increeses for each channel scanned. This effect can be obeserved here. 
+increeses for each channel scanned.
 
 In the examples for scanning channels 1, 6 and 11 the peak latency ends up being
 around half of full scan, hovering at around 100 ms and maxing out at around 
 150ms. In contrast to the full scan, the latency spikes are a lot shorter
 duration compared to the full scan implementation, which we can see as a clear
 benifit in our goodput results.
+
+\todo{Reference to the figures in the paragraph above!}
 
 \begin{figure}
     \centering
@@ -451,7 +437,8 @@ benifit in our goodput results.
 As for the selective scan which skips every even-numbered channel, we can spot
 roughly the same results here. The peak latency is hovering around 100 to 150ms,
 but the goodput is not hit as badly as the full scan results. However, the 
-goodput for this scanning method does end up taking a slightly worse hit.
+goodput for this scanning method does end up taking a slightly worse hit than
+selective scan on channels 1, 6 and 11.
 
 \begin{figure}
     \centering
@@ -496,7 +483,7 @@ the environment the scans were conducted in, or due to some fault.
 During smooth scan, it seems like clients are largely unaffected by the scans
 conducted by the AP it's connected to.
 
-In figures {@fig:clismooth300laten} trough {@fig:clismooth1200good} we can
+In figures {@fig:clismooth300} trough {@fig:clismooth1200} we can
 observe that the latency and goodput results does not have any periodic spikes.
 This is in contrast to the observations in the full and selective scan algorithms,
 where we can see periodic spikes in latency.
@@ -597,7 +584,7 @@ the tests or due to RF noise.
 
 ### Interpreting and analyzing the results
 
-We've now looked at how the six different scans have affected the clients. As
+We have now looked at how the six different scans have affected the clients. As
 expected, the full scan is the worst strategy to utilize from the clients
 point of view. It ends up disturbing the client's performance in such a manner
 that it would be obvious to any real-time application users.
@@ -613,12 +600,3 @@ as layed out in previous chapters. These results show that with shorter interupt
 comes less latency. For smooth scanning this reduced interuption comes from
 the fact that there is a break between every channel scanned, while the selective
 scan achieved the shorter interuption time by just scanning fewer channels.
-
-\todo{
-    I'm not to sure about this paragraph below. Feels kinda tacked on.
-    Not really sure how to add meat to it. Should I just remove it?
-}
-
-We can also dissern that the goodput dips can affect non-realtime applications,
-such as video on-demand where the user can end up with buffering.
- 
